@@ -133,6 +133,7 @@ static atomic_int s_activation_gate;
 static atomic_uint s_written, s_total, s_durable_q, s_reset_at, s_wifi_drop_at;
 #if LAB_FAULT_PROFILE
 static atomic_bool s_lab_clock_not_ready;
+static atomic_bool s_lab_radio_off;
 static atomic_uint s_lab_reset_before_checkpoint;
 #endif
 static portMUX_TYPE s_status_lock = portMUX_INITIALIZER_UNLOCKED;
@@ -856,6 +857,12 @@ cleanup: ;
     ESP_LOGI(TAG, "payload_cleanup target=%s writer_abort=%u http_closed=true result=%s transfer_error=%s",
         target->label, aborted, esp_err_to_name(abort_result), esp_err_to_name(err));
     if (reconnect_after_cleanup) {
+#if LAB_FAULT_PROFILE
+        if (atomic_load(&s_lab_radio_off)) {
+            ESP_LOGI(TAG, "fault_wifi_restore deferred_by_lab_radio_off=true durable_q=%u", atomic_load(&s_durable_q));
+            return err;
+        }
+#endif
         atomic_store(&s_wifi_retries, 0);
         atomic_store(&s_wifi_reconnect_suppressed, false);
         esp_err_t reconnected = esp_wifi_connect();
@@ -884,12 +891,22 @@ static void wifi_event(void *arg, esp_event_base_t base, int32_t id, void *data)
 {
     (void)arg;
     if (base == IP_EVENT && id == IP_EVENT_STA_GOT_IP) {
+#if LAB_FAULT_PROFILE
+        if (atomic_load(&s_lab_radio_off)) {
+            xEventGroupClearBits(s_network, NET_UP);
+            ESP_LOGW(TAG, "lab_radio_off ignoring_late_IP_event=true"); return;
+        }
+#endif
         atomic_store(&s_wifi_retries, 0); xEventGroupSetBits(s_network, NET_UP); ESP_LOGI(TAG, "wifi=connected");
     } else if (base == WIFI_EVENT && id == WIFI_EVENT_STA_DISCONNECTED) {
         xEventGroupClearBits(s_network, NET_UP);
         const wifi_event_sta_disconnected_t *event = data;
         ESP_LOGW(TAG, "wifi=disconnected reason=%u", event ? event->reason : 0U);
-        if (atomic_load(&s_wifi_reconnect_suppressed)) {
+        bool suppress = atomic_load(&s_wifi_reconnect_suppressed);
+#if LAB_FAULT_PROFILE
+        suppress = suppress || atomic_load(&s_lab_radio_off);
+#endif
+        if (suppress) {
             ESP_LOGI(TAG, "wifi_auto_reconnect=suppressed_by_lab_fault");
         } else if (atomic_fetch_add(&s_wifi_retries, 1) < 5) { (void)esp_wifi_connect(); }
         else { ESP_LOGW(TAG, "wifi_retry_budget_exhausted; provision/reconnect explicitly"); }
@@ -898,6 +915,9 @@ static void wifi_event(void *arg, esp_event_base_t base, int32_t id, void *data)
 
 static esp_err_t set_wifi(const char *ssid, const char *password, bool persist)
 {
+#if LAB_FAULT_PROFILE
+    if (atomic_load(&s_lab_radio_off)) { return ESP_ERR_INVALID_STATE; }
+#endif
     size_t sl = strlen(ssid), pl = strlen(password);
     if (sl == 0 || sl > 32 || pl > 64 || (pl > 0 && pl < 8)) { return ESP_ERR_INVALID_ARG; }
     wifi_config_t config = {0};
@@ -924,6 +944,22 @@ static esp_err_t set_wifi(const char *ssid, const char *password, bool persist)
         if (err != ESP_OK) { return err; }
     }
     return esp_wifi_connect();
+}
+
+static esp_err_t connect_saved_wifi(void)
+{
+    nvs_handle_t net;
+    esp_err_t err = nvs_open_from_partition("nvs_cfg", "net", NVS_READONLY, &net);
+    if (err != ESP_OK) { return err; }
+    struct { char ssid[33]; char password[65]; } credentials = {0};
+    size_t length = sizeof(credentials);
+    err = nvs_get_blob(net, "credentials", &credentials, &length);
+    nvs_close(net);
+    if (err == ESP_OK && (length != sizeof(credentials) || credentials.ssid[32] || credentials.password[64])) {
+        err = ESP_ERR_INVALID_SIZE;
+    }
+    if (err == ESP_OK) { err = set_wifi(credentials.ssid, credentials.password, false); }
+    memset(&credentials, 0, sizeof(credentials)); return err;
 }
 
 static esp_err_t network_ready(int64_t started)
@@ -1136,18 +1172,25 @@ void ota_lab_init(void)
     s_ready = true; status_set("IDLE", "local OTA controller ready");
 #if LAB_FAULT_PROFILE
     ESP_LOGW(TAG, "LAB_FAULT_PROFILE=ON test_CA_and_local_origins_enabled production=false TLS_checks=enabled");
-#endif
-    nvs_handle_t net;
-    if (nvs_open_from_partition("nvs_cfg", "net", NVS_READONLY, &net) == ESP_OK) {
-        struct { char ssid[33]; char password[65]; } credentials = {0};
-        size_t n = sizeof(credentials);
-        if (nvs_get_blob(net, "credentials", &credentials, &n) == ESP_OK && n == sizeof(credentials) &&
-            !credentials.ssid[32] && !credentials.password[64]) {
-            err = set_wifi(credentials.ssid, credentials.password, false);
-            if (err != ESP_OK) { ESP_LOGW(TAG, "saved_wifi_connect_failed=%s", esp_err_to_name(err)); }
-        }
-        memset(&credentials, 0, sizeof(credentials)); nvs_close(net);
+    uint8_t offline_once = 0;
+    if (nvs_get_u8(s_meta, "offline_once", &offline_once) == ESP_OK && offline_once == 1) {
+        atomic_store(&s_lab_radio_off, true);
+        atomic_store(&s_wifi_reconnect_suppressed, true);
+        xEventGroupClearBits(s_network, NET_UP);
+        esp_err_t cleared = nvs_erase_key(s_meta, "offline_once");
+        if (cleared == ESP_OK) { cleared = nvs_commit(s_meta); }
+        uint8_t readback = 0;
+        bool consumed = cleared == ESP_OK && nvs_get_u8(s_meta, "offline_once", &readback) == ESP_ERR_NVS_NOT_FOUND;
+        ESP_LOGW(TAG, "lab_offline_boot one_shot_consumed=%u wifi_autostart=false credentials_unchanged=true clear_result=%s",
+            consumed, esp_err_to_name(cleared));
+        /* Even if consuming the one-shot flag failed, keep this boot offline
+         * and report the error. Never erase the OTA/config partitions.
+         */
+        return;
     }
+#endif
+    err = connect_saved_wifi();
+    if (err != ESP_OK && err != ESP_ERR_NVS_NOT_FOUND) { ESP_LOGW(TAG, "saved_wifi_connect_failed=%s", esp_err_to_name(err)); }
 }
 
 static void print_status(void)
@@ -1169,6 +1212,30 @@ static void print_status(void)
 static bool lab_fault_command(const char *line)
 {
     if (strncmp(line, "lab-", 4)) { return false; }
+    if (!strcmp(line, "lab-radio-off") || !strcmp(line, "lab-radio-on")) {
+        if (!s_ready) { ESP_LOGW(TAG, "lab_radio_rejected controller_not_ready"); return true; }
+        if (!strcmp(line, "lab-radio-off")) {
+            atomic_store(&s_lab_radio_off, true);
+            atomic_store(&s_wifi_reconnect_suppressed, true);
+            xEventGroupClearBits(s_network, NET_UP);
+            esp_err_t disconnected = esp_wifi_disconnect();
+            esp_err_t stopped = esp_wifi_stop();
+            if (stopped == ESP_OK || stopped == ESP_ERR_WIFI_NOT_STARTED) { s_wifi_started = false; }
+            const esp_partition_t *running = esp_ota_get_running_partition();
+            esp_ota_img_states_t state = ESP_OTA_IMG_UNDEFINED;
+            bool valid = running && esp_ota_get_state_partition(running, &state) == ESP_OK && state == ESP_OTA_IMG_VALID;
+            ESP_LOGW(TAG, "lab_radio_off disconnect_result=%s stop_result=%s auto_reconnect_suppressed=true sdk_state=%s credentials_unchanged=true",
+                esp_err_to_name(disconnected), esp_err_to_name(stopped), valid ? "VALID" : "OTHER");
+        } else {
+            atomic_store(&s_lab_radio_off, false);
+            atomic_store(&s_wifi_reconnect_suppressed, false);
+            atomic_store(&s_wifi_retries, 0);
+            esp_err_t restored = connect_saved_wifi();
+            ESP_LOGI(TAG, "lab_radio_on stored_credentials_restore_result=%s credentials_unchanged=true",
+                esp_err_to_name(restored));
+        }
+        return true;
+    }
     if (!strcmp(line, "lab-retry-policy-tests")) {
         static const struct { int status; bool retry; } statuses[] = {
             {429, true}, {500, true}, {502, true}, {503, true}, {504, true},
@@ -1210,6 +1277,14 @@ static bool lab_fault_command(const char *line)
     }
     if (!s_ready || atomic_load(&s_busy)) {
         ESP_LOGW(TAG, "lab_fault_command_rejected controller_not_ready_or_busy"); return true;
+    }
+    if (!strcmp(line, "lab-offline-next-boot")) {
+        esp_err_t err = nvs_set_u8(s_meta, "offline_once", 1);
+        if (err == ESP_OK) { err = nvs_commit(s_meta); }
+        uint8_t readback = 0;
+        bool armed = err == ESP_OK && nvs_get_u8(s_meta, "offline_once", &readback) == ESP_OK && readback == 1;
+        ESP_LOGW(TAG, "lab_offline_next_boot armed=%u result=%s credentials_unchanged=true current_radio_unchanged=true",
+            armed, esp_err_to_name(err)); return true;
     }
     if (!strcmp(line, "lab-clock-not-ready on") || !strcmp(line, "lab-clock-not-ready off")) {
         bool enabled = !strcmp(line, "lab-clock-not-ready on");
@@ -1279,6 +1354,7 @@ bool ota_lab_command(const char *line)
         ESP_LOGI(TAG, "Use public GitHub /releases/download/ HTTPS origins; no PAT in firmware. Reset injection is a software reset, not a power cut.");
 #if LAB_FAULT_PROFILE
         ESP_LOGW(TAG, "Optional test mode: lab-clock-not-ready on/off | lab-reset-before-checkpoint Q | lab-checkpoint-status | lab-corrupt-checkpoints | lab-seed-stale-running | lab-retry-policy-tests");
+        ESP_LOGW(TAG, "Offline lab controls: lab-radio-off | lab-radio-on | lab-offline-next-boot");
 #endif
         return true;
     }
