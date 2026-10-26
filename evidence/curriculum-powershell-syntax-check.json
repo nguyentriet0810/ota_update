@@ -1,0 +1,159 @@
+{
+  "method": "PowerShell Parser.ParseInput only; no snippet command executed",
+  "notion": [
+    {
+      "code": "E01",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E01",
+      "index": 1,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E01",
+      "index": 2,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E01",
+      "index": 5,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E02",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E02",
+      "index": 3,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E03",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E03",
+      "index": 3,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E04",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E05",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E06",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E07",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E08",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E08",
+      "index": 3,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E09",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E09",
+      "index": 2,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E10",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E11",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E11",
+      "index": 2,
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "code": "E12",
+      "index": 0,
+      "syntax": "PASS",
+      "errors": []
+    }
+  ],
+  "runbook": [
+    {
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "syntax": "PASS",
+      "errors": []
+    },
+    {
+      "syntax": "PASS",
+      "errors": []
+    }
+  ]
+}

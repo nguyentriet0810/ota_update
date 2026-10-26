@@ -1,0 +1,255 @@
+{
+  "review_date": "2026-10-26",
+  "scope": "Curriculum/source/static validation only; no new build, flash, COM or MCU execution",
+  "learning_progress_unchanged": true,
+  "pages": [
+    {
+      "code": "E01",
+      "id": "3fcd2576a80281f38245d7d8526dbec7",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 4,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        7,
+        8,
+        9,
+        13,
+        14,
+        16,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E02",
+      "id": "3fcd2576a802816381d4fc263bf4292e",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 3,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        8,
+        12,
+        13,
+        15
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E03",
+      "id": "3fcd2576a802818387c9cd3de1c39aa9",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 4,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        9,
+        10,
+        11,
+        13,
+        16,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E04",
+      "id": "3fcd2576a80281a8b49ae77edc8a68b1",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 1,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        6,
+        18,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E05",
+      "id": "3fcd2576a8028199bc19cd84aa17fabe",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 3,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        5,
+        7,
+        10,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E06",
+      "id": "3fcd2576a80281c18da1cc9af87cfab9",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 2,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        8,
+        10,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E07",
+      "id": "3fcd2576a8028100aaaee11942758be9",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 2,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        8,
+        11
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E08",
+      "id": "3fcd2576a80281d3a314f462805b832f",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 3,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        7,
+        12,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E09",
+      "id": "3fcd2576a80281968fdde5adb79b3724",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 2,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        9,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E10",
+      "id": "3fcd2576a8028191aa27fc99f0107424",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 2,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        5,
+        9,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E11",
+      "id": "3fcd2576a802818b98c9ea277d3c0fa6",
+      "status": "Not started",
+      "unchecked": 5,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 2,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        7,
+        8,
+        12,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    },
+    {
+      "code": "E12",
+      "id": "3fcd2576a80281ac9a3fd74f70cc03ed",
+      "status": "Not started",
+      "unchecked": 6,
+      "checked": 0,
+      "checklistPreserved": true,
+      "expectedChangedSnippetCount": 1,
+      "missingSnippets": 0,
+      "truncated": false,
+      "unknownBlocks": 0,
+      "updatedSections": [
+        3,
+        9,
+        13,
+        19
+      ],
+      "fakeFileLinks": 0,
+      "referencePreface": true
+    }
+  ]
+}

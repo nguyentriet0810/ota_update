@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "method": "Compare E02 table start/end with parsed source CSV offsets/sizes",
+  "partitions": 7,
+  "source_sha256": "77ca081cb86b7f5bbd13d01f0759c8911dfd73516b39f57fb995ce81b7561e44"
+}

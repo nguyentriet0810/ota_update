@@ -18,8 +18,8 @@ hơn cho một bài riêng. Provision serial thay baseline là bước bạn t�
 sẵn sàng, cần backup và bộ bootloader/table/app đúng layout. Không xóa NVS hoặc
 sửa otadata để lách version policy.
 
-SDK v6.1 đã cài riêng; v5.3.1 vẫn giữ nguyên. Các ví dụ Bash trong giáo trình là
-dạng tổng quát; máy này dùng PowerShell, COM đã quan sát là13 và các script ở
+SDK v6.1 đã cài riêng; v5.3.1 vẫn giữ nguyên. E01–E12 đã được review và các lệnh
+thực hành đã đổi sang PowerShell; COM đã quan sát là13 và các script ở
 `tools/`. Luôn kiểm lại port/module/nguồn trước khi tự nạp. Signing keys, Wi-Fi
 và Flash backup riêng không nằm trong Git; giữ chúng riêng khi tạo workspace
 thực hành. Bộ khóa mới cần baseline tin đúng khóa, không chỉ đổi key ký candidate.
@@ -30,3 +30,7 @@ giới hạn NVS reset/commit, version_code và retry thực tế. Mục25 ở m
 đặt tên “Firmware mẫu và kết quả tham khảo”. Bài tập/checklist vẫn dành cho lượt
 bạn tự làm; không có build, flash, erase hay phiên COM mới trong lần chỉnh giáo
 trình và tiến độ này.
+
+Xem [bảng review từng bài và phạm vi kiểm tra](curriculum-review-2026-10-26.md).
+Snippet ngắn có thể cần hàm gọi/dependencies; kiểm cú pháp không thay thế link,
+chạy trên MCU và bằng chứng từ lượt tự làm của bạn.

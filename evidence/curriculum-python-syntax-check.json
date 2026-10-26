@@ -1,0 +1,20 @@
+{
+  "method": "Python ast.parse only; no signing/key/file execution",
+  "results": [
+    {
+      "code": "E03",
+      "index": 2,
+      "syntax": "PASS"
+    },
+    {
+      "code": "E08",
+      "index": 1,
+      "syntax": "PASS"
+    },
+    {
+      "code": "E11",
+      "index": 3,
+      "syntax": "PASS"
+    }
+  ]
+}

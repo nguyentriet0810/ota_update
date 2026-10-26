@@ -1,0 +1,124 @@
+{
+  "sdk_commit": "fff9895c82d744c7237be8847347bdd1b07c6643",
+  "compiler": "xtensa-esp32s3-elf-gcc esp15.2.0",
+  "method": "fsyntax-only using existing production compile_commands; no link/build/device run",
+  "source_snippet_count": 10,
+  "translation_units": 9,
+  "results": [
+    {
+      "code": "E01",
+      "unit": "combined_identity_and_app_main",
+      "syntax": "PASS",
+      "context": "Two snippets combined in the documented order",
+      "diagnostics": ""
+    },
+    {
+      "code": "E02",
+      "unit": "partition_fragment",
+      "syntax": "PASS",
+      "context": "Complete candidate selector, or original statement fragment in a function; no fabricated API implementations",
+      "diagnostics": ""
+    },
+    {
+      "code": "E04",
+      "unit": "2",
+      "syntax": "PASS",
+      "context": "Literal complete function snippet; custom extern declarations not linked",
+      "diagnostics": ""
+    },
+    {
+      "code": "E05",
+      "unit": "fresh_stream",
+      "syntax": "PASS",
+      "context": "Includes named by the lesson",
+      "diagnostics": ""
+    },
+    {
+      "code": "E06",
+      "unit": "2",
+      "syntax": "PASS",
+      "context": "Literal complete function snippet; custom extern declarations not linked",
+      "diagnostics": ""
+    },
+    {
+      "code": "E07",
+      "unit": "lowlevel_resume",
+      "syntax": "PASS",
+      "context": "Supplied target/checkpoint parameters described by fragment",
+      "diagnostics": ""
+    },
+    {
+      "code": "E07",
+      "unit": "alternative_highlevel",
+      "syntax": "PASS",
+      "context": "Alternative route, not combined with low-level session",
+      "diagnostics": ""
+    },
+    {
+      "code": "E08",
+      "unit": "2",
+      "syntax": "PASS",
+      "context": "Literal complete function snippet; custom extern declarations not linked",
+      "diagnostics": ""
+    },
+    {
+      "code": "E10",
+      "unit": "nvs_open",
+      "syntax": "PASS",
+      "context": "Complete NVS open function; caller owns successful handle",
+      "diagnostics": ""
+    }
+  ],
+  "snippet_sha256": [
+    {
+      "code": "E01",
+      "index": 3,
+      "sha256": "1ac9595a58e12b467864b35fc2603cd1056f7a2f092c4f1d71b29f2ebec28c95"
+    },
+    {
+      "code": "E01",
+      "index": 4,
+      "sha256": "ff94da78bf7cbe00b5e38e5b08160ee951035cf11db25a26c5e0d7fc0b2f0718"
+    },
+    {
+      "code": "E02",
+      "index": 2,
+      "sha256": "101ca71f052800e75024aa66d7aa9c4e04bbb9ffb4a7fdd9621559b034366474"
+    },
+    {
+      "code": "E04",
+      "index": 2,
+      "sha256": "ed2fc762709774f048de32c67c16ff359d5657683b5418da09325b4c0a140c4d"
+    },
+    {
+      "code": "E05",
+      "index": 2,
+      "sha256": "7b5cab8b852e7b76e8ec87708fbfe653247e5a21ffe1ec0a528ad7ccd37f0af8"
+    },
+    {
+      "code": "E06",
+      "index": 2,
+      "sha256": "6c5e7ad37f9513c8aa16d980bc2788190198b67c072e42d59eee59ed29bde52c"
+    },
+    {
+      "code": "E07",
+      "index": 1,
+      "sha256": "38b97d3a2a5476fbd396c0d242efd6aa0a57ab9cbe9e77fa38fcc35104a6c54c"
+    },
+    {
+      "code": "E07",
+      "index": 2,
+      "sha256": "8b62e1e7f977f8f77df6ee29f5c8a4f93ac9793f088d68ffb69bf40f67681aa0"
+    },
+    {
+      "code": "E08",
+      "index": 2,
+      "sha256": "68ac08f0d8effc5ae0c68faec08474bccf7871ba00a88d3b4152a6bc47bbb345"
+    },
+    {
+      "code": "E10",
+      "index": 1,
+      "sha256": "ff1a3ab1584d88facb26dc62914193b089e23e987b9d79229c3ea67c08e8397c"
+    }
+  ]
+}

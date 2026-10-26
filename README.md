@@ -4,6 +4,8 @@
 tự thực hành sau. Tiến độ học Subject #3 là **12 bài Not started**, checklist
 chưa tích. Kết quả kiểm thử của bộ mẫu không phải bài làm của bạn.
 Xem [cách bắt đầu tự thực hành](docs/learner-start.md).
+E01–E12 đã được [review với SDK/source/CLI của bộ mẫu](docs/curriculum-review-2026-10-26.md);
+các lệnh thực hành trong Notion dùng PowerShell và nêu rõ phần cần tự triển khai.
 
 Board hiện chạy **production8.0.1/code10 VALID** sau OTA qua GitHub.
 **32/32 nhóm ca capstone đạt** trong phạm vi injection đã ghi; xem
