@@ -1,0 +1,49 @@
+{
+  "variant": "v6",
+  "source_commit": "68dbc4fc0ceba65eaa68c4fb325be14978c78cff",
+  "source_files_sha256": {
+    "main/ota_lab.c": "b68cc9d0a1a0692086c1dd076a3d9755891805e4407f39c4ba8de04f7c63b010",
+    "main/ota_lab.h": "bce7ff202624bcafd71910dc7e2ebba3c50067c6fbe3dae8badc4eab68d090c5",
+    "main/main.c": "4ca3b5adfad7187374ae4bfae93ee1c1a02875b4ce81e4634a7fdeab1339118f",
+    "main/cfg_store.c": "eb972da3f15cbbb64906798646b4343779b56b477d0a59d98660acbe0ab8f665",
+    "CMakeLists.txt": "b277547d9bbd55861c99abceba77797907c7837f6e525c4c3927a9526ee5c4ea",
+    "main/CMakeLists.txt": "1c80b02d67bcfa5db06944ac57be21d86536458e3dfb500e3e33bad31394c816"
+  },
+  "app_file": "D:\\ota_update\\.build\\v6-production\\studybook_ota_lab.bin",
+  "app_size": 1118208,
+  "app_sha256": "f3d3abac88542ee0b7cd4549957cc08cd8f4836a0a20cf5730c49698b7bf8de6",
+  "bootloader_sha256": "f8a9a0d45d7b0b534be74580108047c6db3d163fbdd7b307352a9bd3062ad0ed",
+  "partition_table_sha256": "00bdbfb28577b450fa0867638575d4de8c00236a2b64fe4db950a8e53ff9fdf6",
+  "sdkconfig_sha256": "e54e50ddbbe51f7f00de99a5d1086017227dd87274d269c51295058e55620425",
+  "compile_flags": {
+    "PROJECT_VER": "6.0.0",
+    "LAB_VERSION_CODE": "6",
+    "LAB_CFG_SCHEMA": "2",
+    "LAB_FAULT_PROFILE": "OFF",
+    "LAB_CFG_FAULT_SHADOW_RESET": "OFF",
+    "LAB_PREVALID_RESET": "OFF",
+    "LAB_HEALTH_FAIL": "OFF"
+  },
+  "security_config": {
+    "CONFIG_MBEDTLS_HAVE_TIME_DATE": "y",
+    "CONFIG_MBEDTLS_CERTIFICATE_BUNDLE": "y",
+    "CONFIG_SECURE_SIGNED_APPS_NO_SECURE_BOOT": "y",
+    "CONFIG_SECURE_SIGNED_ON_UPDATE_NO_SECURE_BOOT": "y",
+    "CONFIG_SECURE_BOOT": "n",
+    "CONFIG_SECURE_FLASH_ENC_ENABLED": "n",
+    "CONFIG_BOOTLOADER_APP_ANTI_ROLLBACK": "n"
+  },
+  "checks": {
+    "fits_3MiB_slot": true,
+    "fault_mode_matches_requested": true,
+    "other_faults_disabled": true,
+    "TLS_time_checks_enabled": true,
+    "native_signed_update_verification_enabled": true,
+    "hardware_security_unchanged_disabled": true,
+    "test_CA_present_exactly_when_enabled": true,
+    "test_CA_link_symbol_present_exactly_when_enabled": true,
+    "local_test_host_present_exactly_when_enabled": true,
+    "test_clock_hook_present_exactly_when_enabled": true
+  },
+  "hardware_test_status": "NOT RUN by this build audit; root owns COM and observed tests"
+}

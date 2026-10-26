@@ -1,0 +1,47 @@
+2026-10-26T06:38:04.427+00:00 [HOST] fixture=A08-unknown-field expectedgate=unknown field before erase
+2026-10-26T06:38:04.860+00:00 [HOST] sent: status
+2026-10-26T06:38:04.860+00:00 [HOST] sent: otastatus
+2026-10-26T06:38:04.880+00:00 I (618344) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=617354 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:38:04.897+00:00 I (618344) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256951 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:38:04.902+00:00 I (618364) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:38:04.908+00:00 I (618364) lab: BUILD elf_sha256=da6b7babe secure_version=0
+2026-10-26T06:38:04.913+00:00 I (618374) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T06:38:04.924+00:00 I (618384) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T06:38:04.936+00:00 I (618394) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T06:38:04.942+00:00 I (618404) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T06:38:04.952+00:00 I (618404) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T06:38:04.964+00:00 I (618414) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T06:38:04.969+00:00 I (618424) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T06:38:04.986+00:00 I (618434) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T06:38:04.995+00:00 I (618454) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_ARG wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T06:38:05.453+00:00 [HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A08-unknown-field.json https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A08-unknown-field.sig
+2026-10-26T06:38:05.472+00:00 I (618934) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T06:38:05.472+00:00 I (618944) OTA: phase=FETCH_MANIFEST reason=exact bytes
+2026-10-26T06:38:09.092+00:00 I (622564) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:38:09.329+00:00 I (622794) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=621802 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:38:09.346+00:00 I (622794) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=195451 internal_largest=114688 minimum_free=8532332
+2026-10-26T06:38:09.348+00:00 I (622804) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:38:12.015+00:00 I (625484) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:38:16.388+00:00 I (629864) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:38:19.349+00:00 I (632814) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=631822 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:38:19.366+00:00 I (632814) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=182731 internal_largest=108544 minimum_free=8532332
+2026-10-26T06:38:19.368+00:00 I (632824) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:38:19.394+00:00 I (632864) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:38:21.014+00:00 I (634484) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+2026-10-26T06:38:21.076+00:00 I (634554) OTA: phase=FAILED reason=ESP_ERR_INVALID_ARG
+2026-10-26T06:38:21.076+00:00 [HOST] sent: status
+2026-10-26T06:38:21.076+00:00 [HOST] sent: otastatus
+2026-10-26T06:38:21.097+00:00 I (634564) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=633571 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:38:21.114+00:00 I (634564) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256603 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:38:21.119+00:00 I (634574) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:38:21.125+00:00 I (634584) lab: BUILD elf_sha256=da6b7babe secure_version=0
+2026-10-26T06:38:21.130+00:00 I (634594) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T06:38:21.141+00:00 I (634594) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T06:38:21.153+00:00 I (634604) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T06:38:21.159+00:00 I (634614) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T06:38:21.169+00:00 I (634624) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T06:38:21.180+00:00 I (634634) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T06:38:21.186+00:00 I (634644) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T06:38:21.203+00:00 I (634654) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T06:38:21.212+00:00 I (634674) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_ARG wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T06:38:21.323+00:00 [HOST] fixture_result=PASS name=A08-unknown-field

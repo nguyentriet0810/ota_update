@@ -1,0 +1,18 @@
+[HOST] sent: status
+[HOST] sent: otastatus
+I (296624) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=295633 health_fail=0 selftest=PASS service_mode=0
+I (296624) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=258019 internal_largest=184320 minimum_free=8589012
+I (296634) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (296644) lab: BUILD elf_sha256=da6b7babe secure_version=0
+I (296654) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+I (296664) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+I (296664) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+I (296674) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+I (296684) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+I (296694) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+I (296704) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+I (296714) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+I (296824) OTA: status ready=1 busy=0 phase=IDLE reason=local OTA controller ready wifi=up bytes=0 total=0 durable_q=0
+I (302024) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=301032 health_fail=0 selftest=PASS service_mode=0
+I (302024) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=258019 internal_largest=184320 minimum_free=8589012
+I (302034) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID

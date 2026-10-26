@@ -1,0 +1,44 @@
+2026-10-26T06:44:12.192+00:00 [HOST] fixture=A03-signature-bitflip expectedgate=raw manifest signature before parse
+2026-10-26T06:44:12.636+00:00 [HOST] sent: status
+2026-10-26T06:44:12.636+00:00 [HOST] sent: otastatus
+2026-10-26T06:44:12.657+00:00 I (986134) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=985141 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:44:12.674+00:00 I (986134) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256951 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:44:12.679+00:00 I (986144) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:44:12.685+00:00 I (986154) lab: BUILD elf_sha256=da6b7babe secure_version=0
+2026-10-26T06:44:12.690+00:00 I (986164) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T06:44:12.702+00:00 I (986164) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T06:44:12.713+00:00 I (986174) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T06:44:12.718+00:00 I (986184) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T06:44:12.729+00:00 I (986194) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T06:44:12.740+00:00 I (986204) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T06:44:12.747+00:00 I (986214) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T06:44:12.763+00:00 I (986224) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T06:44:12.773+00:00 I (986244) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_RESPONSE wifi=up bytes=0 total=1118208 durable_q=0
+2026-10-26T06:44:13.224+00:00 [HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A03-signature-bitflip.json https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A03-signature-bitflip.sig
+2026-10-26T06:44:13.244+00:00 I (986724) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T06:44:13.244+00:00 I (986724) OTA: phase=FETCH_MANIFEST reason=exact bytes
+2026-10-26T06:44:16.428+00:00 I (989914) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:44:19.119+00:00 I (992604) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:44:20.328+00:00 I (993804) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=992812 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:44:20.343+00:00 I (993804) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=198667 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:44:20.347+00:00 I (993814) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:44:23.181+00:00 I (996664) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:44:26.185+00:00 I (999674) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:44:27.807+00:00 I (1001294) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+2026-10-26T06:44:27.869+00:00 I (1001354) OTA: phase=FAILED reason=ESP_ERR_INVALID_CRC
+2026-10-26T06:44:27.870+00:00 [HOST] sent: status
+2026-10-26T06:44:27.870+00:00 [HOST] sent: otastatus
+2026-10-26T06:44:27.890+00:00 I (1001364) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=1000376 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:44:27.907+00:00 I (1001364) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256603 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:44:27.913+00:00 I (1001384) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:44:27.918+00:00 I (1001384) lab: BUILD elf_sha256=da6b7babe secure_version=0
+2026-10-26T06:44:27.929+00:00 I (1001394) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T06:44:27.935+00:00 I (1001404) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T06:44:27.946+00:00 I (1001414) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T06:44:27.957+00:00 I (1001424) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T06:44:27.962+00:00 I (1001434) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T06:44:27.974+00:00 I (1001444) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T06:44:27.979+00:00 I (1001444) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T06:44:27.996+00:00 I (1001454) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T06:44:28.006+00:00 I (1001474) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_CRC wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T06:44:28.119+00:00 [HOST] fixture_result=PASS name=A03-signature-bitflip

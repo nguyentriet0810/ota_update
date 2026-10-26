@@ -1,0 +1,47 @@
+2026-10-26T06:33:54.056+00:00 [HOST] fixture=A01-wrong-chip expectedgate=manifest compatibility before erase
+2026-10-26T06:33:54.491+00:00 [HOST] sent: status
+2026-10-26T06:33:54.491+00:00 [HOST] sent: otastatus
+2026-10-26T06:33:54.512+00:00 I (367964) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=366977 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:33:54.529+00:00 I (367974) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256951 internal_largest=116736 minimum_free=8532596
+2026-10-26T06:33:54.534+00:00 I (367984) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:33:54.540+00:00 I (367994) lab: BUILD elf_sha256=da6b7babe secure_version=0
+2026-10-26T06:33:54.546+00:00 I (367994) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T06:33:54.556+00:00 I (368004) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T06:33:54.566+00:00 I (368014) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T06:33:54.573+00:00 I (368024) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T06:33:54.584+00:00 I (368034) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T06:33:54.595+00:00 I (368044) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T06:33:54.600+00:00 I (368054) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T06:33:54.618+00:00 I (368064) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T06:33:54.626+00:00 I (368074) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_ARG wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T06:33:55.082+00:00 [HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-chip.json https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-chip.sig
+2026-10-26T06:33:55.101+00:00 I (368564) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T06:33:55.101+00:00 I (368564) OTA: phase=FETCH_MANIFEST reason=exact bytes
+2026-10-26T06:33:58.041+00:00 I (371504) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:33:58.696+00:00 I (372154) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=371162 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:33:58.713+00:00 I (372154) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=197711 internal_largest=116736 minimum_free=8532596
+2026-10-26T06:33:58.715+00:00 I (372164) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:34:01.342+00:00 I (374804) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:34:06.028+00:00 I (379494) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:34:08.717+00:00 I (382174) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=381182 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:34:08.733+00:00 I (382174) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=184767 internal_largest=110592 minimum_free=8532596
+2026-10-26T06:34:08.733+00:00 I (382184) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:34:08.761+00:00 I (382224) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:34:10.339+00:00 I (383804) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+2026-10-26T06:34:10.403+00:00 I (383864) OTA: phase=FAILED reason=ESP_ERR_INVALID_ARG
+2026-10-26T06:34:10.404+00:00 [HOST] sent: status
+2026-10-26T06:34:10.404+00:00 [HOST] sent: otastatus
+2026-10-26T06:34:10.429+00:00 I (383884) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=382893 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:34:10.445+00:00 I (383884) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256895 internal_largest=116736 minimum_free=8532596
+2026-10-26T06:34:10.451+00:00 I (383904) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:34:10.456+00:00 I (383904) lab: BUILD elf_sha256=da6b7babe secure_version=0
+2026-10-26T06:34:10.462+00:00 I (383914) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T06:34:10.473+00:00 I (383924) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T06:34:10.484+00:00 I (383934) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T06:34:10.490+00:00 I (383944) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T06:34:10.501+00:00 I (383954) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T06:34:10.512+00:00 I (383954) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T06:34:10.518+00:00 I (383964) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T06:34:10.534+00:00 I (383974) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T06:34:10.544+00:00 I (383994) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_ARG wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T06:34:10.649+00:00 [HOST] fixture_result=PASS name=A01-wrong-chip

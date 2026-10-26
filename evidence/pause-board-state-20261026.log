@@ -1,0 +1,20 @@
+[HOST] sent: cancel
+[HOST] sent: status
+[HOST] sent: otastatus
+I (461896) OTA: cancel_no_active_session
+I (462096) lab: STATUS version=2.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:26:58 reset=3 uptime_ms=461104 health_fail=0 selftest=PASS service_mode=0
+I (462096) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257595 internal_largest=184320 minimum_free=8588552
+I (462116) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (462116) lab: BUILD elf_sha256=d0b0241ed secure_version=0
+I (462126) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+I (462136) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+I (462146) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+I (462146) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+I (462156) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+I (462166) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+I (462176) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+I (462186) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+I (462296) OTA: status ready=1 busy=0 phase=IDLE reason=local OTA controller ready wifi=up bytes=0 total=0 durable_q=0
+I (462646) lab: STATUS version=2.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:26:58 reset=3 uptime_ms=461652 health_fail=0 selftest=PASS service_mode=0
+I (462646) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257595 internal_largest=184320 minimum_free=8588552
+I (462656) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID

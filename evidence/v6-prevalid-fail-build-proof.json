@@ -1,0 +1,31 @@
+{
+  "fixture": "B04 software reset after health before SDK VALID",
+  "evidence_scope": "HOST BUILD AND NATIVE SIGNATURE VERIFICATION; DEVICE BEHAVIOR NOT RUN BY THIS AGENT",
+  "source_commit": "0163b3323f06cd707656bbd4fd7496f6719e2e5f",
+  "firmware_sources_match_commit": true,
+  "artifact_path": "D:\\ota_update\\.build\\v6-prevalid-fail\\studybook_ota_lab.bin",
+  "size": 1118208,
+  "sha256": "d1eace06e5e7e15941c0af4d26e1af7a514008786aa945bd0ca5bf922c052f5b",
+  "native_signature_verification": "PASS",
+  "native_verification_output": "espsecure v5.6.0\r\nSignature block 0 is valid (RSA).\r\nSignature block 0 verification successful using the supplied key (RSA).\r\nSignature block 1 invalid. Skipping.\r\nSignature block 2 invalid. Skipping.",
+  "build_flags": {
+    "PROJECT_VER": "6.0.0",
+    "LAB_VERSION_CODE": "6",
+    "LAB_CFG_SCHEMA": "2",
+    "LAB_PREVALID_RESET": "ON",
+    "LAB_CFG_FAULT_SHADOW_RESET": "OFF",
+    "LAB_FAULT_PROFILE": "OFF",
+    "LAB_HEALTH_FAIL": "OFF"
+  },
+  "main_compiler_definitions": [
+    "-DLAB_CFG_FAULT_SHADOW_RESET=0",
+    "-DLAB_CFG_SCHEMA=2",
+    "-DLAB_HEALTH_FAIL_OVERRIDE=0",
+    "-DLAB_PREVALID_RESET=1",
+    "-DLAB_VERSION_CODE=6"
+  ],
+  "fault_method": "software_reset; not physical power removal",
+  "device_result": "NOT RUN",
+  "build_log": "work/build-v6-prevalid-fail.log",
+  "native_log": "work/native-v6-prevalid-fail.log"
+}

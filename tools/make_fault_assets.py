@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
@@ -13,6 +14,8 @@ import release
 
 
 def create(args):
+    if not re.fullmatch(r"[0-9a-f]{40}", args.source_commit):
+        raise release.ReleaseError("SOURCE_COMMIT_REQUIRED")
     output = args.output.resolve()
     if output.exists() and any(output.iterdir()):
         raise release.ReleaseError("OUTPUT_NOT_EMPTY")
@@ -53,7 +56,21 @@ def create(args):
               "file_sha256": manifest["sha256"], "release_id": hashlib.sha256(raw).hexdigest(),
               "manifest_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.json",
               "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig",
-              "native_host_verification": "PASS", "board_result": "NOT RUN"}
+              "source_commit": args.source_commit,
+              "native_host_verification": "PASS", "raw_manifest_signature_host": "PASS",
+              "production_local_url_policy": "REJECT_AS_EXPECTED",
+              "safety_guard": "manifest version differs from native app descriptor",
+              "endpoint_pairs": {
+                  "trusted_ip": {"manifest_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.json",
+                                 "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig"},
+                  "untrusted_ca": {"manifest_url": "https://192.168.137.1:8444/releases/download/lab-fault-v6/manifest.json",
+                                   "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig"},
+                  "trusted_wrong_hostname": {"manifest_url": "https://192.168.137.1:8445/releases/download/lab-fault-v6/manifest.json",
+                                             "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig"}},
+              "asset_hashes": {path.name: {"size": path.stat().st_size,
+                                           "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+                               for path in sorted(output.iterdir()) if path.is_file()},
+              "board_result": "NOT RUN"}
     (output / "index.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     return report
 
@@ -62,6 +79,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for option in ("image", "manifest-key", "app-public-key", "output"):
         parser.add_argument("--" + option, type=Path, required=True)
+    parser.add_argument("--source-commit", required=True)
     args = parser.parse_args()
     try:
         print(json.dumps(create(args), indent=2))

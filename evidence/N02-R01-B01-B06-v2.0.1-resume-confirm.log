@@ -1,0 +1,133 @@
+[HOST] sent: ota-wifi-drop-at 344064
+[HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/v2.0.1/manifest.json https://github.com/nguyentriet0810/ota_update/releases/download/v2.0.1/manifest.sig
+W (139086) OTA: wifi_disconnect_injection_offset=344064 next_session_only
+I (139306) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+I (139306) OTA: phase=FETCH_MANIFEST reason=exact bytes
+I (140456) wifi:<ba-add>idx:1 (ifx:0, [MAC_REDACTED]), tid:3, ssn:4, winSize:64
+I (141696) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=3 uptime_ms=140702 health_fail=0 selftest=PASS service_mode=0
+I (141696) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=191115 internal_largest=116736 minimum_free=8537100
+I (141706) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (142536) esp-x509-crt-bundle: Certificate validated
+I (145536) esp-x509-crt-bundle: Certificate validated
+I (149586) esp-x509-crt-bundle: Certificate validated
+I (151726) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=3 uptime_ms=150732 health_fail=0 selftest=PASS service_mode=0
+I (151726) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=199719 internal_largest=116736 minimum_free=8532608
+I (151736) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (153826) esp-x509-crt-bundle: Certificate validated
+I (155136) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+I (155206) OTA: accepted_metadata version=2.0.1 version_code=2 size=1118208 slot=ota_1
+I (155206) OTA: accepted_release_id=c777a481c99b0b240b579c834b7253d070b8b6ff5c7740b5c2358b66e8864389 file_sha256=b715439de0f6dd4451652123c96ea49a9c753c2d76c9d2aed485b80fa3f290c8
+I (155216) OTA: phase=DOWNLOAD reason=inactive slot only
+I (157586) esp-x509-crt-bundle: Certificate validated
+I (160276) esp-x509-crt-bundle: Certificate validated
+I (161586) OTA: writer_started target=ota_1 offset=196608 mode=resume
+I (161646) OTA: download=17% written=200704 durable_q=196608
+I (161746) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=3 uptime_ms=160752 health_fail=0 selftest=PASS service_mode=0
+I (161746) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=200063 internal_largest=116736 minimum_free=8532544
+I (161756) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (163456) OTA: download=20% written=225280 durable_q=196608
+I (166206) OTA: checkpoint_committed q=262144 generation=4
+I (169886) OTA: checkpoint_committed q=327680 generation=5
+I (169906) OTA: download=30% written=335872 durable_q=327680
+I (171416) wifi:state: run -> init (0x0)
+I (171426) wifi:pm stop, total sleep time: 155203463 us / 169280671 us
+
+I (171426) wifi:<ba-del>idx:0, tid:0
+I (171426) wifi:<ba-del>idx:1, tid:3
+W (171426) OTA: fault_method=wifi_disconnect written=344064 q=327680 result=ESP_OK hold_ms=2000
+W (171436) OTA: wifi=disconnected reason=8
+I (171436) OTA: wifi_auto_reconnect=suppressed_by_lab_fault
+I (171756) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=3 uptime_ms=170762 health_fail=0 selftest=PASS service_mode=0
+I (171756) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=195655 internal_largest=116736 minimum_free=8532544
+I (171766) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (173436) OTA: fault_wifi_restore result=ESP_OK writer_aborted=true http_closed=true durable_q=327680
+W (173436) OTA: download_attempt=1 failed=ESP_ERR_HTTP_CONNECTION_CLOSED budget=3
+I (173446) wifi:state: init -> auth (0xb0)
+I (173456) wifi:state: auth -> assoc (0x0)
+I (173456) wifi:state: assoc -> run (0x10)
+I (173486) wifi:connected with [REDACTED], aid = 6, channel 6, BW20, bssid = [MAC_REDACTED]
+I (173496) wifi:security: WPA2-PSK, phy: bgn, rssi: -25, cipher(pairwise:0x3, group:0x3), pmf:0
+I (173496) wifi:pm start, type: 1
+
+I (173496) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (173546) wifi:AP's beacon interval = 102400 us, DTIM period = 3
+I (174526) esp_netif_handlers: sta ip: [LAN_IP_REDACTED], mask: 255.255.255.0, gw: [LAN_IP_REDACTED]
+I (174526) OTA: wifi=connected
+I (175446) OTA: phase=WAIT_RETRY_NETWORK reason=bounded reconnect before checkpoint resume
+I (175446) OTA: phase=DOWNLOAD reason=retry from durable checkpoint
+I (176926) wifi:<ba-add>idx:0 (ifx:0, [MAC_REDACTED]), tid:3, ssn:4, winSize:64
+I (178176) esp-x509-crt-bundle: Certificate validated
+I (180096) wifi:<ba-add>idx:1 (ifx:0, [MAC_REDACTED]), tid:0, ssn:7, winSize:64
+I (180876) esp-x509-crt-bundle: Certificate validated
+I (181776) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=3 uptime_ms=180782 health_fail=0 selftest=PASS service_mode=0
+I (181776) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=198431 internal_largest=120832 minimum_free=8527120
+I (181786) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (181876) OTA: writer_started target=ota_1 offset=327680 mode=resume
+I (182286) OTA: download=29% written=331776 durable_q=327680
+I (182326) OTA: download=30% written=335872 durable_q=327680
+I (184056) OTA: checkpoint_committed q=393216 generation=6
+I (186556) OTA: download=40% written=450560 durable_q=393216
+I (186586) OTA: checkpoint_committed q=458752 generation=7
+I (188886) OTA: checkpoint_committed q=524288 generation=8
+I (190236) OTA: download=50% written=561152 durable_q=524288
+I (190806) OTA: checkpoint_committed q=589824 generation=9
+I (191796) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=3 uptime_ms=190802 health_fail=0 selftest=PASS service_mode=0
+I (191796) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=199767 internal_largest=120832 minimum_free=8527120
+I (191806) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (192426) OTA: checkpoint_committed q=655360 generation=10
+I (192826) OTA: download=60% written=671744 durable_q=655360
+I (194056) OTA: checkpoint_committed q=720896 generation=11
+I (196336) OTA: checkpoint_committed q=786432 generation=12
+I (196336) OTA: download=70% written=786432 durable_q=786432
+I (199106) OTA: checkpoint_committed q=851968 generation=13
+I (201426) OTA: download=80% written=897024 durable_q=851968
+I (201826) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=3 uptime_ms=200836 health_fail=0 selftest=PASS service_mode=0
+I (201826) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=199179 internal_largest=120832 minimum_free=8527120
+I (201846) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (202776) OTA: checkpoint_committed q=917504 generation=14
+I (205846) OTA: checkpoint_committed q=983040 generation=15
+I (206476) OTA: download=90% written=1007616 durable_q=983040
+I (208316) OTA: checkpoint_committed q=1048576 generation=16
+I (211036) OTA: checkpoint_committed q=1114112 generation=17
+I (211046) OTA: download=100% written=1118208 durable_q=1114112
+I (211046) OTA: phase=VERIFY_IMAGE reason=SDK native signature validation
+I (211046) esp_image: segment 0: paddr=00320020 vaddr=3c0b0020 size=35f08h (220936) map
+I (211096) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332) 
+I (211096) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852) 
+I (211106) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af024h (716836) map
+I (211246) esp_image: segment 4: paddr=0040f04c vaddr=403789a4 size=11b24h ( 72484) 
+I (211256) esp_image: segment 5: paddr=00420b78 vaddr=50000000 size=00024h (    36) 
+I (211266) esp_image: segment 6: paddr=00420ba4 vaddr=00000000 size=0f42ch ( 62508) 
+I (211276) esp_image: Verifying image signature...
+I (211276) secure_boot_v2: Take trusted digest key(s) from running app
+I (211286) secure_boot_v2: #0 app key digest == #0 trusted key digest
+I (211286) secure_boot_v2: Verifying with RSA-PSS...
+I (211356) secure_boot_v2_rsa: Signature verified successfully!
+I (211366) OTA: phase=VERIFY_FILE reason=readback final signed bytes and descriptor
+I (211616) OTA: phase=READY_TO_BOOT reason=persisting per-slot identity
+I (211626) esp_image: segment 0: paddr=00320020 vaddr=3c0b0020 size=35f08h (220936) map
+I (211676) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332) 
+I (211676) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852) 
+I (211686) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af024h (716836) map
+I (211826) esp_image: segment 4: paddr=0040f04c vaddr=403789a4 size=11b24h ( 72484) 
+I (211836) esp_image: segment 5: paddr=00420b78 vaddr=50000000 size=00024h (    36) 
+I (211836) esp_image: segment 6: paddr=00420ba4 vaddr=00000000 size=0f42ch ( 62508) 
+I (211856) esp_image: Verifying image signature...
+I (211856) secure_boot_v2: Take trusted digest key(s) from running app
+I (211856) secure_boot_v2: #0 app key digest == #0 trusted key digest
+I (211866) secure_boot_v2: Verifying with RSA-PSS...
+I (211926) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=3 uptime_ms=210939 health_fail=0 selftest=PASS service_mode=0
+I (211936) secure_boot_v2_rsa: Signature verified successfully!
+I (211946) OTA: phase=BOOT_SELECTED reason=NEW; success requires health and VALID after restart
+I (211946) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=240067 internal_largest=120832 minimum_free=8527120
+I (211956) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (212946) wifi:state: run -> init (0x0)
+I (212946) wifi:pm stop, total sleep time: 18260932 us / 39443946 us
+
+I (212946) wifi:<ba-del>idx:1, tid:0
+I (212946) wifi:<ba-del>idx:0, tid:3
+W (212956) OTA: wifi=disconnected reason=8
+I (212996) wifi:flush txq
+I (212996) wifi:stop sw txq
+I (212996) wifi:lmac stop hw txq
+x�ESP-ROM:esp32s3-20210327

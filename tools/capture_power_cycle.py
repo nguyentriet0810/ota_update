@@ -2,12 +2,15 @@
 import argparse
 import json
 from pathlib import Path
+import sys
 import time
 
 import serial
 
 
 def main():
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', default='COM13')
     parser.add_argument('--duration', type=float, default=180)

@@ -11,6 +11,9 @@ import serial
 
 
 def main():
+    # Reset/boot noise can decode to U+FFFD; pipes must not inherit cp1252.
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', default='COM13')
     parser.add_argument('--baud', type=int, default=115200)

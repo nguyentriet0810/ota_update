@@ -1,8 +1,9 @@
 # ESP32-S3 N16R8 — Study Book OTA lab
 
-Trạng thái đang thực hiện: xem [checkpoint phiên 26/10/2026](docs/session-checkpoint-2026-10-26.md).
-Sửa fresh erase/checkpoint policy2 đã có trong source, chưa build/nạp ở checkpoint;
-binary lab cũ vẫn được giữ theo identity đã phát hành.
+Đã tiếp tục phiên sau [checkpoint tạm dừng](docs/session-paused-2026-10-26.md).
+Người dùng đã xóa Flash cho mục đích khác; baseline1.0.1 được nạp lại để tiếp tục
+kiểm thử. 16 fixture reject đã có evidence PASS từ lượt chạy trước. Các ca còn
+thiếu và giới hạn capture được ghi trong matrix; không suy kết quả từ expected.
 
 Project thực hành Subject #3 của Study Book « OTA Update, dùng ESP-IDF **v6.1**
 (`fff9895c82d744c7237be8847347bdd1b07c6643`). SDK/công cụ v6.1 được cài riêng;

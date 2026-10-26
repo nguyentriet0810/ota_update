@@ -1,0 +1,47 @@
+{
+  "purpose": "isolated fault-profile only",
+  "activation_expected": "REJECT_DESCRIPTOR_VERSION",
+  "native_image_version": "6.0.0",
+  "manifest_version": "9.9.9",
+  "version_code": 6,
+  "config_schema": 2,
+  "size": 1118208,
+  "file_sha256": "f3d3abac88542ee0b7cd4549957cc08cd8f4836a0a20cf5730c49698b7bf8de6",
+  "release_id": "eb601d8c5e071b77b42513efa6b48f8a62f95a3869915bdd0ba540135fdd6627",
+  "manifest_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.json",
+  "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig",
+  "source_commit": "68dbc4fc0ceba65eaa68c4fb325be14978c78cff",
+  "native_host_verification": "PASS",
+  "raw_manifest_signature_host": "PASS",
+  "production_local_url_policy": "REJECT_AS_EXPECTED",
+  "safety_guard": "manifest version differs from native app descriptor",
+  "endpoint_pairs": {
+    "trusted_ip": {
+      "manifest_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.json",
+      "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig"
+    },
+    "untrusted_ca": {
+      "manifest_url": "https://192.168.137.1:8444/releases/download/lab-fault-v6/manifest.json",
+      "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig"
+    },
+    "trusted_wrong_hostname": {
+      "manifest_url": "https://192.168.137.1:8445/releases/download/lab-fault-v6/manifest.json",
+      "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig"
+    }
+  },
+  "asset_hashes": {
+    "app.bin": {
+      "size": 1118208,
+      "sha256": "f3d3abac88542ee0b7cd4549957cc08cd8f4836a0a20cf5730c49698b7bf8de6"
+    },
+    "manifest.json": {
+      "size": 439,
+      "sha256": "eb601d8c5e071b77b42513efa6b48f8a62f95a3869915bdd0ba540135fdd6627"
+    },
+    "manifest.sig": {
+      "size": 384,
+      "sha256": "a20e4eef07d4f6a05357ff1ed1357e217426662c5a41c4425f3901c84db8b710"
+    }
+  },
+  "board_result": "NOT RUN"
+}

@@ -1,0 +1,114 @@
+2026-10-26T06:40:59.865+00:00 [HOST] fixture=A05-final-file-digest expectedgate=VERIFY_FILE full signed-file SHA256 mismatch
+2026-10-26T06:40:59.874+00:00 I (793344) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=792352 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:40:59.890+00:00 I (793344) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256763 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:40:59.893+00:00 I (793354) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:41:00.219+00:00 [HOST] sent: status
+2026-10-26T06:41:00.219+00:00 [HOST] sent: otastatus
+2026-10-26T06:41:00.240+00:00 I (793704) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=792719 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:41:00.257+00:00 I (793714) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256819 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:41:00.262+00:00 I (793724) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:41:00.267+00:00 I (793734) lab: BUILD elf_sha256=da6b7babe secure_version=0
+2026-10-26T06:41:00.274+00:00 I (793734) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T06:41:00.285+00:00 I (793744) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T06:41:00.296+00:00 I (793754) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T06:41:00.301+00:00 I (793764) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T06:41:00.312+00:00 I (793774) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T06:41:00.323+00:00 I (793784) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T06:41:00.329+00:00 I (793794) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T06:41:00.346+00:00 I (793804) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T06:41:00.357+00:00 I (793814) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_OTA_VALIDATE_FAILED wifi=up bytes=1118208 total=1118208 durable_q=1114112
+2026-10-26T06:41:00.810+00:00 [HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A05-final-file-digest.json https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A05-final-file-digest.sig
+2026-10-26T06:41:00.830+00:00 I (794304) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T06:41:00.830+00:00 I (794304) OTA: phase=FETCH_MANIFEST reason=exact bytes
+2026-10-26T06:41:03.810+00:00 I (797284) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:41:07.120+00:00 I (800594) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:41:09.893+00:00 I (803364) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=802372 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:41:09.910+00:00 I (803364) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=189087 internal_largest=114688 minimum_free=8532332
+2026-10-26T06:41:09.913+00:00 I (803374) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:41:11.188+00:00 I (804664) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:41:14.492+00:00 I (807974) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:41:16.116+00:00 I (809594) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+2026-10-26T06:41:16.187+00:00 I (809664) OTA: accepted_metadata version=2.0.0 version_code=2 size=1118208 slot=ota_1
+2026-10-26T06:41:16.204+00:00 I (809664) OTA: accepted_release_id=c25e8fdb4e1029300ec60bf54b3692d9910446c0892c301ac5891ab361f6b110 file_sha256=00a6f30638d2f93ecfff30241bce10abcf5066fe8fd14372e368879641fdb79f
+2026-10-26T06:41:16.210+00:00 I (809674) OTA: phase=DOWNLOAD reason=inactive slot only
+2026-10-26T06:41:16.210+00:00 W (809684) OTA: checkpoint_identity_mismatch; fresh candidate only
+2026-10-26T06:41:18.944+00:00 I (812424) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:41:19.893+00:00 I (813364) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=812372 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:41:19.909+00:00 I (813364) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=195611 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:41:19.912+00:00 I (813374) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:41:21.636+00:00 I (815114) esp-x509-crt-bundle: Certificate validated
+2026-10-26T06:41:26.289+00:00 I (819764) OTA: writer_started target=ota_1 offset=0 mode=fresh
+2026-10-26T06:41:26.314+00:00 I (819794) OTA: download=0% written=4096 durable_q=0
+2026-10-26T06:41:29.026+00:00 I (822504) OTA: checkpoint_committed q=65536 generation=51
+2026-10-26T06:41:29.943+00:00 I (823414) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=822422 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:41:29.959+00:00 I (823414) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=199975 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:41:29.962+00:00 I (823424) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:41:32.092+00:00 I (825574) OTA: download=10% written=114688 durable_q=65536
+2026-10-26T06:41:32.728+00:00 I (826204) OTA: checkpoint_committed q=131072 generation=52
+2026-10-26T06:41:36.134+00:00 I (829614) OTA: checkpoint_committed q=196608 generation=53
+2026-10-26T06:41:36.727+00:00 I (830204) OTA: download=20% written=225280 durable_q=196608
+2026-10-26T06:41:39.163+00:00 I (832644) OTA: checkpoint_committed q=262144 generation=54
+2026-10-26T06:41:39.952+00:00 I (833424) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=832432 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:41:39.969+00:00 I (833424) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=199887 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:41:39.972+00:00 I (833434) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:41:42.543+00:00 I (836024) OTA: checkpoint_committed q=327680 generation=55
+2026-10-26T06:41:42.567+00:00 I (836044) OTA: download=30% written=335872 durable_q=327680
+2026-10-26T06:41:46.229+00:00 I (839704) OTA: checkpoint_committed q=393216 generation=56
+2026-10-26T06:41:48.389+00:00 I (841864) OTA: download=40% written=450560 durable_q=393216
+2026-10-26T06:41:48.996+00:00 I (842474) OTA: checkpoint_committed q=458752 generation=57
+2026-10-26T06:41:49.992+00:00 I (843464) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=842472 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:41:50.008+00:00 I (843464) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=200019 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:41:50.011+00:00 I (843474) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:41:52.375+00:00 I (845854) OTA: checkpoint_committed q=524288 generation=58
+2026-10-26T06:41:53.605+00:00 I (847084) OTA: download=50% written=561152 durable_q=524288
+2026-10-26T06:41:55.155+00:00 I (848634) OTA: checkpoint_committed q=589824 generation=59
+2026-10-26T06:41:57.904+00:00 I (851384) OTA: checkpoint_committed q=655360 generation=60
+2026-10-26T06:41:58.819+00:00 I (852294) OTA: download=60% written=671744 durable_q=655360
+2026-10-26T06:42:00.002+00:00 I (853474) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=852482 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:42:00.019+00:00 I (853474) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=200019 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:42:00.021+00:00 I (853484) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:42:00.975+00:00 I (854454) OTA: checkpoint_committed q=720896 generation=61
+2026-10-26T06:42:04.055+00:00 I (857534) OTA: checkpoint_committed q=786432 generation=62
+2026-10-26T06:42:04.060+00:00 I (857534) OTA: download=70% written=786432 durable_q=786432
+2026-10-26T06:42:07.446+00:00 I (860924) OTA: checkpoint_committed q=851968 generation=63
+2026-10-26T06:42:08.997+00:00 I (862474) OTA: download=80% written=897024 durable_q=851968
+2026-10-26T06:42:10.011+00:00 I (863484) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=862492 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:42:10.028+00:00 I (863484) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=200019 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:42:10.030+00:00 I (863494) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:42:10.502+00:00 I (863984) OTA: checkpoint_committed q=917504 generation=64
+2026-10-26T06:42:13.877+00:00 I (867354) OTA: checkpoint_committed q=983040 generation=65
+2026-10-26T06:42:14.504+00:00 I (867984) OTA: download=90% written=1007616 durable_q=983040
+2026-10-26T06:42:16.660+00:00 I (870144) OTA: checkpoint_committed q=1048576 generation=66
+2026-10-26T06:42:19.182+00:00 I (872664) OTA: checkpoint_committed q=1114112 generation=67
+2026-10-26T06:42:19.195+00:00 I (872674) OTA: download=100% written=1118208 durable_q=1114112
+2026-10-26T06:42:19.200+00:00 I (872674) OTA: phase=VERIFY_IMAGE reason=SDK native signature validation
+2026-10-26T06:42:19.204+00:00 I (872674) esp_image: segment 0: paddr=00320020 vaddr=3c0b0020 size=35f08h (220936) map
+2026-10-26T06:42:19.249+00:00 I (872724) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332) 
+2026-10-26T06:42:19.254+00:00 I (872734) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852) 
+2026-10-26T06:42:19.260+00:00 I (872734) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af020h (716832) map
+2026-10-26T06:42:19.398+00:00 I (872874) esp_image: segment 4: paddr=0040f048 vaddr=403789a4 size=11b24h ( 72484) 
+2026-10-26T06:42:19.416+00:00 I (872894) esp_image: segment 5: paddr=00420b74 vaddr=50000000 size=00024h (    36) 
+2026-10-26T06:42:19.420+00:00 I (872894) esp_image: segment 6: paddr=00420ba0 vaddr=00000000 size=0f430h ( 62512) 
+2026-10-26T06:42:19.427+00:00 I (872904) esp_image: Verifying image signature...
+2026-10-26T06:42:19.433+00:00 I (872904) secure_boot_v2: Take trusted digest key(s) from running app
+2026-10-26T06:42:19.444+00:00 I (872914) secure_boot_v2: #0 app key digest == #0 trusted key digest
+2026-10-26T06:42:19.444+00:00 I (872914) secure_boot_v2: Verifying with RSA-PSS...
+2026-10-26T06:42:19.507+00:00 I (872984) secure_boot_v2_rsa: Signature verified successfully!
+2026-10-26T06:42:19.509+00:00 I (872984) OTA: phase=VERIFY_FILE reason=readback final signed bytes and descriptor
+2026-10-26T06:42:19.761+00:00 I (873244) OTA: phase=FAILED reason=ESP_ERR_INVALID_CRC
+2026-10-26T06:42:19.761+00:00 [HOST] sent: status
+2026-10-26T06:42:19.762+00:00 [HOST] sent: otastatus
+2026-10-26T06:42:19.782+00:00 I (873254) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=872264 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T06:42:19.799+00:00 I (873254) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256895 internal_largest=116736 minimum_free=8532332
+2026-10-26T06:42:19.805+00:00 I (873274) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T06:42:19.810+00:00 I (873274) lab: BUILD elf_sha256=da6b7babe secure_version=0
+2026-10-26T06:42:19.816+00:00 I (873284) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T06:42:19.827+00:00 I (873294) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T06:42:19.838+00:00 I (873304) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T06:42:19.844+00:00 I (873304) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T06:42:19.855+00:00 I (873314) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T06:42:19.866+00:00 I (873324) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T06:42:19.871+00:00 I (873334) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T06:42:19.888+00:00 I (873344) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T06:42:19.898+00:00 I (873364) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_CRC wifi=up bytes=1118208 total=1118208 durable_q=0
+2026-10-26T06:42:20.015+00:00 [HOST] fixture_result=PASS name=A05-final-file-digest

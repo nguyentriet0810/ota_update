@@ -1,0 +1,76 @@
+Activating ESP-IDF 6.1
+warning:  IDF_PATH is changed from 'D:/ota_update/.tooling/esp-idf-v6.1' to 'D:\ota_update\.tooling\esp-idf-v6.1'.
+* Checking python version ... 3.11.2
+* Checking python dependencies ... OK
+* Deactivating the current ESP-IDF environment (if any) ... OK
+* Establishing a new ESP-IDF environment ... OK
+* Identifying shell ... pwsh.exe
+* Detecting outdated tools in system ... OK - no outdated tools found
+
+Done! You can now compile ESP-IDF projects.
+Go to the project directory and run:
+
+  idf.py build
+
+WARNING: Python interpreter "D:\ota_update\.tooling\python-env\Scripts\python.exe" used to start idf.py is not from installed venv "D:/ota_update/.tooling/python-env"
+[1/10] Performing build step for 'bootloader'
+[1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\ota_update\.build\v5.0.1-fault-profile\bootloader && D:\ota_update\.tooling\python-env\Scripts\python.exe D:/ota_update/.tooling/esp-idf-v6.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 D:/ota_update/.build/v5.0.1-fault-profile/bootloader/bootloader.bin"
+
+Bootloader binary size 0x52f0 bytes. 0x2d10 bytes (35%) free.
+
+
+[2/10] No install step for 'bootloader'
+[3/10] Completed 'bootloader'
+[4/10] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/ota_lab.c.obj
+[5/10] Linking C static library esp-idf\main\libmain.a
+[6/10] Generating esp-idf/esp_system/ld/sections.ld
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/bt/host/nimble/Kconfig.in:1428: BT_NIMBLE_MESH_PROVISIONER: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/fatfs/Kconfig:240: FATFS_PRINT_LLI: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/fatfs/Kconfig:245: FATFS_PRINT_FLOAT: 'default 0' is not a valid bool value (only 'y' and 'n' are allowed). Value is treated as 'n'.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/bootloader/Kconfig.projbuild:383: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/bootloader/Kconfig.projbuild:423: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/bt/common/Kconfig.in:136: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/bt/host/nimble/Kconfig.in:1023: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/bt/controller/esp32c3/Kconfig.in:652: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/esp_hw_support\./lowpower/port/esp32p4/Kconfig.p4_rev3_mspi_workaround:6: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/esp_mm/Kconfig:20: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/esp_system\./port/soc/esp32s3/Kconfig.memory:21: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: D:/ota_update/.tooling/esp-idf-v6.1/components/openthread/Kconfig:106: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+
+Skipping linker fragment parsing, fragment files unchanged
+
+[7/10] Linking CXX executable studybook_ota_lab.elf
+[8/10] Generating binary image from built executable
+esptool v5.6.0
+
+Creating ESP32-S3 image...
+
+Merged 3 ELF sections.
+
+Successfully created ESP32-S3 image.
+
+Generated D:/ota_update/.build/v5.0.1-fault-profile/studybook_ota_lab-unsigned.bin
+[9/10] Generating signed binary image
+espsecure v5.6.0
+
+1 signing key(s) found.
+
+Signed 1114112 bytes of data from "D:/ota_update/.build/v5.0.1-fault-profile/studybook_ota_lab-unsigned.bin". Signature sector now has 1 signature blocks.
+
+Generated signed binary image D:/ota_update/.build/v5.0.1-fault-profile/studybook_ota_lab.bin from D:/ota_update/.build/v5.0.1-fault-profile/studybook_ota_lab-unsigned.bin
+[10/10] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\ota_update\.build\v5.0.1-fault-profile && D:\ota_update\.tooling\python-env\Scripts\python.exe D:/ota_update/.tooling/esp-idf-v6.1/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/ota_update/.build/v5.0.1-fault-profile/partition_table/partition-table.bin D:/ota_update/.build/v5.0.1-fault-profile/studybook_ota_lab.bin"
+studybook_ota_lab.bin binary size 0x111000 bytes. Smallest app partition is 0x300000 bytes. 0x1ef000 bytes (64%) free.
+
+Executing action: all (aliases: build)
+Running ninja in directory D:\ota_update\.build\v5.0.1-fault-profile
+Executing "ninja all"...
+
+
+Project build complete. To flash, run:
+ idf.py flash
+or
+ idf.py -p PORT flash
+or
+ python -m esptool --chip esp32s3 -b 460800 --before default-reset --after hard-reset write-flash --flash-mode dio --flash-size keep --flash-freq 40m 0x0 ..\v5.0.1-fault-profile\bootloader\bootloader.bin 0x8000 ..\v5.0.1-fault-profile\partition_table\partition-table.bin 0xf000 ..\v5.0.1-fault-profile\ota_data_initial.bin 0x20000 ..\v5.0.1-fault-profile\studybook_ota_lab.bin
+or from the "D:\ota_update\.build\v5.0.1-fault-profile" directory
+ python -m esptool --chip esp32s3 -b 460800 --before default-reset --after hard-reset write-flash "@flash_args"
