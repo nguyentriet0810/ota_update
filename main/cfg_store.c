@@ -4,6 +4,9 @@
 #include <inttypes.h>
 #include "esp_log.h"
 #include "esp_ota_ops.h"
+#include "esp_system.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include "nvs.h"
 
 #ifndef LAB_CFG_SCHEMA
@@ -116,6 +119,15 @@ static esp_err_t write_record(nvs_handle_t handle, const char *key, const cfg_re
     uint8_t bytes[MAX_RECORD_LEN];
     size_t length = encode(bytes, record);
     esp_err_t err = nvs_set_blob(handle, key, bytes, length);
+#if LAB_CFG_FAULT_SHADOW_RESET
+    if (err == ESP_OK && record->schema == 2) {
+        ESP_LOGW(TAG, "FAULT_RESET point=after_schema2_set_blob_before_nvs_commit method=software_reset source_schema1_preserved=true");
+        /* This identifies the API call window. It does not claim that set_blob
+         * buffers every physical write until commit, or emulate a power cut. */
+        vTaskDelay(pdMS_TO_TICKS(150));
+        esp_restart();
+    }
+#endif
     if (err == ESP_OK) err = nvs_commit(handle);
     cfg_record_t readback;
     if (err == ESP_OK) err = read_record(handle, key, record->schema, &readback);

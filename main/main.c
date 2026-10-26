@@ -283,6 +283,11 @@ void app_main(void)
                 vTaskDelay(pdMS_TO_TICKS(250));
                 esp_restart();
             }
+#if LAB_PREVALID_RESET
+            ESP_LOGW(TAG, "FAULT_RESET point=after_health_before_SDK_VALID method=software_reset mark_valid_called=false");
+            vTaskDelay(pdMS_TO_TICKS(150));
+            esp_restart();
+#endif
             esp_err_t err = esp_ota_mark_app_valid_cancel_rollback();
             ESP_LOGI(TAG, "MARK_VALID result=%s state=%s", esp_err_to_name(err), state_name(running_state()));
             if (err == ESP_OK) {

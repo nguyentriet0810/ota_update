@@ -8,7 +8,13 @@ idf_component_register(
              esp-tls mbedtls lwip
 )
 target_compile_definitions(${COMPONENT_LIB} PRIVATE
-    LAB_VERSION_CODE=${LAB_VERSION_CODE} LAB_CFG_SCHEMA=${LAB_CFG_SCHEMA})
+    LAB_VERSION_CODE=${LAB_VERSION_CODE} LAB_CFG_SCHEMA=${LAB_CFG_SCHEMA}
+    LAB_CFG_FAULT_SHADOW_RESET=$<BOOL:${LAB_CFG_FAULT_SHADOW_RESET}>
+    LAB_PREVALID_RESET=$<BOOL:${LAB_PREVALID_RESET}>)
+if(LAB_FAULT_PROFILE)
+    target_compile_definitions(${COMPONENT_LIB} PRIVATE LAB_FAULT_PROFILE=1)
+    target_add_binary_data(${COMPONENT_LIB} "${CMAKE_CURRENT_LIST_DIR}/lab_test_ca.pem" TEXT)
+endif()
 
 # A dedicated negative-test build can use -DLAB_HEALTH_FAIL=ON.
 # No eFuse or persistent security settings are changed by this fixture.
