@@ -1,0 +1,111 @@
+{
+  "date_local": "2026-10-26",
+  "timezone": "Asia/Bangkok",
+  "scope": "Technical lab deliverables only; independent student knowledge assessment unchanged",
+  "topics": [
+    {
+      "code": "E01",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E02",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E03",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E04",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false,
+      "one_call_verified": true
+    },
+    {
+      "code": "E05",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E06",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E07",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E08",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E09",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E10",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E11",
+      "status": "Done",
+      "checked": 5,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    },
+    {
+      "code": "E12",
+      "status": "Done",
+      "checked": 6,
+      "unchecked": 0,
+      "evidence_checkpoint_link_verified": true,
+      "truncated": false
+    }
+  ],
+  "Done": 12,
+  "In_progress": 0,
+  "evidence_checkpoint": "9bbc02588764a5155fd567863bae231b4147dd64",
+  "board_final_version": "8.0.1",
+  "board_sdk_state": "VALID",
+  "capstone_groups_PASS": 32,
+  "E04_onecall": "PASS"
+}
