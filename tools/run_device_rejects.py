@@ -97,8 +97,8 @@ def parse_baseline(lines: list[str]) -> dict:
     return observed
 
 
-def baseline_ok(observed: dict) -> bool:
-    expected = {"version": BASELINE_VERSION, "selftest": "PASS", "running_slot": BASELINE_SLOT,
+def baseline_ok(observed: dict, expected_version: str = BASELINE_VERSION) -> bool:
+    expected = {"version": expected_version, "selftest": "PASS", "running_slot": BASELINE_SLOT,
                 "running_address": BASELINE_ADDRESS, "boot_slot": BASELINE_SLOT, "sdk_state": "VALID",
                 "controller_ready": 1, "controller_busy": 0}
     return all(observed.get(key) == value for key, value in expected.items()) and observed.get("service_mode", 0) == 0
@@ -109,7 +109,8 @@ def baseline_complete(observed: dict) -> bool:
             "controller_ready", "controller_busy"} <= observed.keys()
 
 
-def assess_fixture(fixture: dict, lines: list[str], before: dict, after: dict) -> dict:
+def assess_fixture(fixture: dict, lines: list[str], before: dict, after: dict,
+                   baseline_version: str = BASELINE_VERSION) -> dict:
     _, expected_phase, expected_reason, expected_writer = GATES[fixture["test_id"]]
     started = False
     phases = []
@@ -134,7 +135,7 @@ def assess_fixture(fixture: dict, lines: list[str], before: dict, after: dict) -
     unexpected_reset = [line for line in lines if UNEXPECTED_RESET.search(line)]
     metadata_seen = any("accepted_metadata " in line for line in lines)
     header_reject = any("stream_header_reject " in line for line in lines)
-    unchanged = baseline_ok(before) and baseline_ok(after)
+    unchanged = baseline_ok(before, baseline_version) and baseline_ok(after, baseline_version)
     checks = {
         "new_session_started": started,
         "actual_FAILED_observed": failed_reason is not None,
@@ -236,6 +237,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--index", type=Path, required=True)
     parser.add_argument("--port", default="COM13")
+    parser.add_argument("--baseline-version", default=BASELINE_VERSION,
+                        help="Exact baseline app version required before and after every fixture (default: 1.0.0)")
     parser.add_argument("--evidence-dir", type=Path, required=True)
     parser.add_argument("--timeout", type=float, default=90)
     parser.add_argument("--only", nargs="+", default=[], help="Fixture names or test IDs, space/comma separated")
@@ -246,6 +249,8 @@ def main() -> int:
         index_bytes = args.index.read_bytes()
         index = json.loads(index_bytes.decode("utf-8-sig"))
         fixtures = validate_index(index, args.only)
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9.+_-]{0,30}", args.baseline_version):
+            raise ValueError("--baseline-version must be a nonempty ASCII app version, at most 31 characters")
         if not 1 <= args.timeout <= 900:
             raise ValueError("--timeout must be between 1 and 900 seconds per fixture")
         secrets = []
@@ -271,7 +276,8 @@ def main() -> int:
 
     if args.validate_only:
         print(json.dumps({"index_valid": True, "selected_count": len(fixtures),
-                          "selected": [f["name"] for f in fixtures], "serial_opened": False}, indent=2))
+                          "selected": [f["name"] for f in fixtures], "serial_opened": False,
+                          "baseline_version": args.baseline_version}, indent=2))
         return 0
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
     run_dir = args.evidence_dir / ("run-" + run_id)
@@ -279,6 +285,7 @@ def main() -> int:
     summary = {"run_id": run_id, "started_utc": utc_now(), "evidence_kind": "ACTUAL_DEVICE_SERIAL",
                "index_sha256": hashlib.sha256(index_bytes).hexdigest(), "repo": index["repo"],
                "fixture_release_tag": index["fixture_release_tag"], "port": args.port, "baud": 115200,
+               "expected_baseline_version": args.baseline_version,
                "reset_method": "NONE; RTS/DTR false before open; no reset command",
                "selected_count": len(fixtures), "results": []}
 
@@ -312,10 +319,11 @@ def main() -> int:
                 capture.record("[HOST] fixture=" + fixture["name"] + " expectedgate=" + fixture["expectedgate"], False)
                 capture.pump(0.35)  # Retain queued output; never discard unread board evidence.
                 before, before_lines = capture.baseline()
-                if not baseline_ok(before) or before.get("wifi") != "up" or any(FORBIDDEN.search(x) for x in before_lines):
+                if (not baseline_ok(before, args.baseline_version) or before.get("wifi") != "up"
+                        or any(FORBIDDEN.search(x) for x in before_lines)):
                     result = {"name": fixture["name"], "test_id": fixture["test_id"],
                               "expectedgate": fixture["expectedgate"], "result": "BLOCKED",
-                              "reason": "Fresh baseline must be v1.0.0 ota_0 VALID, healthy, idle and Wi-Fi up",
+                              "reason": f"Fresh baseline must be v{args.baseline_version} ota_0 VALID, healthy, idle and Wi-Fi up",
                               "baseline_before": before}
                     abort_reason = result["reason"]
                 else:
@@ -343,12 +351,12 @@ def main() -> int:
                             capture.pump(3)
                             body = list(capture.lines[start:])
                     after, after_lines = capture.baseline()
-                    result = assess_fixture(fixture, body + after_lines, before, after)
-                    if result["result"] == "FAIL" and (not baseline_ok(after) or result["forbidden_lines"]
+                    result = assess_fixture(fixture, body + after_lines, before, after, args.baseline_version)
+                    if result["result"] == "FAIL" and (not baseline_ok(after, args.baseline_version) or result["forbidden_lines"]
                                                          or result["unexpected_reset_lines"]
                                                          or (not fixture["allow_writer"] and result["writer_seen"])):
                         abort_reason = result["reason"]
-                    elif not baseline_ok(after):
+                    elif not baseline_ok(after, args.baseline_version):
                         abort_reason = "Post-failure baseline/idle could not be established"
                 result["log"] = logfile.relative_to(args.evidence_dir).as_posix()
                 summary["results"].append(result)

@@ -3,9 +3,20 @@ param(
     [Parameter(Mandatory=$true)][string]$SigningKey,
     [string]$IdfPath,
     [string]$ToolsPath,
-    [string]$PythonEnvPath
+    [string]$PythonEnvPath,
+    [ValidatePattern('^[A-Za-z0-9][A-Za-z0-9.+_-]{0,30}$')][string]$ProjectVersion,
+    [ValidateScript({
+        if ($_ -notmatch '^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$' -or $_.Contains('..') -or $_.EndsWith('.') -or
+            $_ -match '^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\.|$)') {
+            throw 'BuildName must be one safe path segment, without .., separators, trailing dots or Windows device names'
+        }
+        $true
+    })][string]$BuildName
 )
 $ErrorActionPreference = 'Stop'
+$otaIndex = [int]$Variant.Substring(1)
+if (-not $ProjectVersion) { $ProjectVersion = "$otaIndex.0.0" }
+if (-not $BuildName) { $BuildName = $Variant }
 $otaProject = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 if (-not $IdfPath) { $IdfPath = Join-Path $otaProject '.tooling/esp-idf-v6.1' }
 if (-not $ToolsPath) { $ToolsPath = Join-Path $otaProject '.tooling/idf-tools' }
@@ -14,12 +25,12 @@ $otaKey = (Resolve-Path -LiteralPath $SigningKey).Path.Replace('\','/')
 $env:IDF_PATH = (Resolve-Path -LiteralPath $IdfPath).Path
 $env:IDF_TOOLS_PATH = (Resolve-Path -LiteralPath $ToolsPath).Path
 $env:IDF_PYTHON_ENV_PATH = (Resolve-Path -LiteralPath $PythonEnvPath).Path
+$env:PYTHONUTF8 = '1'
 . "$env:IDF_PATH/export.ps1"
 if ($LASTEXITCODE -ne 0) { throw 'ESP-IDF export failed' }
-$otaIndex = [int]$Variant.Substring(1)
 $otaSchema = if ($otaIndex -eq 1) { 1 } else { 2 }
 $otaHealthFail = if ($otaIndex -eq 3) { 'ON' } else { 'OFF' }
-$otaBuild = Join-Path $otaProject ".build/$Variant"
+$otaBuild = Join-Path $otaProject ".build/$BuildName"
 New-Item -ItemType Directory -Force -Path $otaBuild | Out-Null
 $otaPrivateDefaults = Join-Path $otaBuild 'signing.defaults'
 Set-Content -LiteralPath $otaPrivateDefaults -Encoding utf8 -Value @(
@@ -34,7 +45,7 @@ try {
     & $otaPython "$env:IDF_PATH/tools/idf.py" -B $otaBuild `
         "-DSDKCONFIG=$($otaBuild.Replace('\','/'))/sdkconfig" `
         "-DSDKCONFIG_DEFAULTS=$otaDefaults" `
-        "-DPROJECT_VER=$otaIndex.0.0" "-DLAB_VERSION_CODE=$otaIndex" `
+        "-DPROJECT_VER=$ProjectVersion" "-DLAB_VERSION_CODE=$otaIndex" `
         "-DLAB_CFG_SCHEMA=$otaSchema" "-DLAB_HEALTH_FAIL=$otaHealthFail" build
     exit $LASTEXITCODE
 } finally { Pop-Location }
