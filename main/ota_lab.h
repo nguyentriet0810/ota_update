@@ -11,4 +11,9 @@ bool ota_lab_command(const char *line);
  */
 bool ota_lab_trial_health(void);
 
+/* LAB_FAULT_PROFILE builds additionally expose explicit lab-* diagnostics via
+ * ota_lab_command. Default production builds have neither local TLS origins
+ * nor the public laboratory CA nor checkpoint-corruption/clock hooks.
+ */
+
 #endif

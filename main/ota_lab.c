@@ -41,6 +41,9 @@
 #ifndef LAB_CFG_SCHEMA
 #define LAB_CFG_SCHEMA 1
 #endif
+#ifndef LAB_FAULT_PROFILE
+#define LAB_FAULT_PROFILE 0
+#endif
 
 #define URL_CAP 513U
 #define REDIRECT_CAP 2049U
@@ -50,7 +53,11 @@
 #define CHECKPOINT_STEP 0x10000U
 #define RECORD_MAGIC 0x43504f54U
 #define RECORD_FORMAT 1U
-#define RECORD_POLICY 1U
+/* Policy 2 checkpoints were created only after a full inactive-slot erase.
+ * Policy 1 snapshots cannot prove the signature tail was cleared, so they are
+ * deliberately invalidated and restarted from zero after this updater fix.
+ */
+#define RECORD_POLICY 2U
 #define NET_UP BIT0
 #define HTTP_TIMEOUT_MS 12000
 #define SESSION_DEADLINE_US (INT64_C(600) * 1000000)
@@ -61,6 +68,11 @@
 static const char *TAG = "OTA";
 extern const uint8_t manifest_key_start[] asm("_binary_manifest_public_der_start");
 extern const uint8_t manifest_key_end[] asm("_binary_manifest_public_der_end");
+#if LAB_FAULT_PROFILE
+/* Optional public test CA. It is not embedded or trusted in production builds. */
+extern const uint8_t lab_ca_start[] asm("_binary_lab_test_ca_pem_start");
+extern const uint8_t lab_ca_end[] asm("_binary_lab_test_ca_pem_end");
+#endif
 
 typedef struct {
     uint32_t schema_version, version_code, secure_version, config_schema;
@@ -109,6 +121,10 @@ static atomic_bool s_busy, s_cancel;
 /* 0 accepts cancellation, -1 cancelled, 1 activation commit has started. */
 static atomic_int s_activation_gate;
 static atomic_uint s_written, s_total, s_durable_q, s_reset_at, s_wifi_drop_at;
+#if LAB_FAULT_PROFILE
+static atomic_bool s_lab_clock_not_ready;
+static atomic_uint s_lab_reset_before_checkpoint;
+#endif
 static portMUX_TYPE s_status_lock = portMUX_INITIALIZER_UNLOCKED;
 static char s_phase[32] = "NOT_INITIALIZED";
 static char s_reason[64] = "";
@@ -149,6 +165,24 @@ static bool same_bytes(const uint8_t *a, const uint8_t *b, size_t length)
     return diff == 0;
 }
 
+#if LAB_FAULT_PROFILE
+static bool is_lab_url(const char *url)
+{
+    if (strncmp(url, "https://", 8)) { return false; }
+    const char *authority = url + 8, *slash = strchr(authority, '/');
+    if (!slash) { return false; }
+    static const char *const authorities[] = {
+        "192.168.137.1:8443", "192.168.137.1:8444", "192.168.137.1:8445",
+        "unresolvable.invalid", "unresolvable.invalid:8443"
+    };
+    size_t length = (size_t)(slash - authority);
+    for (unsigned i = 0; i < sizeof(authorities)/sizeof(authorities[0]); ++i) {
+        if (strlen(authorities[i]) == length && !memcmp(authority, authorities[i], length)) { return true; }
+    }
+    return false;
+}
+#endif
+
 static void hex_digest(const uint8_t digest[32], char text[65])
 {
     static const char digits[] = "0123456789abcdef";
@@ -172,6 +206,9 @@ static bool valid_url(const char *url, bool origin)
             break;
         }
     }
+#if LAB_FAULT_PROFILE
+    if (!match && is_lab_url(url)) { match = true; }
+#endif
     if (!match || strchr(url, '#') || (origin && (strchr(url, '?') || !strstr(slash, "/releases/download/")))) {
         return false;
     }
@@ -227,6 +264,16 @@ static esp_err_t http_open(http_t *h, const char *origin, uint32_t offset)
             .user_data = h, .buffer_size = 4096, .buffer_size_tx = 2048,
             .keep_alive_enable = false,
         };
+#if LAB_FAULT_PROFILE
+        if (is_lab_url(current)) {
+            config.crt_bundle_attach = NULL;
+            config.cert_pem = (const char *)lab_ca_start;
+            config.cert_len = (size_t)(lab_ca_end - lab_ca_start);
+            /* Do not set skip_cert_common_name_check or override common_name.
+             * CA, SAN hostname/IP and certificate time checks remain enabled.
+             */
+        }
+#endif
         h->client = esp_http_client_init(&config);
         if (!h->client) { return ESP_ERR_NO_MEM; }
         esp_http_client_set_header(h->client, "Accept-Encoding", "identity");
@@ -575,12 +622,17 @@ static esp_err_t download(const manifest_t *m, const esp_partition_t *target, in
     if (!running || running->address == target->address) { return ESP_ERR_INVALID_STATE; }
     checkpoint_t cp; uint32_t q = 0;
     if (cp_load(&cp)) {
-        bool match = cp.target_addr == target->address && cp.target_size == target->size &&
-            cp.running_addr == running->address && cp.image_size == m->size && !strcmp(cp.target_label, target->label) &&
-            same_bytes(cp.release_id, m->release_id, 32) && same_bytes(cp.file_digest, m->digest, 32) &&
-            same_bytes(cp.origin_digest, m->origin_digest, 32);
-        if (match) { q = cp.q; }
-        else { ESP_LOGW(TAG, "checkpoint_identity_mismatch; fresh candidate only"); if (cp_clear() != ESP_OK) { return ESP_FAIL; } }
+        if (cp.target_addr == running->address) {
+            ESP_LOGW(TAG, "checkpoint_rejected target_is_running=true before_erase=true");
+            if (cp_clear() != ESP_OK) { return ESP_FAIL; }
+        } else {
+            bool match = cp.target_addr == target->address && cp.target_size == target->size &&
+                cp.running_addr == running->address && cp.image_size == m->size && !strcmp(cp.target_label, target->label) &&
+                same_bytes(cp.release_id, m->release_id, 32) && same_bytes(cp.file_digest, m->digest, 32) &&
+                same_bytes(cp.origin_digest, m->origin_digest, 32);
+            if (match) { q = cp.q; }
+            else { ESP_LOGW(TAG, "checkpoint_identity_mismatch; fresh candidate only"); if (cp_clear() != ESP_OK) { return ESP_FAIL; } }
+        }
     }
     atomic_store(&s_written, q); atomic_store(&s_durable_q, q); atomic_store(&s_total, m->size);
     http_t h;
@@ -603,8 +655,14 @@ static esp_err_t download(const manifest_t *m, const esp_partition_t *target, in
     const esp_partition_t *now = esp_ota_get_running_partition();
     if (!now || now->address != running->address || target->address == now->address) { http_close(&h); return ESP_ERR_INVALID_STATE; }
     esp_ota_handle_t handle = 0; bool live = false, reconnect_after_cleanup = false;
+    /* SDK app verification reads the partition, not merely manifest.size.
+     * A sequential fresh erase could leave an old native signature beyond a
+     * newly advertised unsigned file and validate stale tail bytes. Erase the
+     * WHOLE inactive slot on every fresh attempt. Resumes may preserve a prefix
+     * only when policy-2 identity-bound checkpoints prove this initial erase.
+     */
     err = q ? esp_ota_resume(target, OTA_WITH_SEQUENTIAL_WRITES, q, &handle) :
-        esp_ota_begin(target, OTA_WITH_SEQUENTIAL_WRITES, &handle);
+        esp_ota_begin(target, target->size, &handle);
     if (err != ESP_OK) { http_close(&h); return err; }
     live = true;
     ESP_LOGI(TAG, "writer_started target=%s offset=%" PRIu32 " mode=%s", target->label, q, q ? "resume" : "fresh");
@@ -621,6 +679,15 @@ static esp_err_t download(const manifest_t *m, const esp_partition_t *target, in
         if (err != ESP_OK) { goto cleanup; }
         written += n; atomic_store(&s_written, written);
         if (!(written % CHECKPOINT_STEP) && written < m->size) {
+#if LAB_FAULT_PROFILE
+            uint32_t reset_before = atomic_load(&s_lab_reset_before_checkpoint);
+            if (reset_before && written >= reset_before) {
+                atomic_store(&s_lab_reset_before_checkpoint, 0);
+                ESP_LOGW(TAG, "fault_method=software_reset_before_checkpoint written=%" PRIu32
+                    " old_durable_q=%u nvs_commit_for_new_q=false", written, atomic_load(&s_durable_q));
+                vTaskDelay(pdMS_TO_TICKS(50)); esp_restart();
+            }
+#endif
             err = cp_save(m, target, running->address, written);
             if (err != ESP_OK) { goto cleanup; }
         }
@@ -736,6 +803,12 @@ static esp_err_t set_wifi(const char *ssid, const char *password, bool persist)
 
 static esp_err_t network_ready(void)
 {
+#if LAB_FAULT_PROFILE
+    if (atomic_load(&s_lab_clock_not_ready)) {
+        ESP_LOGW(TAG, "fault_profile_clock_policy=NOT_READY before_TLS=true skip_time_verification=false");
+        return ESP_ERR_INVALID_STATE;
+    }
+#endif
     EventBits_t bits = 0;
     for (unsigned i = 0; i < 30; ++i) {
         if (atomic_load(&s_cancel) || atomic_load(&s_activation_gate) < 0) { return ESP_ERR_TIMEOUT; }
@@ -828,10 +901,16 @@ static void ota_worker(void *argument)
     if (err != ESP_OK) { goto finish; }
     status_set("BOOT_SELECTED", "NEW; success requires health and VALID after restart");
     atomic_store(&s_reset_at, 0); atomic_store(&s_wifi_drop_at, 0);
+#if LAB_FAULT_PROFILE
+    atomic_store(&s_lab_reset_before_checkpoint, 0);
+#endif
     free(request); free(raw); free(signature); free(manifest);
     vTaskDelay(pdMS_TO_TICKS(1000)); esp_restart();
 finish:
     atomic_store(&s_reset_at, 0); atomic_store(&s_wifi_drop_at, 0);
+#if LAB_FAULT_PROFILE
+    atomic_store(&s_lab_reset_before_checkpoint, 0);
+#endif
     if (boot_selected) {
         /* Boot selection and custom NVS cannot be one atomic transaction.
          * The pre-selection identity still reconciles a successful trial.
@@ -906,6 +985,9 @@ void ota_lab_init(void)
     if (err == ESP_OK) { err = esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, wifi_event, NULL); }
     if (err != ESP_OK) { status_set("DISABLED", "Wi-Fi initialization failed"); return; }
     s_ready = true; status_set("IDLE", "local OTA controller ready");
+#if LAB_FAULT_PROFILE
+    ESP_LOGW(TAG, "LAB_FAULT_PROFILE=ON test_CA_and_local_origins_enabled production=false TLS_checks=enabled");
+#endif
     nvs_handle_t net;
     if (nvs_open_from_partition("nvs_cfg", "net", NVS_READONLY, &net) == ESP_OK) {
         struct { char ssid[33]; char password[65]; } credentials = {0};
@@ -931,12 +1013,95 @@ static void print_status(void)
         atomic_load(&s_written), atomic_load(&s_total), atomic_load(&s_durable_q));
 }
 
+#if LAB_FAULT_PROFILE
+/* These commands exist only in the optional laboratory build. They mutate the
+ * checkpoint test records, never otadata, credentials, config or trust keys.
+ */
+static bool lab_fault_command(const char *line)
+{
+    if (strncmp(line, "lab-", 4)) { return false; }
+    if (!strcmp(line, "lab-checkpoint-status")) {
+        if (!s_ready) { ESP_LOGW(TAG, "lab_checkpoint_status controller_not_ready"); return true; }
+        const char *keys[] = { "cp0", "cp1" };
+        for (unsigned i = 0; i < 2; ++i) {
+            checkpoint_t cp = {0}; size_t size = sizeof(cp);
+            esp_err_t err = nvs_get_blob(s_meta, keys[i], &cp, &size);
+            bool found = err == ESP_OK && size == sizeof(cp);
+            ESP_LOGI(TAG, "lab_checkpoint key=%s found=%u valid_crc_format=%u q=%" PRIu32
+                " generation=%" PRIu32 " target=0x%" PRIx32 " read=%s",
+                keys[i], found, found && cp_valid(&cp), cp.q, cp.generation, cp.target_addr, esp_err_to_name(err));
+        }
+        return true;
+    }
+    if (!s_ready || atomic_load(&s_busy)) {
+        ESP_LOGW(TAG, "lab_fault_command_rejected controller_not_ready_or_busy"); return true;
+    }
+    if (!strcmp(line, "lab-clock-not-ready on") || !strcmp(line, "lab-clock-not-ready off")) {
+        bool enabled = !strcmp(line, "lab-clock-not-ready on");
+        atomic_store(&s_lab_clock_not_ready, enabled);
+        ESP_LOGW(TAG, "lab_clock_not_ready=%u actual_clock_unchanged=true TLS_time_checks_enabled=true", enabled);
+        return true;
+    }
+    static const char reset_prefix[] = "lab-reset-before-checkpoint ";
+    if (!strncmp(line, reset_prefix, sizeof(reset_prefix)-1)) {
+        const char *value = line + sizeof(reset_prefix)-1;
+        char *end; unsigned long q = strtoul(value, &end, 10);
+        if (!*value || *end || q >= SLOT_CAP || q % CHECKPOINT_STEP) {
+            ESP_LOGW(TAG, "lab_reset_before_checkpoint_invalid use_64KiB_boundary_or_zero");
+        } else {
+            atomic_store(&s_lab_reset_before_checkpoint, q);
+            ESP_LOGW(TAG, "lab_reset_before_checkpoint_q=%lu next_session_only=true", q);
+        }
+        return true;
+    }
+    if (!strcmp(line, "lab-corrupt-checkpoints")) {
+        const char *keys[] = { "cp0", "cp1" };
+        unsigned changed = 0; esp_err_t result = ESP_OK;
+        for (unsigned i = 0; i < 2; ++i) {
+            checkpoint_t cp = {0}; size_t size = sizeof(cp);
+            esp_err_t err = nvs_get_blob(s_meta, keys[i], &cp, &size);
+            if (err == ESP_ERR_NVS_NOT_FOUND) { continue; }
+            if (err != ESP_OK || size != sizeof(cp)) { result = err == ESP_OK ? ESP_ERR_INVALID_SIZE : err; break; }
+            cp.crc ^= UINT32_C(0x01010101);
+            err = nvs_set_blob(s_meta, keys[i], &cp, sizeof(cp));
+            if (err != ESP_OK) { result = err; break; }
+            ++changed;
+        }
+        if (changed) {
+            esp_err_t committed = nvs_commit(s_meta);
+            if (committed != ESP_OK) { result = committed; }
+        }
+        atomic_store(&s_durable_q, 0);
+        ESP_LOGW(TAG, "fault_method=checkpoint_crc_xor records_changed=%u result=%s credentials_and_cfg_unchanged=true",
+            changed, esp_err_to_name(result));
+        return true;
+    }
+    if (!strcmp(line, "lab-seed-stale-running")) {
+        const esp_partition_t *running = esp_ota_get_running_partition();
+        esp_err_t err = running ? cp_clear() : ESP_ERR_INVALID_STATE;
+        manifest_t fixture = {0}; fixture.size = 2 * CHECKPOINT_STEP;
+        (void)hash_bytes("lab-stale-running", strlen("lab-stale-running"), fixture.release_id);
+        if (err == ESP_OK) { err = cp_save(&fixture, running, running->address, CHECKPOINT_STEP); }
+        ESP_LOGW(TAG, "fault_method=stale_checkpoint_target_running target=0x%" PRIx32 " q=%u result=%s flash_image_unchanged=true",
+            running ? running->address : 0U, CHECKPOINT_STEP, esp_err_to_name(err));
+        return true;
+    }
+    ESP_LOGW(TAG, "lab_fault_command_unknown"); return true;
+}
+#endif
+
 bool ota_lab_command(const char *line)
 {
+#if LAB_FAULT_PROFILE
+    if (lab_fault_command(line)) { return true; }
+#endif
     if (!strcmp(line, "otahelp")) {
         ESP_LOGI(TAG, "otastatus | wifi SSID|PASSWORD (no echo) | ota MANIFEST_URL SIGNATURE_URL | cancel | clearresume");
         ESP_LOGI(TAG, "Lab faults: ota-reset-at OFFSET | ota-wifi-drop-at OFFSET (0 disarms; idle only)");
         ESP_LOGI(TAG, "Use public GitHub /releases/download/ HTTPS origins; no PAT in firmware. Reset injection is a software reset, not a power cut.");
+#if LAB_FAULT_PROFILE
+        ESP_LOGW(TAG, "Optional test mode: lab-clock-not-ready on/off | lab-reset-before-checkpoint Q | lab-checkpoint-status | lab-corrupt-checkpoints | lab-seed-stale-running");
+#endif
         return true;
     }
     if (!strcmp(line, "otastatus")) { print_status(); return true; }
