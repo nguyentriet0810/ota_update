@@ -1,0 +1,45 @@
+{
+  "compiled_source_commit": "daf38ef3d3b897c1fe559f894578575e6a729feb",
+  "files": {
+    "CMakeLists.txt": {
+      "sha256": "b277547d9bbd55861c99abceba77797907c7837f6e525c4c3927a9526ee5c4ea",
+      "same_as_compiled_source": true
+    },
+    "sdkconfig.defaults": {
+      "sha256": "079e3af70eeaf0d8a7a080e6c41dd6614d55024d0df3818bad81ad33c6c44793",
+      "same_as_compiled_source": true
+    },
+    "main/CMakeLists.txt": {
+      "sha256": "1c80b02d67bcfa5db06944ac57be21d86536458e3dfb500e3e33bad31394c816",
+      "same_as_compiled_source": true
+    },
+    "main/main.c": {
+      "sha256": "4ca3b5adfad7187374ae4bfae93ee1c1a02875b4ce81e4634a7fdeab1339118f",
+      "same_as_compiled_source": true
+    },
+    "main/ota_lab.c": {
+      "sha256": "cf95ad70a3b9a7c52cdfd7d2cbc57a0a4b01510906ed82bb3210ac0bc17b520a",
+      "same_as_compiled_source": true
+    },
+    "main/ota_lab.h": {
+      "sha256": "bce7ff202624bcafd71910dc7e2ebba3c50067c6fbe3dae8badc4eab68d090c5",
+      "same_as_compiled_source": true
+    },
+    "main/cfg_store.c": {
+      "sha256": "eb972da3f15cbbb64906798646b4343779b56b477d0a59d98660acbe0ab8f665",
+      "same_as_compiled_source": true
+    },
+    "main/cfg_store.h": {
+      "sha256": "f10ef8feaf9d6da56bc3fddb829e368c2694f96f964aad6c47f0c3fe3eb31d17",
+      "same_as_compiled_source": true
+    },
+    "main/manifest_public.der": {
+      "sha256": "a424352bcbd308e122420b96ca3fbf9b5107d93a44f2469d2d48255272d72b5d",
+      "same_as_compiled_source": true
+    },
+    "main/lab_test_ca.pem": {
+      "sha256": "db73ebacc3cc981305903237715c7a36257fa3df8d7cea48c847ee4fb9513e35",
+      "same_as_compiled_source": true
+    }
+  }
+}

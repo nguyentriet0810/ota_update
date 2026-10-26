@@ -2,7 +2,10 @@
 
 Profile test nằm trong clone riêng `D:\ota_update\.build\fault-profile`, branch `lab-fault-profile`. Production mặc định `LAB_FAULT_PROFILE=OFF` và chỉ nhận GitHub origin; chỉ binary test bật flag mới nhúng lab CA và nhận hotspot IP/port. Không tắt TLS CA/hostname/time verification. Các ca host bên dưới không tự chứng minh board PASS.
 
-Source cuối5.0.4/6.0.4 pin commit `f2c72dd570b0306b87539e64b35700ecfc4b104e`.
+Source chiến dịch5.0.4/6.0.4 pin commit `f2c72dd570b0306b87539e64b35700ecfc4b104e`.
+Phần thực hành E04 bổ sung dùng source `daf38ef3d3b897c1fe559f894578575e6a729feb`;
+demo7.0.1/code9 và production8.0.1/code10 có hướng dẫn riêng ở
+[one-call runbook](E04-onecall-runbook.md).
 Khi source profile đã được tích hợp vào main, build bằng công cụ chung:
 
 ```powershell

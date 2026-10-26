@@ -1,0 +1,8 @@
+{
+  "tag": "v8.0.0-production",
+  "source_commit": "29ae774a2ee3cb4171cfc7894391c83e735dfddd",
+  "host_download_all_assets_identical": true,
+  "native_and_manifest_signatures": "VERIFIED_HOST",
+  "file_sha256": "6e9a8ec87f0f3635051df19c89384696678728efe1387de033f564cc47a046c8",
+  "release_url": "https://github.com/nguyentriet0810/ota_update/releases/tag/v8.0.0-production"
+}

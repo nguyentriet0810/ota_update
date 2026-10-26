@@ -1,10 +1,10 @@
 # ESP32-S3 N16R8 — Study Book OTA lab
 
-Board hiện chạy **production6.0.4/code7 VALID** sau OTA qua GitHub.
+Board hiện chạy **production8.0.1/code10 VALID** sau OTA qua GitHub.
 **32/32 nhóm ca capstone đạt** trong phạm vi injection đã ghi; xem
 [báo cáo thực nghiệm](docs/lab-report-2026-10-26.md) và
 [matrix/evidence](docs/capstone-test-matrix.csv). Báo cáo nêu rõ giới hạn một board,
-software reset, hardware security và route one-call E04 chưa chạy riêng.
+software reset và hardware security. E04 one-call đã chạy riêng với [runbook/evidence](docs/E04-onecall-runbook.md).
 
 Project thực hành Subject #3 của Study Book « OTA Update, dùng ESP-IDF **v6.1**
 (`fff9895c82d744c7237be8847347bdd1b07c6643`). SDK/công cụ v6.1 được cài riêng;

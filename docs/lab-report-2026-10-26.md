@@ -1,9 +1,9 @@
 # Kết quả thực nghiệm Subject #3 — 26/10/2026
 
-Board đã về **production6.0.4, version_code7, ota_1 VALID**, self-test PASS,
+Board đã về **production8.0.1, version_code10, ota_0 VALID**, self-test PASS,
 controller IDLE/busy0, Wi-Fi hoạt động. Config schema2/active2/generation2,
 sample1000ms, threshold30000 milli-degreeC; schema1 nguồn generation1/CRCfbab8dc4
-vẫn được giữ. [Trạng thái cuối](../evidence/final-production-state.log).
+vẫn được giữ. [Trạng thái cuối](../evidence/final-production-v8.0.1-state.log).
 
 **32/32 nhóm ca capstone đạt trong phạm vi injection đã ghi** tại
 [matrix](capstone-test-matrix.csv). Đây là chiến dịch trên một ESP32-S3, qua các
@@ -19,13 +19,13 @@ cửa sổ mất nguồn đều an toàn.
 | Flash/PSRAM |16MiB quad3.3V /8MiB octal; runtime memory check PASS |
 | SDK | ESP-IDF v6.1, fff9895c82d744c7237be8847347bdd1b07c6643 |
 | SDK cũ | v5.3.1 giữ tại C:\Espressif, không thay thế |
-| Firmware source | f2c72dd570b0306b87539e64b35700ecfc4b104e |
-| Final signed app SHA256 | bb106acb5477e5206537fccc0ed671531721d5149c1a1109f9a4e6738676c659 |
+| Firmware source | daf38ef3d3b897c1fe559f894578575e6a729feb |
+| Final signed app SHA256 | f035f3b7a4fb19d6af25bc4da139001b0754c9f8c124432470c761107d90c6b4 |
 | Size/slot |1118208 /3145728bytes |
 | Security | Software signed raw manifest + native app + full signed-file SHA256 + TLS CA/hostname/time |
 | Hardware security | Secure Boot=false, Flash Encryption=disabled, eFuse secure_version0; inventory chỉ đọc |
 
-[Release cuối](https://github.com/nguyentriet0810/ota_update/releases/tag/v6.0.4-production)
+[Release cuối](https://github.com/nguyentriet0810/ota_update/releases/tag/v8.0.1-production)
 có app, exact manifest, signature và release-info. Host đã tải lại toàn bộ assets,
 so bytes/hash và verify cả hai chữ ký. Build audit chứng minh testCA/local origins,
 clock/radio/offline/checkpoint diagnostics và intentional boot/health faults không
@@ -77,25 +77,37 @@ reject malformed/out-of-range và worker-busy; không bỏ TLS time verification
 Nhãn version và numeric version_code độc lập; test5.0.4/code6 → production6.0.4/code7.
 Các prerelease0.3 chưa cài được giữ bất biến; không thay bytes dưới URL cũ.
 
+
+Demo E04 lần đầu dùng HTTP TX buffer mặc định đã gặp Out of buffer với signed
+redirect URL dài của GitHub, SDK trảESP_FAIL trước boot selection. Đã sửa riêng
+demo thành TX2048/RX4096, tối đa5redirects; tạo release mới/code tăng, giữ trace
+lỗi cũ và rerun one-call thành công. Lượt lỗi chưa activate không được tính vào
+denominator healthy activations.
+
 ## Tái hiện và giới hạn
 
 Dùng [runbook](runbook.md), [fault runbook](fault-profile-runbook.md),
 [schema contract](schema-spec.md), [security design](E09-hardware-security-design.md)
 và [bài giải thiết kế](study-exercises.md). Main chứa source core giống commit đã
 build; public evidence có sdkconfig đã lọc, map nén, CSV/BIN và artifact hashes.
-Scratch directories0.3 được tái dùng để build0.4; app0.3 đã publish vẫn được giữ
+Scratch directories0.3 được tái dùng cho các build0.4 rồi7.0.1/8.0.1; assets đã publish vẫn được giữ
 riêng trong immutable release assets. Không suy phiên bản từ tên cache folder.
 
-Capstone dùng low-level esp_http_client/esp_ota_*; route one-call esp_https_ota()
-của E04 chưa chạy riêng. Đây là giới hạn rõ của phần thực hành E04. Knowledge
-checks và phần tự làm độc lập của người học không được tự tích hoàn thành.
+Capstone32ca dùng low-level esp_http_client/esp_ota_*. E04 one-call đã chạy riêng
+từ lab7.0.1/code9 lên production8.0.1/code10: API trảESP_OK, post-readback qua,
+NEW→PENDING_VERIFY→VALID đúng identity. [Trace/verdict](../evidence/E04-onecall-result.json)
+và [runbook](E04-onecall-runbook.md) nêu rõ SDK chọn boot trước custom readback;
+không áp các guarantee checkpoint/cancel của capstone cho demo. Production loại
+demo/testCA/hooks bằng compile flags. Knowledge checks và phần tự làm độc lập
+của người học không được tự tích hoàn thành.
 Hardware Secure Boot/encryption/anti-rollback không bật; các bài E09 là thiết kế,
 simulation và inventory read-only. Software reset không thay cho power cut trong
 Flash/NVS commit. R07 kiểm hai CRC lỗi; R08 kiểm duplicate/cancel, chưa gây lỗi
 Flash phần cứng. Không tuyên bố fleet coverage hoặc sản phẩm sẵn sàng thương mại.
 
-Metrics của lượt tiếp tục:5 healthy activations(v2,v4,v5.0.2,v5.0.4,v6.0.4),5
-confirmed;3 intentionally failing trial activations(explicit3/reset3/prevalid6),3
+Metrics của lượt tiếp tục:8 healthy activations(v2,v4,v5.0.2,v5.0.4,v6.0.4,
+v7.0.0,v7.0.1,v8.0.1),8confirmed;3 intentionally failing trial
+activations(explicit3/reset3/prevalid6),3
 fallback đúng. Denominator là attempts trên **một board**. Các metadata/image
 reject không nằm trong denominator activated. Dừng rollout nếu healthy candidate
 crash, data regression hoặc gate sai; không gom expected negative-fixture rollback

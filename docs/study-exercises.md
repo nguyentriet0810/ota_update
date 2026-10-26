@@ -26,9 +26,10 @@ unknown/duplicate fields, wrong board/chip/layout và size bounds có log riêng
 ## E04–E05: network và ownership
 
 Capstone chọn `esp_http_client` + low-level `esp_ota_*` để kiểm manifest, HTTP,
-resume và cancellation từng gate. Route one-call `esp_https_ota()` trong E04
-không phải route đã chạy của capstone; không dùng log low-level để nhận là đã
-kiểm one-call. DNS/TLS/time/status/size có phase và reason riêng trong log.
+resume và cancellation từng gate. Route one-call `esp_https_ota()` của E04 có
+demo lab riêng: SDK chọn boot trong API, custom readback theo sau rồi trial
+health kiểm lại trước confirm. Không dùng log hai route thay lẫn nhau. Xem
+[runbook E04](E04-onecall-runbook.md). DNS/TLS/time/status/size có phase/reason riêng.
 
 Một worker sở hữu HTTP và OTA handle. Kiểm target khác running trước begin và
 kiểm lại ngay trước mutation. Khi cancel trước activation, abort writer, đóng

@@ -14,14 +14,18 @@
     "storage-cases/first-run-summary.json",
     "storage-cases/range-416-reassessment.json"
   ],
-  "final_expected_version": "6.0.4",
-  "final_version_code": 7,
-  "source_commit": "f2c72dd570b0306b87539e64b35700ecfc4b104e",
-  "app_sha256": "bb106acb5477e5206537fccc0ed671531721d5149c1a1109f9a4e6738676c659",
+  "final_expected_version": "8.0.1",
+  "final_version_code": 10,
+  "source_commit": "daf38ef3d3b897c1fe559f894578575e6a729feb",
+  "app_sha256": "f035f3b7a4fb19d6af25bc4da139001b0754c9f8c124432470c761107d90c6b4",
   "scope_exclusions": [
-    "esp_https_ota one-call route not executed; capstone uses low-level route",
     "hardware Secure Boot/Flash Encryption/anti-rollback not enabled",
     "no fleet-wide or exhaustive power-cut/write-error coverage",
     "student independent knowledge assessment not claimed"
-  ]
+  ],
+  "E04_one_call": "PASS; see E04-onecall-result.json",
+  "subject_topics_technical": {
+    "Done": 12,
+    "In_progress": 0
+  }
 }

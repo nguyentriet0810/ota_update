@@ -1,0 +1,8 @@
+{
+  "tag": "v7.0.0-onecall-lab",
+  "source_commit": "29ae774a2ee3cb4171cfc7894391c83e735dfddd",
+  "host_download_all_assets_identical": true,
+  "native_and_manifest_signatures": "VERIFIED_HOST",
+  "file_sha256": "a72c2c5888e387bf9d2e0c25daede41a868a9560e8a6f7fafd4a68484a1da264",
+  "release_url": "https://github.com/nguyentriet0810/ota_update/releases/tag/v7.0.0-onecall-lab"
+}

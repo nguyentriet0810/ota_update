@@ -1,0 +1,209 @@
+[HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/v7.0.0-onecall-lab/manifest.json https://github.com/nguyentriet0810/ota_update/releases/download/v7.0.0-onecall-lab/manifest.sig
+I (1068716) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+I (1068716) OTA: phase=FETCH_MANIFEST reason=exact bytes; bounded metadata pair budget
+I (1071416) wifi:<ba-add>idx:0 (ifx:0, [MAC_REDACTED]), tid:0, ssn:9, winSize:64
+I (1073446) lab: STATUS version=6.0.4 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:51:09 reset=3 uptime_ms=1072423 health_fail=0 selftest=PASS service_mode=0
+I (1073446) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=181891 internal_largest=108544 minimum_free=8533060
+I (1073466) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (1073546) esp-x509-crt-bundle: Certificate validated
+I (1075956) esp-x509-crt-bundle: Certificate validated
+I (1079266) esp-x509-crt-bundle: Certificate validated
+I (1081596) esp-x509-crt-bundle: Certificate validated
+I (1082806) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+I (1082876) OTA: accepted_metadata version=7.0.0 version_code=8 size=1118208 slot=ota_0
+I (1082876) OTA: accepted_release_id=f79ea35330cbf862844a06e6e88a7f808fe73b2979a2c621322950b3e33fa52b file_sha256=a72c2c5888e387bf9d2e0c25daede41a868a9560e8a6f7fafd4a68484a1da264
+I (1082886) OTA: phase=DOWNLOAD reason=inactive slot only
+I (1084006) lab: STATUS version=6.0.4 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:51:09 reset=3 uptime_ms=1082989 health_fail=0 selftest=PASS service_mode=0
+I (1084016) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=182931 internal_largest=108544 minimum_free=8527024
+I (1084026) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (1085546) esp-x509-crt-bundle: Certificate validated
+I (1088036) esp-x509-crt-bundle: Certificate validated
+I (1091716) OTA: writer_started target=ota_0 offset=0 mode=fresh
+I (1091736) OTA: download=0% written=4096 durable_q=0
+I (1094036) lab: STATUS version=6.0.4 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:51:09 reset=3 uptime_ms=1093013 health_fail=0 selftest=PASS service_mode=0
+I (1094036) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=193007 internal_largest=112640 minimum_free=8527024
+I (1094046) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (1094796) OTA: checkpoint_committed q=65536 generation=1
+I (1097346) OTA: download=10% written=114688 durable_q=65536
+I (1097866) OTA: checkpoint_committed q=131072 generation=2
+I (1100726) OTA: checkpoint_committed q=196608 generation=3
+I (1101056) OTA: download=20% written=225280 durable_q=196608
+I (1102816) OTA: checkpoint_committed q=262144 generation=4
+I (1104076) lab: STATUS version=6.0.4 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:51:09 reset=3 uptime_ms=1103053 health_fail=0 selftest=PASS service_mode=0
+I (1104076) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=192719 internal_largest=112640 minimum_free=8527024
+I (1104096) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (1105026) OTA: checkpoint_committed q=327680 generation=5
+I (1105046) OTA: download=30% written=335872 durable_q=327680
+I (1107386) OTA: checkpoint_committed q=393216 generation=6
+I (1109566) OTA: download=40% written=450560 durable_q=393216
+I (1110776) OTA: checkpoint_committed q=458752 generation=7
+I (1113126) OTA: checkpoint_committed q=524288 generation=8
+I (1114126) lab: STATUS version=6.0.4 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:51:09 reset=3 uptime_ms=1113108 health_fail=0 selftest=PASS service_mode=0
+I (1114136) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=192847 internal_largest=112640 minimum_free=8527024
+I (1114146) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (1114776) OTA: download=50% written=561152 durable_q=524288
+I (1116306) OTA: checkpoint_committed q=589824 generation=9
+I (1119476) OTA: checkpoint_committed q=655360 generation=10
+I (1119776) OTA: download=60% written=671744 durable_q=655360
+I (1121936) OTA: checkpoint_committed q=720896 generation=11
+I (1124166) lab: STATUS version=6.0.4 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:51:09 reset=3 uptime_ms=1123143 health_fail=0 selftest=PASS service_mode=0
+I (1124166) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=192883 internal_largest=112640 minimum_free=8527024
+I (1124176) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (1124396) OTA: checkpoint_committed q=786432 generation=12
+I (1124396) OTA: download=70% written=786432 durable_q=786432
+I (1126336) OTA: checkpoint_committed q=851968 generation=13
+I (1128586) OTA: download=80% written=897024 durable_q=851968
+I (1129406) OTA: checkpoint_committed q=917504 generation=14
+I (1131666) OTA: checkpoint_committed q=983040 generation=15
+I (1132896) OTA: download=90% written=1007616 durable_q=983040
+I (1134146) OTA: checkpoint_committed q=1048576 generation=16
+I (1134176) lab: STATUS version=6.0.4 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:51:09 reset=3 uptime_ms=1133153 health_fail=0 selftest=PASS service_mode=0
+I (1134176) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=192719 internal_largest=112640 minimum_free=8527024
+I (1134196) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (1137526) OTA: checkpoint_committed q=1114112 generation=17
+I (1137806) OTA: download=100% written=1118208 durable_q=1114112
+I (1137806) OTA: phase=VERIFY_IMAGE reason=SDK native signature validation
+I (1137806) esp_image: segment 0: paddr=00020020 vaddr=3c0c0020 size=38030h (229424) map
+I (1137866) esp_image: segment 1: paddr=00058058 vaddr=3fc9b200 size=0573ch ( 22332)
+I (1137866) esp_image: segment 2: paddr=0005d79c vaddr=40374000 size=0287ch ( 10364)
+I (1137876) esp_image: segment 3: paddr=00060020 vaddr=42000020 size=b0adch (723676) map
+I (1138026) esp_image: segment 4: paddr=00110b04 vaddr=4037687c size=148c0h ( 84160)
+I (1138046) esp_image: segment 5: paddr=001253cc vaddr=50000000 size=00024h (    36)
+I (1138046) esp_image: segment 6: paddr=001253f8 vaddr=00000000 size=0abd8h ( 43992)
+I (1138056) esp_image: Verifying image signature...
+I (1138056) secure_boot_v2: Take trusted digest key(s) from running app
+I (1138056) secure_boot_v2: #0 app key digest == #0 trusted key digest
+I (1138066) secure_boot_v2: Verifying with RSA-PSS...
+I (1138136) secure_boot_v2_rsa: Signature verified successfully!
+I (1138136) OTA: payload_cleanup target=ota_0 writer_abort=0 http_closed=true result=ESP_OK transfer_error=ESP_OK
+I (1138136) OTA: phase=VERIFY_FILE reason=readback final signed bytes and descriptor
+I (1138386) OTA: phase=READY_TO_BOOT reason=persisting per-slot identity
+I (1138436) esp_image: segment 0: paddr=00020020 vaddr=3c0c0020 size=38030h (229424) map
+I (1138486) esp_image: segment 1: paddr=00058058 vaddr=3fc9b200 size=0573ch ( 22332)
+I (1138496) esp_image: segment 2: paddr=0005d79c vaddr=40374000 size=0287ch ( 10364)
+I (1138496) esp_image: segment 3: paddr=00060020 vaddr=42000020 size=b0adch (723676) map
+I (1138636) esp_image: segment 4: paddr=00110b04 vaddr=4037687c size=148c0h ( 84160)
+I (1138656) esp_image: segment 5: paddr=001253cc vaddr=50000000 size=00024h (    36)
+I (1138656) esp_image: segment 6: paddr=001253f8 vaddr=00000000 size=0abd8h ( 43992)
+I (1138666) esp_image: Verifying image signature...
+I (1138666) secure_boot_v2: Take trusted digest key(s) from running app
+I (1138666) secure_boot_v2: #0 app key digest == #0 trusted key digest
+I (1138676) secure_boot_v2: Verifying with RSA-PSS...
+I (1138746) secure_boot_v2_rsa: Signature verified successfully!
+I (1138756) OTA: phase=BOOT_SELECTED reason=NEW; success requires health and VALID after restart
+I (1139756) wifi:state: run -> init (0x0)
+I (1139756) wifi:pm stop, total sleep time: 1068370706 us / 1129204415 us
+
+I (1139756) wifi:<ba-del>idx:0, tid:0
+W (1139756) OTA: wifi=disconnected reason=8
+I (1139796) wifi:flush txq
+I (1139796) wifi:stop sw txq
+I (1139796) wifi:lmac stop hw txq
+xxESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4038069d
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x3fce2820,len:0x14f0
+load:0x403c8700,len:0xde4
+load:0x403cb700,len:0x2fc4
+entry 0x403c8904
+I (31) boot: ESP-IDF v6.1 2nd stage bootloader
+I (32) boot: compile time Oct 26 2026 13:22:56
+I (32) boot: Multicore bootloader
+I (32) boot: chip revision: v0.2
+I (35) boot: efuse block revision: v1.4
+I (38) boot.esp32s3: Boot SPI Speed : 40MHz
+I (42) boot.esp32s3: SPI Mode       : DIO
+I (46) boot.esp32s3: SPI Flash Size : 16MB
+I (50) boot: Enabling RNG early entropy source...
+I (54) boot: Partition Table:
+I (57) boot: ## Label            Usage          Type ST Offset   Length
+I (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (70) boot:  1 otadata          OTA data         01 00 0000f000 00002000
+I (76) boot:  2 phy_init         RF data          01 01 00011000 00001000
+I (83) boot:  3 nvs_cfg          WiFi data        01 02 00012000 00008000
+I (89) boot:  4 ota_meta         WiFi data        01 02 0001a000 00006000
+I (96) boot:  5 ota_0            OTA app          00 10 00020000 00300000
+I (102) boot:  6 ota_1            OTA app          00 11 00320000 00300000
+I (109) boot: End of partition table
+I (150) esp_image: segment 0: paddr=00020020 vaddr=3c0c0020 size=38030h (229424) map
+I (208) esp_image: segment 1: paddr=00058058 vaddr=3fc9b200 size=0573ch ( 22332) load
+I (215) esp_image: segment 2: paddr=0005d79c vaddr=40374000 size=0287ch ( 10364) load
+I (218) esp_image: segment 3: paddr=00060020 vaddr=42000020 size=b0adch (723676) map
+I (402) esp_image: segment 4: paddr=00110b04 vaddr=4037687c size=148c0h ( 84160) load
+I (427) esp_image: segment 5: paddr=001253cc vaddr=50000000 size=00024h (    36) load
+I (427) esp_image: segment 6: paddr=001253f8 vaddr=00000000 size=0abd8h ( 43992)
+I (451) boot: Loaded app from partition at offset 0x20000
+I (451) boot: Disabling RNG early entropy source...
+I (461) octal_psram: vendor id    : 0x0d (AP)
+I (462) octal_psram: dev id       : 0x02 (generation 3)
+I (462) octal_psram: density      : 0x03 (64 Mbit)
+I (464) octal_psram: good-die     : 0x01 (Pass)
+I (468) octal_psram: Latency      : 0x01 (Fixed)
+I (472) octal_psram: VCC          : 0x01 (3V)
+I (476) octal_psram: SRF          : 0x01 (Fast Refresh)
+I (481) octal_psram: BurstType    : 0x01 (Hybrid Wrap)
+I (486) octal_psram: BurstLen     : 0x01 (32 Byte)
+I (491) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)
+I (496) octal_psram: DriveStrength: 0x00 (1/1)
+I (500) MSPI Timing: Enter psram timing tuning
+I (505) esp_psram: Found 8MB PSRAM device
+I (508) esp_psram: Speed: 80MHz
+I (511) cpu_start: Multicore app
+I (947) esp_psram: SPI SRAM memory test OK
+I (955) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (956) cpu_start: Pro cpu start user code
+I (956) cpu_start: cpu freq: 160000000 Hz
+I (957) app_init: Application information:
+I (961) app_init: Project name:     studybook_ota_lab
+I (966) app_init: App version:      7.0.0
+I (970) app_init: Compile time:     Oct 26 2026 19:12:38
+I (975) app_init: ELF file SHA256:  73106eafe...
+I (979) app_init: ESP-IDF:          v6.1
+I (983) efuse_init: Min chip rev:     v0.0
+I (987) efuse_init: Max chip rev:     v0.99
+I (990) efuse_init: Chip rev:         v0.2
+I (994) heap_init: Initializing. RAM available for dynamic allocation:
+I (1001) heap_init: At 3FCA5240 len 000444D0 (273 KiB): RAM
+I (1006) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (1011) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (1016) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (1022) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+I (1030) spi_flash: detected chip: boya
+I (1032) spi_flash: flash io: dio
+I (1039) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (1042) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (1049) main_task: Started on CPU0
+I (1069) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations
+I (1069) main_task: Calling app_main()
+I (1079) lab: NVS_INIT partition=nvs result=ESP_OK erase_performed=false
+I (1099) lab: NVS_INIT partition=nvs_cfg result=ESP_OK erase_performed=false
+I (1109) lab: NVS_INIT partition=ota_meta result=ESP_OK erase_performed=false
+I (1109) cfg: SHADOW_REUSE migration_id=00010002 source_generation=1 conversion_repeated=false
+I (1109) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+I (1129) lab: SELFTEST result=PASS flash_psram_heap_cfg_checked=true
+I (1129) lab: STATUS version=7.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_19:12:38 reset=3 uptime_ms=111 health_fail=0 selftest=PASS service_mode=0
+I (1149) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=303947 internal_largest=212992 minimum_free=8656932
+I (1159) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=PENDING_VERIFY
+I (1169) lab: BUILD elf_sha256=73106eafe secure_version=0
+I (1169) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+I (1179) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+I (1189) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+I (1199) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+I (1209) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+I (1219) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+I (1229) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+I (1239) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+I (1249) uart: ESP_INTR_FLAG_IRAM flag not set while CONFIG_UART_ISR_IN_IRAM is enabled, flag updated
+I (1259) lab: TRIAL begin confirmation_window_ms=5000 health_fail=0
+I (1269) lab: COMMANDS status | partitions | seed | reboot | failtrial | testreset | help
+I (1279) lab: seed only accepts UNDEFINED baseline; failtrial=SDK INVALID rollback, testreset=unconfirmed reset; both require PENDING_VERIFY
+I (1289) lab: CONFIG_COMMANDS cfg show | cfg parser-tests | cfg arm-valid-reset
+I (1299) lab: OTA/network provisioning commands are handled by ota_lab; credentials are not echoed
+I (6529) OTA: trial_identity valid=1 compiled_code=8 compiled_schema=2
+I (6579) lab: MARK_VALID result=ESP_OK state=VALID
+I (6579) cfg: RECONCILE SDK_state=VALID active_schema=2 source_schema1_retained=true conversion_repeated=false
+I (6829) OTA: confirmed_identity slot=ota_0 version=7.0.0 version_code=8
+I (6829) OTA: running_release_id=f79ea35330cbf862844a0

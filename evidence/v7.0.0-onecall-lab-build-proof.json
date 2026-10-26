@@ -1,0 +1,55 @@
+{
+  "variant": "v5",
+  "source_commit": "29ae774a2ee3cb4171cfc7894391c83e735dfddd",
+  "source_files_sha256": {
+    "main/ota_lab.c": "6656c81497e01462b551de788a81ad33d8eee536e4d8c8bc82f290f5762539e8",
+    "main/ota_lab.h": "bce7ff202624bcafd71910dc7e2ebba3c50067c6fbe3dae8badc4eab68d090c5",
+    "main/main.c": "4ca3b5adfad7187374ae4bfae93ee1c1a02875b4ce81e4634a7fdeab1339118f",
+    "main/cfg_store.c": "eb972da3f15cbbb64906798646b4343779b56b477d0a59d98660acbe0ab8f665",
+    "CMakeLists.txt": "b277547d9bbd55861c99abceba77797907c7837f6e525c4c3927a9526ee5c4ea",
+    "main/CMakeLists.txt": "1c80b02d67bcfa5db06944ac57be21d86536458e3dfb500e3e33bad31394c816"
+  },
+  "app_file": "D:\\ota_update\\.build\\5.0.3-fault-profile\\studybook_ota_lab.bin",
+  "app_size": 1118208,
+  "app_sha256": "a72c2c5888e387bf9d2e0c25daede41a868a9560e8a6f7fafd4a68484a1da264",
+  "bootloader_sha256": "84e323bbe49fa1fec82b44aa2e6207957d2612aa3e44fb3c7b2458fb827c5df7",
+  "partition_table_sha256": "00bdbfb28577b450fa0867638575d4de8c00236a2b64fe4db950a8e53ff9fdf6",
+  "sdkconfig_sha256": "572ba2783b58bf7fe1ef070df0927f03b48118350036d5df2284addda54d471d",
+  "compile_flags": {
+    "PROJECT_VER": "7.0.0",
+    "LAB_VERSION_CODE": "8",
+    "LAB_CFG_SCHEMA": "2",
+    "LAB_FAULT_PROFILE": "ON",
+    "LAB_CFG_FAULT_SHADOW_RESET": "OFF",
+    "LAB_PREVALID_RESET": "OFF",
+    "LAB_HEALTH_FAIL": "OFF"
+  },
+  "security_config": {
+    "CONFIG_MBEDTLS_HAVE_TIME_DATE": "y",
+    "CONFIG_MBEDTLS_CERTIFICATE_BUNDLE": "y",
+    "CONFIG_SECURE_SIGNED_APPS_NO_SECURE_BOOT": "y",
+    "CONFIG_SECURE_SIGNED_ON_UPDATE_NO_SECURE_BOOT": "y",
+    "CONFIG_SECURE_BOOT": "n",
+    "CONFIG_SECURE_FLASH_ENC_ENABLED": "n",
+    "CONFIG_BOOTLOADER_APP_ANTI_ROLLBACK": "n",
+    "CONFIG_UART_ISR_IN_IRAM": "y"
+  },
+  "checks": {
+    "fits_3MiB_slot": true,
+    "fault_mode_matches_requested": true,
+    "requested_version_code_schema_match": true,
+    "other_faults_disabled": true,
+    "TLS_time_checks_enabled": true,
+    "native_signed_update_verification_enabled": true,
+    "hardware_security_unchanged_disabled": true,
+    "test_CA_present_exactly_when_enabled": true,
+    "test_CA_link_symbol_present_exactly_when_enabled": true,
+    "local_test_host_present_exactly_when_enabled": true,
+    "test_clock_hook_present_exactly_when_enabled": true,
+    "test_radio_hook_present_exactly_when_enabled": true,
+    "offline_one_shot_present_exactly_when_enabled": true,
+    "UART_ISR_IRAM_required_for_patch3": true,
+    "E04_one_call_demo_present_exactly_when_enabled": true
+  },
+  "hardware_test_status": "NOT RUN by this build audit; root owns COM and observed tests"
+}

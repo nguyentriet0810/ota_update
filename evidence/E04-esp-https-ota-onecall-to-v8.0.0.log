@@ -1,0 +1,42 @@
+[HOST] sent: status
+[HOST] sent: ota-basic https://github.com/nguyentriet0810/ota_update/releases/download/v8.0.0-production/manifest.json https://github.com/nguyentriet0810/ota_update/releases/download/v8.0.0-production/manifest.sig
+I (39789) lab: STATUS version=7.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_19:12:38 reset=3 uptime_ms=38762 health_fail=0 selftest=PASS service_mode=0
+I (39789) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=250615 internal_largest=176128 minimum_free=8601116
+I (39799) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (39809) lab: BUILD elf_sha256=73106eafe secure_version=0
+I (39819) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+I (39819) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+I (39829) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+I (39839) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+I (39849) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+I (39859) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+I (39869) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+I (39879) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+I (39999) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+I (40009) OTA: phase=FETCH_MANIFEST reason=exact bytes; bounded metadata pair budget
+I (40989) wifi:<ba-add>idx:0 (ifx:0, [MAC_REDACTED]), tid:0, ssn:10, winSize:64
+I (41359) lab: STATUS version=7.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_19:12:38 reset=3 uptime_ms=40332 health_fail=0 selftest=PASS service_mode=0
+I (41359) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=182415 internal_largest=108544 minimum_free=8534392
+I (41369) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (42809) esp-x509-crt-bundle: Certificate validated
+I (45219) esp-x509-crt-bundle: Certificate validated
+I (48429) esp-x509-crt-bundle: Certificate validated
+I (50759) esp-x509-crt-bundle: Certificate validated
+I (51389) lab: STATUS version=7.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_19:12:38 reset=3 uptime_ms=50362 health_fail=0 selftest=PASS service_mode=0
+I (51389) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=187763 internal_largest=110592 minimum_free=8528656
+I (51399) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (52069) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+I (52129) OTA: accepted_metadata version=8.0.0 version_code=9 size=1118208 slot=ota_1
+I (52129) OTA: accepted_release_id=9ed128e42120b083cb3a2a169fb3e93e38f6dfd27f0d98223214a6278eddf75b file_sha256=6e9a8ec87f0f3635051df19c89384696678728efe1387de033f564cc47a046c8
+I (54989) OTA: phase=BASIC_ONE_CALL reason=E04 lab only; no checkpoint/cancel contract during SDK call
+I (54989) OTA: E04_ONE_CALL begin target=ota_1 task=ota_worker TLS_CA_hostname_time=true
+I (57839) esp-x509-crt-bundle: Certificate validated
+I (60479) esp-x509-crt-bundle: Certificate validated
+I (61419) lab: STATUS version=7.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_19:12:38 reset=3 uptime_ms=60392 health_fail=0 selftest=PASS service_mode=0
+I (61419) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=194515 internal_largest=110592 minimum_free=8528656
+I (61429) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+E (61579) HTTP_CLIENT: Out of buffer
+E (61579) esp_https_ota: Failed to open HTTP connection: ESP_FAIL
+E (61579) esp_https_ota: Failed to establish HTTP connection
+I (61589) OTA: E04_ONE_CALL result=ESP_FAIL
+I (61589) OTA: phase=FAILED reason=ESP_FAIL
