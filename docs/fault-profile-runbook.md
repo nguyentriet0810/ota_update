@@ -9,11 +9,19 @@ Khi native v6 signed image đã build:
 ```powershell
 $otaPython = 'D:\ota_update\.tooling\python-env\Scripts\python.exe'
 $otaFault = 'D:\ota_update\.build\fault-profile'
-& $otaPython "$otaFault/tools/make_fault_assets.py" --image 'D:\ota_update\.build\fault-profile\.build\v6\studybook_ota_lab.bin' --manifest-key 'D:\ota_update\.secrets\manifest-signing.pem' --app-public-key 'D:\ota_update\docs\public-keys\app-public.pem' --output 'D:\ota_update\.build\fault-assets'
+& $otaPython "$otaFault/tools/make_fault_assets.py" --image 'D:\ota_update\.build\v6-production\studybook_ota_lab.bin' --manifest-key 'D:\ota_update\.secrets\manifest-signing.pem' --app-public-key 'D:\ota_update\docs\public-keys\app-public.pem' --source-commit '68dbc4fc0ceba65eaa68c4fb325be14978c78cff' --output 'D:\ota_update\.build\fault-assets'
 & $otaPython "$otaFault/tools/fault_server.py" --root 'D:\ota_update\.build\fault-assets' --tls-dir 'D:\ota_update\.secrets\fault-tls' --log "$otaFault/evidence/fault-server.jsonl"
 ```
 
 Thay đường dẫn image bằng file build thực tế. Server chỉ bind192.168.137.1:8443/8444/8445; control chỉ bind127.0.0.1:8765. Chỉ phục vụ `.json/.sig/.bin` trực tiếp từ public fixture root; không traversal/private PEM. Nếu cần firewall, giới hạn đúng hotspot interface, ba port và IP board; lưu/xóa rule theo phiên test. Dừng server sau chiến dịch.
+
+Sau khi server được người điều phối khởi chạy, kiểm listener trước khi cân nhắc firewall:
+
+```powershell
+& $otaPython "$otaFault/tools/probe_fault_server.py" --ca "$otaFault/main/lab_test_ca.pem"
+```
+
+Probe không tự mở server hoặc đổi firewall/trust store. Nó phải thấy8443 TLS/HTTP200 với manifest dummy9.9.9,8444 bị reject do CA,8445 bị reject do hostname và8765 trả status loopback. Connect-refused/timeout không được tính như TLS reject PASS. Host probe không tự chứng minh board truy cập được qua firewall.
 
 Manifest test có version_code6/schema2, native image version6.0.0 nhưng manifest version9.9.9 có chủ đích. Ngay cả luồng tải sạch cũng phải reject descriptor, giữ app test đang chạy. Nó được ký bằng manifest key lab thật, native image ký đúng app key. Không phát hành fixture này như firmware good.
 
