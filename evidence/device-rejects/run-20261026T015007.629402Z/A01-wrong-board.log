@@ -1,0 +1,44 @@
+2026-10-26T01:50:07.632+00:00 [HOST] fixture=A01-wrong-board expectedgate=manifest compatibility before erase
+2026-10-26T01:50:08.061+00:00 [HOST] sent: status
+2026-10-26T01:50:08.061+00:00 [HOST] sent: otastatus
+2026-10-26T01:50:08.082+00:00 I (386844) lab: STATUS version=1.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_08:28:54 reset=1 uptime_ms=385858 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T01:50:08.098+00:00 I (386854) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=258151 internal_largest=184320 minimum_free=8605704
+2026-10-26T01:50:08.104+00:00 I (386864) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T01:50:08.110+00:00 I (386874) lab: BUILD elf_sha256=5ffe31090 secure_version=0
+2026-10-26T01:50:08.115+00:00 I (386874) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T01:50:08.126+00:00 I (386884) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T01:50:08.137+00:00 I (386894) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T01:50:08.143+00:00 I (386904) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T01:50:08.154+00:00 I (386914) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T01:50:08.165+00:00 I (386924) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T01:50:08.171+00:00 I (386934) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T01:50:08.186+00:00 I (386944) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T01:50:08.197+00:00 I (386954) OTA: status ready=1 busy=0 phase=IDLE reason=local OTA controller ready wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T01:50:08.648+00:00 [HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-board.json https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-board.sig
+2026-10-26T01:50:08.662+00:00 I (387434) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T01:50:13.416+00:00 I (392184) lab: STATUS version=1.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_08:28:54 reset=1 uptime_ms=391192 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T01:50:13.432+00:00 I (392184) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=234719 internal_largest=159744 minimum_free=8582916
+2026-10-26T01:50:13.434+00:00 I (392194) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T01:50:23.435+00:00 I (402204) lab: STATUS version=1.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_08:28:54 reset=1 uptime_ms=401212 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T01:50:23.452+00:00 I (402204) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=234719 internal_largest=159744 minimum_free=8582916
+2026-10-26T01:50:23.455+00:00 I (402214) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T01:50:33.456+00:00 I (412224) lab: STATUS version=1.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_08:28:54 reset=1 uptime_ms=411232 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T01:50:33.472+00:00 I (412224) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=234719 internal_largest=159744 minimum_free=8582916
+2026-10-26T01:50:33.475+00:00 I (412234) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T01:50:38.652+00:00 I (417434) OTA: phase=FAILED reason=ESP_ERR_TIMEOUT
+2026-10-26T01:50:38.653+00:00 [HOST] sent: status
+2026-10-26T01:50:38.653+00:00 [HOST] sent: otastatus
+2026-10-26T01:50:38.674+00:00 I (417444) lab: STATUS version=1.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_08:28:54 reset=1 uptime_ms=416451 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T01:50:38.690+00:00 I (417444) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257747 internal_largest=159744 minimum_free=8582916
+2026-10-26T01:50:38.696+00:00 I (417454) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+2026-10-26T01:50:38.702+00:00 I (417464) lab: BUILD elf_sha256=5ffe31090 secure_version=0
+2026-10-26T01:50:38.708+00:00 I (417474) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T01:50:38.718+00:00 I (417474) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T01:50:38.730+00:00 I (417484) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T01:50:38.735+00:00 I (417494) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T01:50:38.746+00:00 I (417504) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T01:50:38.757+00:00 I (417514) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T01:50:38.763+00:00 I (417524) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T01:50:38.780+00:00 I (417534) cfg: CONFIG ready=1 reader_schema=1 active_schema=1 used_schema=1 generation=1 sample_ms=1000 threshold=30 units=degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T01:50:38.788+00:00 I (417554) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_TIMEOUT wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T01:50:38.895+00:00 [HOST] fixture_result=BLOCKED name=A01-wrong-board

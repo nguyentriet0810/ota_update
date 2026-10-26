@@ -1,0 +1,104 @@
+{
+  "host_fixture_result": "PASS",
+  "fixture_count": 16,
+  "asset_count": 37,
+  "board_result": "NOT RUN",
+  "checks": [
+    {
+      "name": "A01-wrong-board",
+      "metadata_validation": "PROFILE:board",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A01-wrong-chip",
+      "metadata_validation": "PROFILE:chip",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A01-wrong-layout",
+      "metadata_validation": "PROFILE:layout_id",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A02-negative-size",
+      "metadata_validation": "INTEGER_BOUND:size",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A02-fraction-size",
+      "metadata_validation": "INTEGER_BOUND:size",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A02-oversize",
+      "metadata_validation": "INTEGER_BOUND:size",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A06-version-conflict",
+      "metadata_validation": "ACCEPT",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A08-unknown-schema",
+      "metadata_validation": "INTEGER_BOUND:schema_version",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A03-raw-newline-tamper",
+      "metadata_validation": "MANIFEST_SIGNATURE",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A03-signature-bitflip",
+      "metadata_validation": "MANIFEST_SIGNATURE",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A08-duplicate-size",
+      "metadata_validation": "DUPLICATE_KEY:size",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A08-unknown-field",
+      "metadata_validation": "MANIFEST_FIELDS",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A04-unsigned-native",
+      "metadata_validation": "ACCEPT",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A04-wrong-native-key",
+      "metadata_validation": "ACCEPT",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A05-final-file-digest",
+      "metadata_validation": "ACCEPT",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    },
+    {
+      "name": "A07-truncated-file",
+      "metadata_validation": "ACCEPT",
+      "fixture_check": "PASS",
+      "board_result": "NOT RUN"
+    }
+  ]
+}

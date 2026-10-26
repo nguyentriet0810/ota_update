@@ -1,0 +1,26 @@
+test_private_outside_project_and_no_implicit_overwrite (test_generate_keys.KeyGenerationTests.test_private_outside_project_and_no_implicit_overwrite) ... ok
+test_bad_digest_format (test_release.ReleaseTests.test_bad_digest_format) ... ok
+test_der_and_pem_public_import (test_release.ReleaseTests.test_der_and_pem_public_import) ... ok
+test_descriptor_version_conflict (test_release.ReleaseTests.test_descriptor_version_conflict) ... ok
+test_exact_byte_newline_tamper (test_release.ReleaseTests.test_exact_byte_newline_tamper) ... ok
+test_image_corruption_or_length (test_release.ReleaseTests.test_image_corruption_or_length) ... ok
+test_missing_required_field (test_release.ReleaseTests.test_missing_required_field) ... ok
+test_numeric_bounds_and_types (test_release.ReleaseTests.test_numeric_bounds_and_types) ... ok
+test_oversized_manifest_and_invalid_utf8 (test_release.ReleaseTests.test_oversized_manifest_and_invalid_utf8) ... ok
+test_profile_mismatch (test_release.ReleaseTests.test_profile_mismatch) ... ok
+test_signature_byte_tamper (test_release.ReleaseTests.test_signature_byte_tamper) ... ok
+test_signed_duplicate_key_rejected (test_release.ReleaseTests.test_signed_duplicate_key_rejected) ... ok
+test_signed_unknown_field_rejected (test_release.ReleaseTests.test_signed_unknown_field_rejected) ... ok
+test_stale_version_rejected (test_release.ReleaseTests.test_stale_version_rejected) ... ok
+test_string_bounds (test_release.ReleaseTests.test_string_bounds) ... ok
+test_truncated_signature (test_release.ReleaseTests.test_truncated_signature) ... ok
+test_url_policy (test_release.ReleaseTests.test_url_policy) ... ok
+test_valid_raw_signature_and_image (test_release.ReleaseTests.test_valid_raw_signature_and_image) ... ok
+test_wrong_chip_even_when_hash_matches (test_release.ReleaseTests.test_wrong_chip_even_when_hash_matches) ... ok
+test_wrong_key (test_release.ReleaseTests.test_wrong_key) ... ok
+test_wrong_salt_rejected (test_release.ReleaseTests.test_wrong_salt_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.520s
+
+OK

@@ -1,0 +1,26 @@
+{
+  "host_tls_checks": [
+    {
+      "certificate": "good",
+      "expected_tls_accept": true,
+      "observed_accept": true,
+      "reason": "",
+      "result": "PASS"
+    },
+    {
+      "certificate": "untrusted",
+      "expected_tls_accept": false,
+      "observed_accept": false,
+      "reason": "self signed certificate",
+      "result": "PASS"
+    },
+    {
+      "certificate": "wrong-host",
+      "expected_tls_accept": false,
+      "observed_accept": false,
+      "reason": "IP address mismatch, certificate is not valid for '192.168.137.1'.",
+      "result": "PASS"
+    }
+  ],
+  "board_result": "NOT RUN"
+}

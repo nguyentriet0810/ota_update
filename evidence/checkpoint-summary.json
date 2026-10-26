@@ -1,0 +1,508 @@
+{
+  "date_local": "2026-10-26",
+  "timezone": "Asia/Bangkok",
+  "board": {
+    "version": "1.0.0",
+    "running": "ota_0",
+    "state": "VALID",
+    "ota_busy": false,
+    "last_attempt": "ESP_ERR_INVALID_VERSION; candidate not activated"
+  },
+  "source_artifacts_commit": "a83d6376c584da9cba04c2854774e38789eeff2e",
+  "pending_patch": "Fresh full inactive-slot erase and checkpoint policy2; not built/deployed yet",
+  "device_reject_counts": {
+    "BLOCKED": 1,
+    "PASS": 5,
+    "NOT RUN": 10
+  },
+  "device_reject_results": [
+    {
+      "name": "A01-wrong-board",
+      "test_id": "A01",
+      "expectedgate": "manifest compatibility before erase",
+      "result": "BLOCKED",
+      "reason": "Transport/time prerequisites failed before the intended rejection gate",
+      "checks": {
+        "new_session_started": true,
+        "actual_FAILED_observed": true,
+        "expected_failure_phase": false,
+        "expected_failure_reason": false,
+        "writer_contract": true,
+        "boot_selection_not_observed": true,
+        "unexpected_reset_not_observed": true,
+        "baseline_unchanged_and_idle": true,
+        "no_metadata_accept_before_reject": true
+      },
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FAILED"
+      ],
+      "observed_failure_phase": "WAIT_NETWORK_TIME",
+      "observed_failure_reason": "ESP_ERR_TIMEOUT",
+      "writer_seen": false,
+      "forbidden_lines": [],
+      "unexpected_reset_lines": [],
+      "baseline_before": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "IDLE",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T015007.629402Z/A01-wrong-board.log"
+    },
+    {
+      "name": "A01-wrong-chip",
+      "test_id": "A01",
+      "expectedgate": "manifest compatibility before erase",
+      "result": "PASS",
+      "reason": "Expected rejection gate observed; baseline remains VALID and idle",
+      "checks": {
+        "new_session_started": true,
+        "actual_FAILED_observed": true,
+        "expected_failure_phase": true,
+        "expected_failure_reason": true,
+        "writer_contract": true,
+        "boot_selection_not_observed": true,
+        "unexpected_reset_not_observed": true,
+        "baseline_unchanged_and_idle": true,
+        "no_metadata_accept_before_reject": true
+      },
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "AUTH_MANIFEST",
+        "FAILED"
+      ],
+      "observed_failure_phase": "AUTH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_ARG",
+      "writer_seen": false,
+      "forbidden_lines": [],
+      "unexpected_reset_lines": [],
+      "baseline_before": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T015007.629402Z/A01-wrong-chip.log"
+    },
+    {
+      "name": "A01-wrong-layout",
+      "test_id": "A01",
+      "expectedgate": "manifest compatibility before erase",
+      "result": "PASS",
+      "reason": "Expected rejection gate observed; baseline remains VALID and idle",
+      "checks": {
+        "new_session_started": true,
+        "actual_FAILED_observed": true,
+        "expected_failure_phase": true,
+        "expected_failure_reason": true,
+        "writer_contract": true,
+        "boot_selection_not_observed": true,
+        "unexpected_reset_not_observed": true,
+        "baseline_unchanged_and_idle": true,
+        "no_metadata_accept_before_reject": true
+      },
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "AUTH_MANIFEST",
+        "FAILED"
+      ],
+      "observed_failure_phase": "AUTH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_ARG",
+      "writer_seen": false,
+      "forbidden_lines": [],
+      "unexpected_reset_lines": [],
+      "baseline_before": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T015007.629402Z/A01-wrong-layout.log"
+    },
+    {
+      "name": "A02-negative-size",
+      "test_id": "A02",
+      "expectedgate": "manifest integer bound before erase",
+      "result": "PASS",
+      "reason": "Expected rejection gate observed; baseline remains VALID and idle",
+      "checks": {
+        "new_session_started": true,
+        "actual_FAILED_observed": true,
+        "expected_failure_phase": true,
+        "expected_failure_reason": true,
+        "writer_contract": true,
+        "boot_selection_not_observed": true,
+        "unexpected_reset_not_observed": true,
+        "baseline_unchanged_and_idle": true,
+        "no_metadata_accept_before_reject": true
+      },
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "AUTH_MANIFEST",
+        "FAILED"
+      ],
+      "observed_failure_phase": "AUTH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_ARG",
+      "writer_seen": false,
+      "forbidden_lines": [],
+      "unexpected_reset_lines": [],
+      "baseline_before": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T015007.629402Z/A02-negative-size.log"
+    },
+    {
+      "name": "A02-fraction-size",
+      "test_id": "A02",
+      "expectedgate": "manifest integer type before erase",
+      "result": "PASS",
+      "reason": "Expected rejection gate observed; baseline remains VALID and idle",
+      "checks": {
+        "new_session_started": true,
+        "actual_FAILED_observed": true,
+        "expected_failure_phase": true,
+        "expected_failure_reason": true,
+        "writer_contract": true,
+        "boot_selection_not_observed": true,
+        "unexpected_reset_not_observed": true,
+        "baseline_unchanged_and_idle": true,
+        "no_metadata_accept_before_reject": true
+      },
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "AUTH_MANIFEST",
+        "FAILED"
+      ],
+      "observed_failure_phase": "AUTH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_ARG",
+      "writer_seen": false,
+      "forbidden_lines": [],
+      "unexpected_reset_lines": [],
+      "baseline_before": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T015007.629402Z/A02-fraction-size.log"
+    },
+    {
+      "name": "A02-oversize",
+      "test_id": "A02",
+      "expectedgate": "manifest slot bound before erase",
+      "result": "PASS",
+      "reason": "Expected rejection gate observed; baseline remains VALID and idle",
+      "checks": {
+        "new_session_started": true,
+        "actual_FAILED_observed": true,
+        "expected_failure_phase": true,
+        "expected_failure_reason": true,
+        "writer_contract": true,
+        "boot_selection_not_observed": true,
+        "unexpected_reset_not_observed": true,
+        "baseline_unchanged_and_idle": true,
+        "no_metadata_accept_before_reject": true
+      },
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "AUTH_MANIFEST",
+        "FAILED"
+      ],
+      "observed_failure_phase": "AUTH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_ARG",
+      "writer_seen": false,
+      "forbidden_lines": [],
+      "unexpected_reset_lines": [],
+      "baseline_before": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "1.0.0",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "running_slot": "ota_0",
+        "running_address": 131072,
+        "boot_slot": "ota_0",
+        "sdk_state": "VALID",
+        "controller_ready": 1,
+        "controller_busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T015007.629402Z/A02-oversize.log"
+    },
+    {
+      "name": "A06-version-conflict",
+      "test_id": "A06",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A08-unknown-schema",
+      "test_id": "A08",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A03-raw-newline-tamper",
+      "test_id": "A03",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A03-signature-bitflip",
+      "test_id": "A03",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A08-duplicate-size",
+      "test_id": "A08",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A08-unknown-field",
+      "test_id": "A08",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A04-unsigned-native",
+      "test_id": "A04",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A04-wrong-native-key",
+      "test_id": "A04",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A05-final-file-digest",
+      "test_id": "A05",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    },
+    {
+      "name": "A07-truncated-file",
+      "test_id": "A07",
+      "result": "NOT RUN",
+      "reason": "Runner interrupted for native signature boundary audit; incomplete capture is not PASS"
+    }
+  ],
+  "physical_cold_boot": "PASS with user-confirmed USB-only power removal/reconnection",
+  "host_release_tests": "21 PASS",
+  "builds": {
+    "v1": {
+      "studybook_ota_lab.bin": {
+        "bytes": 1118208,
+        "sha256": "962b5b534e937ece4f3fa1f1fa428e55d1bd4a16957fe5f0457c363241234ae0"
+      },
+      "studybook_ota_lab.elf": {
+        "bytes": 10671872,
+        "sha256": "5ffe310909be44f28ad754a2bfaf3551fc7cd4592253f2220fe97e27720e58dd"
+      },
+      "bootloader/bootloader.bin": {
+        "bytes": 21232,
+        "sha256": "42aa81cd0d27f1ede1833f0bc2f8f42d44ddd196e7215c185c2ae80012ca9b64"
+      },
+      "partition_table/partition-table.bin": {
+        "bytes": 3072,
+        "sha256": "00bdbfb28577b450fa0867638575d4de8c00236a2b64fe4db950a8e53ff9fdf6"
+      }
+    },
+    "v2": {
+      "studybook_ota_lab.bin": {
+        "bytes": 1118208,
+        "sha256": "00a6f30638d2f93ecfff30241bce10abcf5066fe8fd14372e368879641fdb79f"
+      },
+      "studybook_ota_lab.elf": {
+        "bytes": 10678968,
+        "sha256": "126862be9e8e8c773753b313ca241c9364a5cac32e605dd649e799d047fb231d"
+      },
+      "bootloader/bootloader.bin": {
+        "bytes": 21232,
+        "sha256": "cb75c9f55a72cc388afc9c6f3533de4c5abc8a573ee8518076a73485e036cf34"
+      },
+      "partition_table/partition-table.bin": {
+        "bytes": 3072,
+        "sha256": "00bdbfb28577b450fa0867638575d4de8c00236a2b64fe4db950a8e53ff9fdf6"
+      }
+    },
+    "v3": {
+      "studybook_ota_lab.bin": {
+        "bytes": 1118208,
+        "sha256": "1062bde0255f1adb1bea05b092acc900c45749407c91e2b2c0b36cdb7d47a494"
+      },
+      "studybook_ota_lab.elf": {
+        "bytes": 10673796,
+        "sha256": "55bbd7ed9ad09d508bb71d841661903df42484927e27423ea8e828ad4e3a8f68"
+      },
+      "bootloader/bootloader.bin": {
+        "bytes": 21232,
+        "sha256": "14bad173b73307e7153bc361468792cc6cddf78691fc1e40e53331cb64823c3e"
+      },
+      "partition_table/partition-table.bin": {
+        "bytes": 3072,
+        "sha256": "00bdbfb28577b450fa0867638575d4de8c00236a2b64fe4db950a8e53ff9fdf6"
+      }
+    },
+    "v4": {
+      "studybook_ota_lab.bin": {
+        "bytes": 1118208,
+        "sha256": "45a2565ec3dc23ff1c60cba834f1bb084da5b9f9b31db4c7587d6adda584580f"
+      },
+      "studybook_ota_lab.elf": {
+        "bytes": 10678968,
+        "sha256": "0e50c108abe2d88a2f8fc44197458b83ab6a64edc461a85cbb457c68f4ef6075"
+      },
+      "bootloader/bootloader.bin": {
+        "bytes": 21232,
+        "sha256": "eb2a640938401540212cc32703b82e6220e9af6aa3400d52c33b5be08e3de06e"
+      },
+      "partition_table/partition-table.bin": {
+        "bytes": 3072,
+        "sha256": "00bdbfb28577b450fa0867638575d4de8c00236a2b64fe4db950a8e53ff9fdf6"
+      }
+    },
+    "v2-shadow-fail": {
+      "studybook_ota_lab.bin": {
+        "bytes": 1118208,
+        "sha256": "c307ac048d90fb5293518cd9e537288532c1d5c05926b8bec00980b56abdd3ea"
+      },
+      "studybook_ota_lab.elf": {
+        "bytes": 10679832,
+        "sha256": "33ecca06a40f0ad096439db46a98a2bdbe7565eec2945b90fc3a12c66694a481"
+      },
+      "bootloader/bootloader.bin": {
+        "bytes": 21232,
+        "sha256": "4a009bc41b96205933dbc291e2958d1c3eb96674910a87c7eac7720ca5a0cf25"
+      },
+      "partition_table/partition-table.bin": {
+        "bytes": 3072,
+        "sha256": "00bdbfb28577b450fa0867638575d4de8c00236a2b64fe4db950a8e53ff9fdf6"
+      }
+    }
+  }
+}

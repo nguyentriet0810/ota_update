@@ -1,0 +1,366 @@
+{
+  "fixture_release_tag": "lab-negative-v2",
+  "repo": "nguyentriet0810/ota_update",
+  "source_release": "v2.0.0",
+  "source_version_code": 2,
+  "fixtures": [
+    {
+      "name": "A01-wrong-board",
+      "test_id": "A01",
+      "expectedgate": "manifest compatibility before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-board.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-board.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A01-wrong-board.json",
+        "A01-wrong-board.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A01-wrong-chip",
+      "test_id": "A01",
+      "expectedgate": "manifest compatibility before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-chip.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-chip.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A01-wrong-chip.json",
+        "A01-wrong-chip.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A01-wrong-layout",
+      "test_id": "A01",
+      "expectedgate": "manifest compatibility before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-layout.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A01-wrong-layout.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A01-wrong-layout.json",
+        "A01-wrong-layout.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A02-negative-size",
+      "test_id": "A02",
+      "expectedgate": "manifest integer bound before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A02-negative-size.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A02-negative-size.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A02-negative-size.json",
+        "A02-negative-size.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A02-fraction-size",
+      "test_id": "A02",
+      "expectedgate": "manifest integer type before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A02-fraction-size.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A02-fraction-size.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A02-fraction-size.json",
+        "A02-fraction-size.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A02-oversize",
+      "test_id": "A02",
+      "expectedgate": "manifest slot bound before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A02-oversize.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A02-oversize.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A02-oversize.json",
+        "A02-oversize.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A06-version-conflict",
+      "test_id": "A06",
+      "expectedgate": "file descriptor differs from authenticated manifest",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A06-version-conflict.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A06-version-conflict.sig",
+      "allow_writer": true,
+      "assetnames": [
+        "A06-version-conflict.json",
+        "A06-version-conflict.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A08-unknown-schema",
+      "test_id": "A08",
+      "expectedgate": "manifest schema before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A08-unknown-schema.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A08-unknown-schema.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A08-unknown-schema.json",
+        "A08-unknown-schema.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A03-raw-newline-tamper",
+      "test_id": "A03",
+      "expectedgate": "raw manifest signature before parse",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A03-raw-newline-tamper.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A03-raw-newline-tamper.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A03-raw-newline-tamper.json",
+        "A03-raw-newline-tamper.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A03-signature-bitflip",
+      "test_id": "A03",
+      "expectedgate": "raw manifest signature before parse",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A03-signature-bitflip.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A03-signature-bitflip.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A03-signature-bitflip.json",
+        "A03-signature-bitflip.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A08-duplicate-size",
+      "test_id": "A08",
+      "expectedgate": "duplicate key before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A08-duplicate-size.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A08-duplicate-size.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A08-duplicate-size.json",
+        "A08-duplicate-size.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A08-unknown-field",
+      "test_id": "A08",
+      "expectedgate": "unknown field before erase",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A08-unknown-field.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A08-unknown-field.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A08-unknown-field.json",
+        "A08-unknown-field.sig"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A04-unsigned-native",
+      "test_id": "A04",
+      "expectedgate": "SDK native app signature validation",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A04-unsigned-native.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A04-unsigned-native.sig",
+      "allow_writer": true,
+      "assetnames": [
+        "A04-unsigned-native.json",
+        "A04-unsigned-native.sig",
+        "A04-unsigned-native.bin"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A04-wrong-native-key",
+      "test_id": "A04",
+      "expectedgate": "SDK native app trusted-key mismatch",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A04-wrong-native-key.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A04-wrong-native-key.sig",
+      "allow_writer": true,
+      "assetnames": [
+        "A04-wrong-native-key.json",
+        "A04-wrong-native-key.sig",
+        "A04-wrong-native-key.bin"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A05-final-file-digest",
+      "test_id": "A05",
+      "expectedgate": "VERIFY_FILE full signed-file SHA256 mismatch",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A05-final-file-digest.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A05-final-file-digest.sig",
+      "allow_writer": true,
+      "assetnames": [
+        "A05-final-file-digest.json",
+        "A05-final-file-digest.sig",
+        "A05-final-file-digest.bin"
+      ],
+      "result_on_board": "NOT RUN"
+    },
+    {
+      "name": "A07-truncated-file",
+      "test_id": "A07",
+      "expectedgate": "HTTP length contract before writer",
+      "manifest_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A07-truncated-file.json",
+      "signature_url": "https://github.com/nguyentriet0810/ota_update/releases/download/lab-negative-v2/A07-truncated-file.sig",
+      "allow_writer": false,
+      "assetnames": [
+        "A07-truncated-file.json",
+        "A07-truncated-file.sig",
+        "A07-truncated-file.bin"
+      ],
+      "result_on_board": "NOT RUN"
+    }
+  ],
+  "asset_hashes": {
+    "A01-wrong-board.json": {
+      "size": 465,
+      "sha256": "163aad32ca90d24e30f644efb90f9e42fdcd4cb4483ecaf8be1c1622fd413de0"
+    },
+    "A01-wrong-board.sig": {
+      "size": 384,
+      "sha256": "73c86d439e2787411a47a843bd6732b9746b5d2c03c886b09897f0fb2cba3ac1"
+    },
+    "A01-wrong-chip.json": {
+      "size": 463,
+      "sha256": "22f52a5b3b817f59b4b57a0a3f854e3b6746d19b90d62d220fc00e38dcd87f90"
+    },
+    "A01-wrong-chip.sig": {
+      "size": 384,
+      "sha256": "3124714d14cc4408e6123f47a31acc00a6032c0e0702e5be76d14e897cfdc062"
+    },
+    "A01-wrong-layout.json": {
+      "size": 462,
+      "sha256": "3f028ebbac2d48733a9d085e28b0824c190e070d06a15d618842000e9a4fe402"
+    },
+    "A01-wrong-layout.sig": {
+      "size": 384,
+      "sha256": "9f2886f3e3b4cf7dce5cf17b4d67d10875b36d67ec69c497d0175ff9a3bfbf00"
+    },
+    "A02-fraction-size.json": {
+      "size": 461,
+      "sha256": "ff31ed254c697934ffc0ffa88f49c429871c229a0994a62ad722b1139824ae2f"
+    },
+    "A02-fraction-size.sig": {
+      "size": 384,
+      "sha256": "63b402dab0a63f1952b4866ccba6bb74b2fa2f645bc7182923b0dff4e6a26ee1"
+    },
+    "A02-negative-size.json": {
+      "size": 460,
+      "sha256": "8cd779ea0608271ff1ed08a1e3b9c2f4fbd35a4548e12a5a0493a30c25a65221"
+    },
+    "A02-negative-size.sig": {
+      "size": 384,
+      "sha256": "1630e18753620c56278dd7de9a38bc2442002cd5d1a6f648a45cb4035a9fd858"
+    },
+    "A02-oversize.json": {
+      "size": 465,
+      "sha256": "5846b2079937094c9a3b8b48e5539ec5f1d061525d60984b375ccb0d9afbe07e"
+    },
+    "A02-oversize.sig": {
+      "size": 384,
+      "sha256": "e43a68d7e747e13e850ba2b95dfbb0538b428418abb3526386f7d3a369104864"
+    },
+    "A03-raw-newline-tamper.json": {
+      "size": 466,
+      "sha256": "2c308e244cc342fd7981c5a2c5aa2bd73b95f4594bd05581fecf08fb52db91ad"
+    },
+    "A03-raw-newline-tamper.sig": {
+      "size": 384,
+      "sha256": "30d3076ed57252c309e4b2f14842193507850202b3496a18622ca22bcc5fe37e"
+    },
+    "A03-signature-bitflip.json": {
+      "size": 465,
+      "sha256": "4f6004485e5fc4783f46d3805280b7142130faf3127fe67b57d63b133cdbbadd"
+    },
+    "A03-signature-bitflip.sig": {
+      "size": 384,
+      "sha256": "4c8a7cecad9f4344831b8b7318949c0f6bdbd13067ff65b75aa213364aee991e"
+    },
+    "A04-unsigned-native.bin": {
+      "size": 1114112,
+      "sha256": "1f8b86d1257ec0230332802710fe7716080186caf2a292581d9194141adf5855"
+    },
+    "A04-unsigned-native.json": {
+      "size": 471,
+      "sha256": "fe2dfd17236383886aced4521de8568d42f256981f3e0273a275e51210b12239"
+    },
+    "A04-unsigned-native.sig": {
+      "size": 384,
+      "sha256": "8ab4197f738c4729a4f6522bd18d896a1b9d384fb551fd3e57ec8a4ab890a959"
+    },
+    "A04-wrong-native-key.bin": {
+      "size": 1118208,
+      "sha256": "c8085f592133b812a3f02a569cb154a01e9b7091738af1b6edaf5454bedb477e"
+    },
+    "A04-wrong-native-key.json": {
+      "size": 472,
+      "sha256": "c4a50fed07d3277ee00f6406ee86a1f46c4de630f51a59794085464173b3ff3f"
+    },
+    "A04-wrong-native-key.sig": {
+      "size": 384,
+      "sha256": "670081b73df7c3a57e8d30d6fc6f6f9f31389a75013fff819be23bffd1ba660a"
+    },
+    "A05-final-file-digest.bin": {
+      "size": 1118208,
+      "sha256": "6c52811b684daa61ff2d66164c9183fa605c3572b5439cdd46f3364d72a1b452"
+    },
+    "A05-final-file-digest.json": {
+      "size": 473,
+      "sha256": "c25e8fdb4e1029300ec60bf54b3692d9910446c0892c301ac5891ab361f6b110"
+    },
+    "A05-final-file-digest.sig": {
+      "size": 384,
+      "sha256": "e3d72cb2f186751368416198aaf4b53f3327f31c46952e9ce9480860ef983974"
+    },
+    "A06-version-conflict.json": {
+      "size": 465,
+      "sha256": "3e9542ddd56ab3589968b24a9ea51bf365d37b7ff44d9be0153aa39ad459e411"
+    },
+    "A06-version-conflict.sig": {
+      "size": 384,
+      "sha256": "af2b0fc874bef80eb4c067b018c0b7440274f7e85987ef11943fdba027f7ba25"
+    },
+    "A07-truncated-file.bin": {
+      "size": 1114112,
+      "sha256": "1f8b86d1257ec0230332802710fe7716080186caf2a292581d9194141adf5855"
+    },
+    "A07-truncated-file.json": {
+      "size": 470,
+      "sha256": "68962c19b009ba138ced2628862910c6f750388336a378a8266ee5346aea8333"
+    },
+    "A07-truncated-file.sig": {
+      "size": 384,
+      "sha256": "f3f8a1cbcf976950d6b217aefb8904a4496ec030a53065b2137328e5e77ce393"
+    },
+    "A08-duplicate-size.json": {
+      "size": 475,
+      "sha256": "dff870efa02c76bd618737eb563f83d5c64dc377feeec8972f11e41f65c03ae8"
+    },
+    "A08-duplicate-size.sig": {
+      "size": 384,
+      "sha256": "45e6cfca995d79e14fe3baf2b6f0ccfb02b705bd5d09429801d616b1bfa737cd"
+    },
+    "A08-unknown-field.json": {
+      "size": 483,
+      "sha256": "59d1936a31cca24eec8b595475ed1faa370df34e2c7c46474bf288ff79207533"
+    },
+    "A08-unknown-field.sig": {
+      "size": 384,
+      "sha256": "cbcbf807e1cc0530d6b492ff197790f944b43ed3e0e1dbf56492669d54c51d5c"
+    },
+    "A08-unknown-schema.json": {
+      "size": 465,
+      "sha256": "07e4d981c68b8a6968b2559f05dff7b36dccbc91e4ada219c033e2666a205080"
+    },
+    "A08-unknown-schema.sig": {
+      "size": 384,
+      "sha256": "c53233bd99719ca61be40cc561f52d5a082295a8266ca54238c81363d01f7256"
+    }
+  }
+}

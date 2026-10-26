@@ -1,0 +1,10 @@
+[HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/v2.0.0/not-found.json https://github.com/nguyentriet0810/ota_update/releases/download/v2.0.0/manifest.sig
+I (231794) lab: STATUS version=1.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_08:28:54 reset=1 uptime_ms=230802 health_fail=0 selftest=PASS service_mode=0
+I (231794) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=258135 internal_largest=184320 minimum_free=8594332
+I (231804) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (232064) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+I (236074) OTA: phase=FETCH_MANIFEST reason=exact bytes
+I (236634) wifi:<ba-add>idx:0 (ifx:0, [MAC_REDACTED]), tid:0, ssn:8, winSize:64
+I (238474) wifi:<ba-add>idx:1 (ifx:0, [MAC_REDACTED]), tid:1, ssn:5, winSize:64
+I (239374) esp-x509-crt-bundle: Certificate validated
+I (241554) OTA: phase=FAILED reason=ESP_ERR_INVALID_RESPONSE

@@ -1,0 +1,30 @@
+[HOST] Wi-Fi credentials sent privately; command suppressed
+[HOST] sent: cfg parser-tests
+[HOST] sent: otastatus
+I (55834) phy_init: phy_version 712,87e8c20e,Apr 13 2026,18:51:10
+W (55834) phy_init: failed to load RF calibration data (0x1102), falling back to full calibration
+I (55874) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(2)
+I (55884) wifi:mode : sta ([MAC_REDACTED])
+I (55884) wifi:enable tsf
+I (55904) OTA: wifi_provision_result=ESP_OK; credentials omitted
+I (56034) cfg: PARSER_TESTS valid=1 short_rejected=1 crc_rejected=1 range_rejected=1 schema3_rejected=1 result=PASS NVS_mutated=false
+I (56234) OTA: status ready=1 busy=0 phase=IDLE reason=local OTA controller ready wifi=down bytes=0 total=0 durable_q=0
+I (56584) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:1, snd_ch_cfg:0x0
+I (56584) wifi:state: init -> auth (0xb0)
+I (56594) wifi:state: auth -> assoc (0x0)
+I (56594) wifi:state: assoc -> run (0x10)
+I (56624) wifi:connected with [REDACTED], aid = 1, channel 6, BW20, bssid = [MAC_REDACTED]
+I (56624) wifi:security: WPA2-PSK, phy: bgn, rssi: -18, cipher(pairwise:0x3, group:0x3), pmf:0
+I (56634) wifi:pm start, type: 1
+
+I (56634) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us
+I (56644) wifi:set rx beacon pti, rx_bcn_pti: 0, bcn_timeout: 25000, mt_pti: 0, mt_time: 10000
+I (56704) wifi:AP's beacon interval = 102400 us, DTIM period = 3
+I (57694) esp_netif_handlers: sta ip: [LAN_IP_REDACTED], mask: 255.255.255.0, gw: [LAN_IP_REDACTED]
+I (57694) OTA: wifi=connected
+I (61454) lab: STATUS version=1.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_08:28:54 reset=1 uptime_ms=60462 health_fail=0 selftest=PASS service_mode=0
+I (61454) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=258115 internal_largest=184320 minimum_free=8605692
+I (61464) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (71474) lab: STATUS version=1.0.0 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_08:28:54 reset=1 uptime_ms=70482 health_fail=0 selftest=PASS service_mode=0
+I (71474) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=258115 internal_largest=184320 minimum_free=8605692
+I (71484) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID

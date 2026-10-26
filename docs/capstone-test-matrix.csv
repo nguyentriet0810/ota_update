@@ -1,14 +1,14 @@
-﻿test_id,injection,expected,result,observed,evidence_paths,fault_method,repeat_count,limitation
+test_id,injection,expected,result,observed,evidence_paths,fault_method,repeat_count,limitation
 N01,DNS hoặc route lỗi,Không ghi/chọn candidate; báo lỗi đúng phase.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
 N02,Mất Wi-Fi giữa download,App hiện tại giữ; retry/resume theo policy.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
 N03,CA hoặc hostname sai,"TLS reject, không skip verification.",NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
 N04,Clock chưa đạt time policy,Không bỏ certificate time check; báo reason.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
 N05,"Redirect loop, HTTP downgrade hoặc host ngoài policy",Dừng trước nhận bytes không được phép.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
-N06,404 hoặc HTTP200 HTML,Không coi là app image.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+N06,404 hoặc HTTP200 HTML,Không coi là app image.,PASS,404 metadata qua GitHub HTTPS bị từ chối ESP_ERR_INVALID_RESPONSE trước writer; v1 vẫn VALID.,evidence/N06-404-reject.log;evidence/session-checkpoint-board.log,HTTP404 fixture,1,Đã thử nhánh404; nhánh200HTML chưa chạy.
 N07,"Timeout, 5xx hoặc rate-limit",Backoff/budget hữu hạn; app có tiến độ.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
 N08,Resume200/416/Content-Range sai,Không append mù; restart/reconcile.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
-A01,Signed metadata sai board/chip/layout,Reject trước begin/erase.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
-A02,Size âm/thập phân/vượt3MiB,Bounds/type reject.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A01,Signed metadata sai board/chip/layout,Reject trước begin/erase.,BLOCKED,Sai chip/layout PASS trước erase; sai board gặp prerequisite time/network timeout trước gate cần kiểm.,evidence/device-rejects/summary.json,Signed malformed metadata,3,Chỉ 2/3 biến thể có observed reject; phải rerun sai board.
+A02,Size âm/thập phân/vượt3MiB,Bounds/type reject.,PASS,"Size âm, thập phân và vượt3MiB đều reject ESP_ERR_INVALID_ARG trước writer; v1/ota_0 VALID giữ nguyên.",evidence/device-rejects/summary.json,Three signed invalid-size metadata fixtures,3,Kết quả trên binaryv1 tại a83d637; sẽ regression-test lại sau writer policy2.
 A03,Manifest/signature đổi1byte,Crypto reject.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
 A04,Unsigned app hoặc app key lạ,Native verify reject.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
 A05,File đổi nhưng metadata/hash cũ,Full-file digest reject; không set_boot.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.

@@ -50,7 +50,11 @@
 #define CHECKPOINT_STEP 0x10000U
 #define RECORD_MAGIC 0x43504f54U
 #define RECORD_FORMAT 1U
-#define RECORD_POLICY 1U
+/* Policy 2 checkpoints were created only after a full inactive-slot erase.
+ * Policy 1 snapshots cannot prove the signature tail was cleared, so they are
+ * deliberately invalidated and restarted from zero after this updater fix.
+ */
+#define RECORD_POLICY 2U
 #define NET_UP BIT0
 #define HTTP_TIMEOUT_MS 12000
 #define SESSION_DEADLINE_US (INT64_C(600) * 1000000)
@@ -603,8 +607,14 @@ static esp_err_t download(const manifest_t *m, const esp_partition_t *target, in
     const esp_partition_t *now = esp_ota_get_running_partition();
     if (!now || now->address != running->address || target->address == now->address) { http_close(&h); return ESP_ERR_INVALID_STATE; }
     esp_ota_handle_t handle = 0; bool live = false, reconnect_after_cleanup = false;
+    /* SDK app verification reads the partition, not merely manifest.size.
+     * A sequential fresh erase could leave an old native signature beyond a
+     * newly advertised unsigned file and validate stale tail bytes. Erase the
+     * WHOLE inactive slot on every fresh attempt. Resumes may preserve a prefix
+     * only when policy-2 identity-bound checkpoints prove this initial erase.
+     */
     err = q ? esp_ota_resume(target, OTA_WITH_SEQUENTIAL_WRITES, q, &handle) :
-        esp_ota_begin(target, OTA_WITH_SEQUENTIAL_WRITES, &handle);
+        esp_ota_begin(target, target->size, &handle);
     if (err != ESP_OK) { http_close(&h); return err; }
     live = true;
     ESP_LOGI(TAG, "writer_started target=%s offset=%" PRIu32 " mode=%s", target->label, q, q ? "resume" : "fresh");

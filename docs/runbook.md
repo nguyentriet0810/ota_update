@@ -68,7 +68,9 @@ Sau reboot, gửi lại **đúng hai URL**. Worker xác thực manifest lại r�
 
 `cancel` hủy request đang bận và dọn checkpoint; `clearresume` chỉ dùng khi idle để bắt đầu lại có chủ đích. Duplicate request khi busy phải bị từ chối. Transient download có tối đa3 attempt; metadata/auth error không retry vòng lặp. Origin URL cố định và TLS redirect allowlist được kiểm ở firmware; không lưu signed redirect URL tạm làm identity.
 
-Sau v2 VALID, cập nhật v3.0.0 health_fail: candidate được xác thực nhưng self-test fail, state INVALID và quay về v2. Thử gửi lại đúng v3 để quan sát quarantine theo release_id/filehash; sau đó v4.0.0 repaired phải được nhận và VALID. Ghi running slot/identity thật sau mỗi mốc. `failtrial`/`testreset` chỉ có tác dụng phù hợp khi đang PENDING_VERIFY.
+Sau v2 VALID, cập nhật v3.0.0 health_fail: candidate được xác thực nhưng reset khi chưa confirm; bootloader đổi trial sang ABORTED và quay về v2. `failtrial` là ca riêng B02: chỉ khi đang PENDING_VERIFY, gọi explicit SDK invalid/rollback để tạo INVALID. `testreset` là ca B03: chỉ khi đang PENDING_VERIFY, software reset tạo ABORTED ở boot sau. Chỉ kết luận fallback khi boot log tiếp theo chứng minh app/slot/identity đúng. Thử gửi lại đúng v3 để quan sát quarantine theo release_id/filehash; sau đó v4.0.0 repaired phải được nhận và VALID.
+
+Để gây mất Wi-Fi thật trong download mà không tắt AP của người dùng, đặt `ota-wifi-drop-at 147456` trước lệnh OTA. Firmware disconnect radio ở byte threshold, tạm chặn auto-connect2giây, abort writer/HTTP rồi reconnect và retry/resume theo Q. Cần log `fault_method=wifi_disconnect`, sự kiện Wi-Fi disconnected, `fault_wifi_restore ... writer_aborted=true/http_closed=true`, `WAIT_RETRY_NETWORK` và writer resume offset đã quan sát. Đây là radio disconnect theo phần mềm, không tương đương cắt nguồn AP hoặc nguồn board. Giá trị0 disarm; chỉ arm khi idle.
 
 ## Dữ liệu, fault matrix và kết luận E10/E12
 
