@@ -1,0 +1,59 @@
+2026-10-26T11:36:50.089+00:00 [HOST] case=N07-http429 no host reset commands
+2026-10-26T11:36:50.413+00:00 [HOST] sent: status
+2026-10-26T11:36:50.413+00:00 [HOST] sent: otastatus
+2026-10-26T11:36:50.434+00:00 I (181755) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=180737 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:36:50.451+00:00 I (181755) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256879 internal_largest=120832 minimum_free=8539816
+2026-10-26T11:36:50.456+00:00 I (181775) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:36:50.473+00:00 I (181785) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=180763 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:36:50.484+00:00 I (181795) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256879 internal_largest=120832 minimum_free=8539816
+2026-10-26T11:36:50.488+00:00 I (181805) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:36:50.495+00:00 I (181815) lab: BUILD elf_sha256=fe7778499 secure_version=0
+2026-10-26T11:36:50.505+00:00 I (181825) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T11:36:50.517+00:00 I (181835) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T11:36:50.522+00:00 I (181835) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T11:36:50.534+00:00 I (181845) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T11:36:50.539+00:00 I (181855) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T11:36:50.551+00:00 I (181865) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T11:36:50.562+00:00 I (181875) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T11:36:50.578+00:00 I (181885) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T11:36:50.585+00:00 I (181905) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_HTTP_EAGAIN wifi=up bytes=0 total=1118208 durable_q=0
+2026-10-26T11:36:50.709+00:00 [HOST] server_settings={"chunk_bytes": 4096, "chunk_delay_ms": 0, "cut_after": 147456, "delay_ms": 18000, "fault_requests": -1, "image_mode": "status429", "range_mode": "correct"}
+2026-10-26T11:36:50.717+00:00 [HOST] sent: ota https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.json https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig
+2026-10-26T11:36:50.735+00:00 I (182065) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T11:36:50.738+00:00 I (182065) OTA: phase=FETCH_MANIFEST reason=exact bytes; bounded metadata pair budget
+2026-10-26T11:36:52.050+00:00 I (183385) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+2026-10-26T11:36:52.124+00:00 I (183455) OTA: accepted_metadata version=9.9.9 version_code=6 size=1118208 slot=ota_0
+2026-10-26T11:36:52.140+00:00 I (183455) OTA: accepted_release_id=eb601d8c5e071b77b42513efa6b48f8a62f95a3869915bdd0ba540135fdd6627 file_sha256=f3d3abac88542ee0b7cd4549957cc08cd8f4836a0a20cf5730c49698b7bf8de6
+2026-10-26T11:36:52.140+00:00 I (183465) OTA: phase=DOWNLOAD reason=inactive slot only
+2026-10-26T11:36:52.771+00:00 W (184095) OTA: http_response_transient status=429 retry_after_ms=1000 blocked=0
+2026-10-26T11:36:52.782+00:00 W (184105) OTA: http_attempt phase=payload attempt=1 budget=3 status=429 error=ESP_ERR_HTTP_EAGAIN retryable=1
+2026-10-26T11:36:52.788+00:00 W (184105) OTA: retry_backoff phase=payload failed_attempt=1 next_attempt=2 delay_ms=1411 status=429 retry_after_ms=1000
+2026-10-26T11:36:54.203+00:00 I (185535) OTA: retry_backoff_complete phase=payload waited_ms=1415 requested_ms=1411
+2026-10-26T11:36:54.208+00:00 I (185535) OTA: phase=WAIT_RETRY_NETWORK reason=bounded reconnect before checkpoint resume
+2026-10-26T11:36:54.213+00:00 I (185535) OTA: phase=DOWNLOAD reason=retry from durable checkpoint
+2026-10-26T11:36:54.903+00:00 W (186225) OTA: http_response_transient status=429 retry_after_ms=1000 blocked=0
+2026-10-26T11:36:54.914+00:00 W (186235) OTA: http_attempt phase=payload attempt=2 budget=3 status=429 error=ESP_ERR_HTTP_EAGAIN retryable=1
+2026-10-26T11:36:54.920+00:00 W (186235) OTA: retry_backoff phase=payload failed_attempt=2 next_attempt=3 delay_ms=2555 status=429 retry_after_ms=1000
+2026-10-26T11:36:57.483+00:00 I (188815) OTA: retry_backoff_complete phase=payload waited_ms=2563 requested_ms=2555
+2026-10-26T11:36:57.488+00:00 I (188815) OTA: phase=WAIT_RETRY_NETWORK reason=bounded reconnect before checkpoint resume
+2026-10-26T11:36:57.493+00:00 I (188815) OTA: phase=DOWNLOAD reason=retry from durable checkpoint
+2026-10-26T11:36:58.405+00:00 W (189735) OTA: http_response_transient status=429 retry_after_ms=1000 blocked=0
+2026-10-26T11:36:58.416+00:00 W (189735) OTA: http_attempt phase=payload attempt=3 budget=3 status=429 error=ESP_ERR_HTTP_EAGAIN retryable=1
+2026-10-26T11:36:58.422+00:00 W (189735) OTA: retry_budget_exhausted phase=payload attempts=3
+2026-10-26T11:36:58.422+00:00 I (189745) OTA: phase=FAILED reason=ESP_ERR_HTTP_EAGAIN
+2026-10-26T11:36:58.422+00:00 [HOST] sent: status
+2026-10-26T11:36:58.422+00:00 [HOST] sent: otastatus
+2026-10-26T11:36:58.444+00:00 I (189765) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=188747 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:36:58.460+00:00 I (189765) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256815 internal_largest=120832 minimum_free=8539816
+2026-10-26T11:36:58.466+00:00 I (189785) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:36:58.471+00:00 I (189795) lab: BUILD elf_sha256=fe7778499 secure_version=0
+2026-10-26T11:36:58.477+00:00 I (189795) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T11:36:58.488+00:00 I (189805) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T11:36:58.499+00:00 I (189815) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T11:36:58.504+00:00 I (189825) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T11:36:58.516+00:00 I (189835) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T11:36:58.527+00:00 I (189845) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T11:36:58.532+00:00 I (189855) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T11:36:58.549+00:00 I (189855) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T11:36:58.559+00:00 I (189875) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_HTTP_EAGAIN wifi=up bytes=0 total=1118208 durable_q=0
+2026-10-26T11:36:58.700+00:00 [HOST] case_result=PASS reason=Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed

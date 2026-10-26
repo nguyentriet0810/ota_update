@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import re
+import sys
 import time
 from urllib.request import Request, ProxyHandler, build_opener
 
@@ -128,12 +129,12 @@ def backoff_evidence(lines):
         if failure:
             attempts[int(failure[1])] = {"attempt": int(failure[1]), "reason": failure[2], "budget": int(failure[3])}
             failed_at = int(stamp[1]) if stamp else None
-        failure = re.search(r"http_attempt phase=payload attempt=(\d+) budget=(\d+) status=(\d+) error=(\S+) retryable=(\d+)", line)
+        failure = re.search(r"http_attempt phase=payload attempt=(\d+) budget=(\d+) status=(-?\d+) error=(\S+) retryable=(\d+)", line)
         if failure:
             attempts[int(failure[1])] = {"attempt": int(failure[1]), "budget": int(failure[2]),
                                         "status": int(failure[3]), "reason": failure[4], "retryable": int(failure[5])}
             failed_at = int(stamp[1]) if stamp else None
-        rule = re.search(r"retry_backoff phase=payload failed_attempt=(\d+) next_attempt=(\d+) delay_ms=(\d+) status=(\d+) retry_after_ms=(\d+)", line)
+        rule = re.search(r"retry_backoff phase=payload failed_attempt=(\d+) next_attempt=(\d+) delay_ms=(\d+) status=(-?\d+) retry_after_ms=(\d+)", line)
         if rule:
             rules.append(dict(failed_attempt=int(rule[1]), next_attempt=int(rule[2]), delay_ms=int(rule[3]),
                               status=int(rule[4]), retry_after_ms=int(rule[5])))
@@ -321,6 +322,8 @@ class Capture:
 
 
 def main():
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", default="COM13")
     parser.add_argument("--evidence-dir", type=Path, required=True)

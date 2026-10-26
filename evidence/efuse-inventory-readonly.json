@@ -1,0 +1,61 @@
+{
+  "method": "espefuse summary READ ONLY; no burn commands",
+  "fields": {
+    "SECURE_BOOT_EN": {
+      "bit_len": 1,
+      "block": 0,
+      "category": "security",
+      "description": "Set this bit to enable secure boot",
+      "efuse_type": "bool",
+      "name": "SECURE_BOOT_EN",
+      "pos": 20,
+      "raw_value": "0x0",
+      "readable": true,
+      "value": false,
+      "word": 3,
+      "writeable": true
+    },
+    "SPI_BOOT_CRYPT_CNT": {
+      "bit_len": 3,
+      "block": 0,
+      "category": "security",
+      "description": "Enables flash encryption when 1 or 3 bits are set and disabled otherwise",
+      "efuse_type": "uint:3",
+      "name": "SPI_BOOT_CRYPT_CNT",
+      "pos": 18,
+      "raw_value": "0x0",
+      "readable": true,
+      "value": "Disable",
+      "word": 2,
+      "writeable": true
+    },
+    "SECURE_VERSION": {
+      "bit_len": 16,
+      "block": 0,
+      "category": "security",
+      "description": "Secure version (used by ESP-IDF anti-rollback feature)",
+      "efuse_type": "uint:16",
+      "name": "SECURE_VERSION",
+      "pos": 14,
+      "raw_value": "0x0000",
+      "readable": true,
+      "value": 0,
+      "word": 4,
+      "writeable": true
+    },
+    "DIS_DOWNLOAD_MODE": {
+      "bit_len": 1,
+      "block": 0,
+      "category": "security",
+      "description": "Set this bit to disable download mode (boot_mode[3:0] = 0; 1; 2; 3; 6; 7)",
+      "efuse_type": "bool",
+      "name": "DIS_DOWNLOAD_MODE",
+      "pos": 0,
+      "raw_value": "0x0",
+      "readable": true,
+      "value": false,
+      "word": 4,
+      "writeable": true
+    }
+  }
+}

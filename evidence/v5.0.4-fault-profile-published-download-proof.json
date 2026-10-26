@@ -1,0 +1,8 @@
+{
+  "tag": "v5.0.4-fault-profile",
+  "source_commit": "f2c72dd570b0306b87539e64b35700ecfc4b104e",
+  "host_download_all_assets_identical": true,
+  "native_and_manifest_signatures": "VERIFIED_HOST",
+  "file_sha256": "723f87adb2ee467cfecbb5035f0fa399ba95b29be4208243775de5575037f755",
+  "release_url": "https://github.com/nguyentriet0810/ota_update/releases/tag/v5.0.4-fault-profile"
+}

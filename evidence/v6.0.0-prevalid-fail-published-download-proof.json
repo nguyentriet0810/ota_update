@@ -1,0 +1,8 @@
+{
+  "tag": "v6.0.0-prevalid-fail",
+  "source_commit": "0163b3323f06cd707656bbd4fd7496f6719e2e5f",
+  "host_download_all_assets_identical": true,
+  "native_and_manifest_signatures": "VERIFIED_HOST",
+  "file_sha256": "d1eace06e5e7e15941c0af4d26e1af7a514008786aa945bd0ca5bf922c052f5b",
+  "release_url": "https://github.com/nguyentriet0810/ota_update/releases/tag/v6.0.0-prevalid-fail"
+}

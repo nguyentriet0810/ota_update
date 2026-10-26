@@ -1,0 +1,27 @@
+{
+  "matrix_groups": 32,
+  "PASS": 32,
+  "FAIL": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0,
+  "method": "One ESP32-S3; evidence spans pinned firmware versions, software resets and one physical offline USB power cycle.",
+  "network_subcases": 12,
+  "storage_subcases": 10,
+  "crypto_reject_fixtures": 16,
+  "assessment_history_retained": [
+    "network-cases/summary.json",
+    "network-cases/timeout-reassessment.json",
+    "storage-cases/first-run-summary.json",
+    "storage-cases/range-416-reassessment.json"
+  ],
+  "final_expected_version": "6.0.4",
+  "final_version_code": 7,
+  "source_commit": "f2c72dd570b0306b87539e64b35700ecfc4b104e",
+  "app_sha256": "bb106acb5477e5206537fccc0ed671531721d5149c1a1109f9a4e6738676c659",
+  "scope_exclusions": [
+    "esp_https_ota one-call route not executed; capstone uses low-level route",
+    "hardware Secure Boot/Flash Encryption/anti-rollback not enabled",
+    "no fleet-wide or exhaustive power-cut/write-error coverage",
+    "student independent knowledge assessment not claimed"
+  ]
+}

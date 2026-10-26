@@ -1,0 +1,270 @@
+{
+  "name": "N07-timeout",
+  "test_id": "N07",
+  "result": "PASS",
+  "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+  "checks": {
+    "new_session_started": true,
+    "FAILED_observed": true,
+    "writer_contract": true,
+    "no_boot_selection_or_reset": true,
+    "unchanged_healthy_idle_baseline": true,
+    "expected_phase": true,
+    "intended_image_fault_requested": true,
+    "injected_mode_observed": true,
+    "authenticated_metadata": true,
+    "bounded_retry_count": true,
+    "retry_budget_logged": true,
+    "bounded_backoff_logged": true,
+    "actual_backoff_observed": true,
+    "budget_exhaustion_logged": true,
+    "intended_failure_reason": true
+  },
+  "coverage_gap": null,
+  "observed_failure_phase": "DOWNLOAD",
+  "observed_failure_reason": "ESP_ERR_HTTP_FETCH_HEADER",
+  "phases": [
+    "WAIT_NETWORK_TIME",
+    "FETCH_MANIFEST",
+    "AUTH_MANIFEST",
+    "DOWNLOAD",
+    "WAIT_RETRY_NETWORK",
+    "DOWNLOAD",
+    "WAIT_RETRY_NETWORK",
+    "DOWNLOAD",
+    "FAILED"
+  ],
+  "forbidden_lines": [],
+  "writer_seen": false,
+  "writer_violation": false,
+  "baseline_before": {
+    "version": "5.0.2",
+    "selftest": "PASS",
+    "service_mode": 0,
+    "slot": "ota_1",
+    "address": 3276800,
+    "boot": "ota_1",
+    "state": "VALID",
+    "ready": 1,
+    "busy": 0,
+    "controller_phase": "FAILED",
+    "wifi": "up"
+  },
+  "baseline_after": {
+    "version": "5.0.2",
+    "selftest": "PASS",
+    "service_mode": 0,
+    "slot": "ota_1",
+    "address": 3276800,
+    "boot": "ota_1",
+    "state": "VALID",
+    "ready": 1,
+    "busy": 0,
+    "controller_phase": "FAILED",
+    "wifi": "up"
+  },
+  "details": {
+    "server_asset_requests": 5,
+    "image_requests": 3,
+    "retry_logs": [
+      {
+        "attempt": 1,
+        "budget": 3,
+        "status": -1,
+        "reason": "ESP_ERR_HTTP_FETCH_HEADER",
+        "retryable": 1
+      },
+      {
+        "attempt": 2,
+        "budget": 3,
+        "status": -1,
+        "reason": "ESP_ERR_HTTP_FETCH_HEADER",
+        "retryable": 1
+      },
+      {
+        "attempt": 3,
+        "budget": 3,
+        "status": -1,
+        "reason": "ESP_ERR_HTTP_FETCH_HEADER",
+        "retryable": 1
+      }
+    ],
+    "backoff_ms": [
+      1640,
+      2810
+    ],
+    "backoff_rules": [
+      {
+        "failed_attempt": 1,
+        "next_attempt": 2,
+        "delay_ms": 1621,
+        "status": -1,
+        "retry_after_ms": 0
+      },
+      {
+        "failed_attempt": 2,
+        "next_attempt": 3,
+        "delay_ms": 2789,
+        "status": -1,
+        "retry_after_ms": 0
+      }
+    ],
+    "completed_wait_ms": [
+      1622,
+      2793
+    ],
+    "server_request_intervals_ms": [
+      14328.0,
+      15469.0
+    ],
+    "writer_abort_and_HTTP_cleanup_observed": false
+  },
+  "server_events": [
+    {
+      "monotonic": 90844.0,
+      "control": {
+        "image_mode": "timeout",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      }
+    },
+    {
+      "monotonic": 90844.0,
+      "response_status": 200,
+      "response_bytes": 15203,
+      "path": "/control",
+      "handler": "Controller"
+    },
+    {
+      "monotonic": 90844.937,
+      "request_id": 25,
+      "port": 8443,
+      "path": "/releases/download/lab-fault-v6/manifest.json",
+      "method": "GET",
+      "range": "",
+      "image_mode": "timeout",
+      "range_mode": "correct"
+    },
+    {
+      "monotonic": 90844.937,
+      "request_id": 25,
+      "status": 200,
+      "content_length": 439,
+      "content_range": null,
+      "range_start": 0,
+      "file_total": 439
+    },
+    {
+      "monotonic": 90844.937,
+      "request_id": 25,
+      "sent_bytes": 439,
+      "complete": true,
+      "mode": "good"
+    },
+    {
+      "monotonic": 90845.64,
+      "request_id": 26,
+      "port": 8443,
+      "path": "/releases/download/lab-fault-v6/manifest.sig",
+      "method": "GET",
+      "range": "",
+      "image_mode": "timeout",
+      "range_mode": "correct"
+    },
+    {
+      "monotonic": 90845.64,
+      "request_id": 26,
+      "status": 200,
+      "content_length": 384,
+      "content_range": null,
+      "range_start": 0,
+      "file_total": 384
+    },
+    {
+      "monotonic": 90845.64,
+      "request_id": 26,
+      "sent_bytes": 384,
+      "complete": true,
+      "mode": "good"
+    },
+    {
+      "monotonic": 90846.359,
+      "request_id": 27,
+      "port": 8443,
+      "path": "/releases/download/lab-fault-v6/app.bin",
+      "method": "GET",
+      "range": "",
+      "image_mode": "timeout",
+      "range_mode": "correct"
+    },
+    {
+      "monotonic": 90860.687,
+      "request_id": 28,
+      "port": 8443,
+      "path": "/releases/download/lab-fault-v6/app.bin",
+      "method": "GET",
+      "range": "",
+      "image_mode": "timeout",
+      "range_mode": "correct"
+    },
+    {
+      "monotonic": 90864.359,
+      "request_id": 27,
+      "status": 200,
+      "content_length": 1118208,
+      "content_range": null,
+      "range_start": 0,
+      "file_total": 1118208
+    },
+    {
+      "monotonic": 90864.578,
+      "request_id": 27,
+      "peer_closed": "SSLEOFError"
+    },
+    {
+      "monotonic": 90864.578,
+      "request_id": 27,
+      "sent_bytes": 65536,
+      "complete": false,
+      "mode": "timeout"
+    },
+    {
+      "monotonic": 90876.156,
+      "request_id": 29,
+      "port": 8443,
+      "path": "/releases/download/lab-fault-v6/app.bin",
+      "method": "GET",
+      "range": "",
+      "image_mode": "timeout",
+      "range_mode": "correct"
+    },
+    {
+      "monotonic": 90878.687,
+      "request_id": 28,
+      "status": 200,
+      "content_length": 1118208,
+      "content_range": null,
+      "range_start": 0,
+      "file_total": 1118208
+    },
+    {
+      "monotonic": 90879.015,
+      "request_id": 28,
+      "peer_closed": "SSLEOFError"
+    },
+    {
+      "monotonic": 90879.015,
+      "request_id": 28,
+      "sent_bytes": 65536,
+      "complete": false,
+      "mode": "timeout"
+    }
+  ],
+  "log": "run-20261026T113621.083366Z/N07-timeout.log",
+  "assessment_method": "Same immutable device/server evidence; parser now accepts HTTP status -1 before headers. Original FAIL retained in original run summary.",
+  "original_result": "FAIL"
+}

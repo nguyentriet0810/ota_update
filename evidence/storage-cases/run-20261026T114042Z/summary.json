@@ -1,0 +1,289 @@
+{
+  "results": [
+    {
+      "name": "N08-range-wrong_start",
+      "test_id": "N08",
+      "result": "PASS",
+      "checks": {
+        "actual_range_request": true,
+        "bad_header_rejected": true,
+        "rejected_before_writer": true,
+        "contract_failure": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T114042Z\\N08-range-wrong_start.log"
+    },
+    {
+      "name": "N08-range-wrong_total",
+      "test_id": "N08",
+      "result": "PASS",
+      "checks": {
+        "actual_range_request": true,
+        "bad_header_rejected": true,
+        "rejected_before_writer": true,
+        "contract_failure": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T114042Z\\N08-range-wrong_total.log"
+    },
+    {
+      "name": "N08-range-wrong_end",
+      "test_id": "N08",
+      "result": "PASS",
+      "checks": {
+        "actual_range_request": true,
+        "bad_header_rejected": true,
+        "rejected_before_writer": true,
+        "contract_failure": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T114042Z\\N08-range-wrong_end.log"
+    },
+    {
+      "name": "N08-range-ignore",
+      "test_id": "N08",
+      "result": "PASS",
+      "checks": {
+        "actual_range_request": true,
+        "discard_200_body": true,
+        "fresh_restart": true,
+        "never_append_200_to_prefix": true,
+        "dummy_descriptor_rejected": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T114042Z\\N08-range-ignore.log"
+    },
+    {
+      "name": "R06-same-url-changed-tail",
+      "test_id": "R06",
+      "result": "PASS",
+      "checks": {
+        "resume_same_identity": true,
+        "native_validation_passed": true,
+        "full_signed_file_digest_rejected": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T114042Z\\R06-same-url-changed-tail.log"
+    },
+    {
+      "name": "R05-stale-running-target",
+      "test_id": "R05",
+      "result": "PASS",
+      "checks": {
+        "stale_rejected_before_erase": true,
+        "fresh_inactive_writer": true,
+        "cancelled_cleanly": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "CANCELLED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T114042Z\\R05-stale-running-target.log"
+    },
+    {
+      "name": "R07-two-corrupt-snapshots",
+      "test_id": "R07",
+      "result": "PASS",
+      "checks": {
+        "both_snapshots_invalid": true,
+        "no_guessed_resume_offset": true,
+        "clean_cancel": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "CANCELLED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "CANCELLED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T114042Z\\R07-two-corrupt-snapshots.log"
+    }
+  ]
+}

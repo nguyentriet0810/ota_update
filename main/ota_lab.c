@@ -25,9 +25,11 @@
 #include "esp_netif.h"
 #include "esp_ota_ops.h"
 #include "esp_partition.h"
+#include "esp_random.h"
 #include "esp_rom_crc.h"
 #include "esp_sntp.h"
 #include "esp_system.h"
+#include "esp_tls_errors.h"
 #include "esp_timer.h"
 #include "esp_wifi.h"
 #include "freertos/FreeRTOS.h"
@@ -41,6 +43,9 @@
 #endif
 #ifndef LAB_CFG_SCHEMA
 #define LAB_CFG_SCHEMA 1
+#endif
+#ifndef LAB_FAULT_PROFILE
+#define LAB_FAULT_PROFILE 0
 #endif
 
 #define URL_CAP 513U
@@ -58,6 +63,8 @@
 #define RECORD_POLICY 2U
 #define NET_UP BIT0
 #define HTTP_TIMEOUT_MS 12000
+#define HTTP_ATTEMPTS 3U
+#define MAX_RETRY_DELAY_MS 60000U
 #define SESSION_DEADLINE_US (INT64_C(600) * 1000000)
 #define PRODUCT "esp32s3-ota-lab"
 #define BOARD "esp32s3-n16r8-lab"
@@ -66,6 +73,11 @@
 static const char *TAG = "OTA";
 extern const uint8_t manifest_key_start[] asm("_binary_manifest_public_der_start");
 extern const uint8_t manifest_key_end[] asm("_binary_manifest_public_der_end");
+#if LAB_FAULT_PROFILE
+/* Optional public test CA. It is not embedded or trusted in production builds. */
+extern const uint8_t lab_ca_start[] asm("_binary_lab_test_ca_pem_start");
+extern const uint8_t lab_ca_end[] asm("_binary_lab_test_ca_pem_end");
+#endif
 
 typedef struct {
     uint32_t schema_version, version_code, secure_version, config_schema;
@@ -94,9 +106,15 @@ typedef struct {
 } identity_t;
 
 typedef struct {
+    int http_status;
+    uint32_t retry_after_ms;
+    bool retryable, server_delay_blocked;
+} retry_hint_t;
+
+typedef struct {
     esp_http_client_handle_t client;
-    char location[REDIRECT_CAP], content_range[96], encoding[32], content_type[80];
-    unsigned location_count, range_count, encoding_count, length_count, type_count;
+    char location[REDIRECT_CAP], content_range[96], encoding[32], content_type[80], retry_after[80];
+    unsigned location_count, range_count, encoding_count, length_count, type_count, retry_after_count;
     bool invalid_headers;
     int status;
     int64_t content_length;
@@ -114,11 +132,17 @@ static atomic_bool s_busy, s_cancel;
 /* 0 accepts cancellation, -1 cancelled, 1 activation commit has started. */
 static atomic_int s_activation_gate;
 static atomic_uint s_written, s_total, s_durable_q, s_reset_at, s_wifi_drop_at;
+#if LAB_FAULT_PROFILE
+static atomic_bool s_lab_clock_not_ready;
+static atomic_bool s_lab_radio_off;
+static atomic_uint s_lab_reset_before_checkpoint;
+#endif
 static portMUX_TYPE s_status_lock = portMUX_INITIALIZER_UNLOCKED;
 static char s_phase[32] = "NOT_INITIALIZED";
 static char s_reason[64] = "";
 static uint32_t s_generation;
 static esp_err_t partition_hash(const esp_partition_t *part, uint32_t length, uint8_t out[32]);
+static esp_err_t network_ready(int64_t started);
 
 static void status_set(const char *phase, const char *reason)
 {
@@ -133,6 +157,76 @@ static bool cancelled_or_expired(int64_t started)
 {
     return atomic_load(&s_cancel) || atomic_load(&s_activation_gate) < 0 ||
         esp_timer_get_time() - started > SESSION_DEADLINE_US;
+}
+
+static bool http_status_retryable(int status)
+{
+    return status == 429 || status == 500 || status == 502 || status == 503 || status == 504;
+}
+
+/* Only delta-seconds Retry-After is supported. Unsupported HTTP-date or a
+ * delay exceeding the local 60s wait budget defers this session; it must never
+ * be truncated and retried before the server's requested deadline.
+ */
+static bool parse_retry_after(const char *value, uint32_t *delay_ms)
+{
+    const unsigned char *p = (const unsigned char *)value;
+    while (*p == ' ' || *p == '\t') { ++p; }
+    if (*p < '0' || *p > '9') { return false; }
+    uint32_t seconds = 0;
+    while (*p >= '0' && *p <= '9') {
+        if (seconds <= MAX_RETRY_DELAY_MS / 1000U) { seconds = seconds * 10U + (*p - '0'); }
+        ++p;
+    }
+    while (*p == ' ' || *p == '\t') { ++p; }
+    if (*p || seconds > MAX_RETRY_DELAY_MS / 1000U) { return false; }
+    *delay_ms = seconds * 1000U; return true;
+}
+
+static int request_timeout_ms(int64_t started)
+{
+    int64_t remaining = (SESSION_DEADLINE_US - (esp_timer_get_time() - started)) / 1000;
+    if (remaining <= 0 || cancelled_or_expired(started)) { return 0; }
+    return remaining < HTTP_TIMEOUT_MS ? (int)remaining : HTTP_TIMEOUT_MS;
+}
+
+static bool retry_wait(const char *phase, unsigned attempt, esp_err_t error,
+                       const retry_hint_t *hint, int64_t started)
+{
+    ESP_LOGW(TAG, "http_attempt phase=%s attempt=%u budget=%u status=%d error=%s retryable=%u",
+        phase, attempt, HTTP_ATTEMPTS, hint->http_status, esp_err_to_name(error), hint->retryable);
+    if (!hint->retryable || cancelled_or_expired(started)) { return false; }
+    if (hint->server_delay_blocked) {
+        ESP_LOGW(TAG, "retry_deferred phase=%s reason=Retry-After_unsupported_or_exceeds_local_budget", phase);
+        return false;
+    }
+    if (attempt >= HTTP_ATTEMPTS) {
+        ESP_LOGW(TAG, "retry_budget_exhausted phase=%s attempts=%u", phase, attempt); return false;
+    }
+    uint32_t delay = (1000U << (attempt - 1U)) + esp_random() % 1001U;
+    if (delay < hint->retry_after_ms) { delay = hint->retry_after_ms; }
+    if (delay > MAX_RETRY_DELAY_MS) { delay = MAX_RETRY_DELAY_MS; }
+    int64_t remaining_ms = (SESSION_DEADLINE_US - (esp_timer_get_time() - started)) / 1000;
+    if (remaining_ms < delay) {
+        ESP_LOGW(TAG, "retry_deferred phase=%s reason=session_deadline_before_server_or_local_delay", phase);
+        return false;
+    }
+    ESP_LOGW(TAG, "retry_backoff phase=%s failed_attempt=%u next_attempt=%u delay_ms=%" PRIu32
+        " status=%d retry_after_ms=%" PRIu32, phase, attempt, attempt + 1U, delay, hint->http_status, hint->retry_after_ms);
+    int64_t waited_from = esp_timer_get_time();
+    int64_t until = waited_from + (int64_t)delay * 1000;
+    while (esp_timer_get_time() < until) {
+        if (cancelled_or_expired(started)) {
+            ESP_LOGW(TAG, "retry_backoff_cancelled phase=%s waited_ms=%" PRId64,
+                phase, (esp_timer_get_time() - waited_from) / 1000); return false;
+        }
+        int64_t left_ms = (until - esp_timer_get_time() + 999) / 1000;
+        uint32_t slice = left_ms > 100 ? 100U : (uint32_t)left_ms;
+        if (slice) { vTaskDelay(pdMS_TO_TICKS(slice) ? pdMS_TO_TICKS(slice) : 1); }
+    }
+    ESP_LOGI(TAG, "retry_backoff_complete phase=%s waited_ms=%" PRId64 " requested_ms=%" PRIu32,
+        phase, (esp_timer_get_time() - waited_from) / 1000, delay);
+    return !cancelled_or_expired(started);
 }
 
 static esp_err_t hash_bytes(const void *data, size_t length, uint8_t out[32])
@@ -153,6 +247,24 @@ static bool same_bytes(const uint8_t *a, const uint8_t *b, size_t length)
     for (size_t i = 0; i < length; ++i) { diff |= a[i] ^ b[i]; }
     return diff == 0;
 }
+
+#if LAB_FAULT_PROFILE
+static bool is_lab_url(const char *url)
+{
+    if (strncmp(url, "https://", 8)) { return false; }
+    const char *authority = url + 8, *slash = strchr(authority, '/');
+    if (!slash) { return false; }
+    static const char *const authorities[] = {
+        "192.168.137.1:8443", "192.168.137.1:8444", "192.168.137.1:8445",
+        "unresolvable.invalid", "unresolvable.invalid:8443"
+    };
+    size_t length = (size_t)(slash - authority);
+    for (unsigned i = 0; i < sizeof(authorities)/sizeof(authorities[0]); ++i) {
+        if (strlen(authorities[i]) == length && !memcmp(authority, authorities[i], length)) { return true; }
+    }
+    return false;
+}
+#endif
 
 static void hex_digest(const uint8_t digest[32], char text[65])
 {
@@ -177,6 +289,9 @@ static bool valid_url(const char *url, bool origin)
             break;
         }
     }
+#if LAB_FAULT_PROFILE
+    if (!match && is_lab_url(url)) { match = true; }
+#endif
     if (!match || strchr(url, '#') || (origin && (strchr(url, '?') || !strstr(slash, "/releases/download/")))) {
         return false;
     }
@@ -198,6 +313,7 @@ static esp_err_t http_event(esp_http_client_event_t *event)
     else if (!strcasecmp(k, "Content-Range")) { dest = h->content_range; cap = sizeof(h->content_range); count = &h->range_count; }
     else if (!strcasecmp(k, "Content-Encoding")) { dest = h->encoding; cap = sizeof(h->encoding); count = &h->encoding_count; }
     else if (!strcasecmp(k, "Content-Type")) { dest = h->content_type; cap = sizeof(h->content_type); count = &h->type_count; }
+    else if (!strcasecmp(k, "Retry-After")) { dest = h->retry_after; cap = sizeof(h->retry_after); count = &h->retry_after_count; }
     else if (!strcasecmp(k, "Content-Length")) { if (++h->length_count > 1) { h->invalid_headers = true; } }
     if (dest) {
         if (++*count > 1 || strlen(v) >= cap) { h->invalid_headers = true; }
@@ -218,20 +334,35 @@ static void http_close(http_t *h)
 /* Redirects are opened individually: HTTPS, certificate chain and hostname are
  * checked afresh at every hop. Expiring CDN URL strings are never persisted.
  */
-static esp_err_t http_open(http_t *h, const char *origin, uint32_t offset)
+static esp_err_t http_open(http_t *h, const char *origin, uint32_t offset,
+                           int64_t started, retry_hint_t *hint)
 {
+    memset(hint, 0, sizeof(*hint));
     if (!valid_url(origin, true)) { return ESP_ERR_INVALID_ARG; }
     char current[REDIRECT_CAP];
     snprintf(current, sizeof(current), "%s", origin);
     for (unsigned hop = 0; hop <= 5; ++hop) {
+        int timeout_ms = request_timeout_ms(started);
+        if (!timeout_ms) { return ESP_ERR_TIMEOUT; }
+        hint->http_status = 0;
         memset(h, 0, sizeof(*h));
         esp_http_client_config_t config = {
             .url = current, .crt_bundle_attach = esp_crt_bundle_attach,
-            .timeout_ms = HTTP_TIMEOUT_MS, .disable_auto_redirect = true,
+            .timeout_ms = timeout_ms, .disable_auto_redirect = true,
             .max_authorization_retries = -1, .event_handler = http_event,
             .user_data = h, .buffer_size = 4096, .buffer_size_tx = 2048,
             .keep_alive_enable = false,
         };
+#if LAB_FAULT_PROFILE
+        if (is_lab_url(current)) {
+            config.crt_bundle_attach = NULL;
+            config.cert_pem = (const char *)lab_ca_start;
+            config.cert_len = (size_t)(lab_ca_end - lab_ca_start);
+            /* Do not set skip_cert_common_name_check or override common_name.
+             * CA, SAN hostname/IP and certificate time checks remain enabled.
+             */
+        }
+#endif
         h->client = esp_http_client_init(&config);
         if (!h->client) { return ESP_ERR_NO_MEM; }
         esp_http_client_set_header(h->client, "Accept-Encoding", "identity");
@@ -241,10 +372,36 @@ static esp_err_t http_open(http_t *h, const char *origin, uint32_t offset)
             esp_http_client_set_header(h->client, "Range", range);
         }
         esp_err_t err = esp_http_client_open(h->client, 0);
-        if (err != ESP_OK) { http_close(h); return err; }
+        if (err != ESP_OK) {
+            int tls_error = 0, verify_flags = 0;
+            esp_err_t tls = esp_http_client_get_and_clear_last_tls_error(h->client, &tls_error, &verify_flags);
+            bool tls_permanent = verify_flags != 0 || tls == ESP_ERR_MBEDTLS_X509_CRT_PARSE_FAILED ||
+                tls == ESP_ERR_MBEDTLS_SSL_SET_HOSTNAME_FAILED || tls == ESP_ERR_MBEDTLS_SSL_HANDSHAKE_FAILED;
+            hint->retryable = !tls_permanent && (err == ESP_ERR_HTTP_CONNECT || err == ESP_ERR_TIMEOUT ||
+                err == ESP_FAIL || tls == ESP_ERR_ESP_TLS_CANNOT_RESOLVE_HOSTNAME ||
+                tls == ESP_ERR_ESP_TLS_FAILED_CONNECT_TO_HOST || tls == ESP_ERR_ESP_TLS_CONNECTION_TIMEOUT ||
+                tls == ESP_ERR_ESP_TLS_SERVER_HANDSHAKE_TIMEOUT);
+            ESP_LOGW(TAG, "https_open_failed error=%s tls=0x%x tls_error=%d verify_flags=0x%x retryable=%u",
+                esp_err_to_name(err), (unsigned)tls, tls_error, verify_flags, hint->retryable);
+            http_close(h); return err;
+        }
+        timeout_ms = request_timeout_ms(started);
+        if (!timeout_ms) { http_close(h); return ESP_ERR_TIMEOUT; }
+        (void)esp_http_client_set_timeout_ms(h->client, timeout_ms);
         h->content_length = esp_http_client_fetch_headers(h->client);
         h->status = esp_http_client_get_status_code(h->client);
-        if (h->content_length < 0 || h->invalid_headers) { http_close(h); return ESP_FAIL; }
+        hint->http_status = h->status;
+        if (h->invalid_headers) { http_close(h); return ESP_ERR_INVALID_RESPONSE; }
+        if (h->content_length < 0) { hint->retryable = true; http_close(h); return ESP_ERR_HTTP_FETCH_HEADER; }
+        if (http_status_retryable(h->status)) {
+            hint->retryable = true;
+            if (h->retry_after_count && !parse_retry_after(h->retry_after, &hint->retry_after_ms)) {
+                hint->server_delay_blocked = true;
+            }
+            ESP_LOGW(TAG, "http_response_transient status=%d retry_after_ms=%" PRIu32 " blocked=%u",
+                h->status, hint->retry_after_ms, hint->server_delay_blocked);
+            http_close(h); return ESP_ERR_HTTP_EAGAIN;
+        }
         if (h->status == 301 || h->status == 302 || h->status == 303 || h->status == 307 || h->status == 308) {
             if (hop == 5 || h->location_count != 1 || !valid_url(h->location, false)) {
                 http_close(h); return ESP_ERR_INVALID_RESPONSE;
@@ -262,24 +419,28 @@ static esp_err_t http_open(http_t *h, const char *origin, uint32_t offset)
     return ESP_FAIL;
 }
 
-static esp_err_t fetch_small(const char *url, uint8_t *out, size_t cap, size_t *length)
+static esp_err_t fetch_small(const char *url, uint8_t *out, size_t cap, size_t *length,
+                             int64_t started, retry_hint_t *hint)
 {
     http_t h;
-    esp_err_t err = http_open(&h, url, 0);
+    esp_err_t err = http_open(&h, url, 0, started, hint);
     if (err != ESP_OK) { return err; }
     if (h.status != 200 || h.content_length <= 0 || h.content_length > (int64_t)cap ||
         (h.type_count && !strncasecmp(h.content_type, "text/html", 9))) {
         http_close(&h); return ESP_ERR_INVALID_RESPONSE;
     }
     size_t used = 0, expected = (size_t)h.content_length;
-    while (used < expected && !atomic_load(&s_cancel)) {
+    while (used < expected) {
+        int timeout_ms = request_timeout_ms(started);
+        if (!timeout_ms) { http_close(&h); return ESP_ERR_TIMEOUT; }
+        (void)esp_http_client_set_timeout_ms(h.client, timeout_ms);
         int n = esp_http_client_read(h.client, (char *)out + used, (int)(expected - used));
-        if (n <= 0) { http_close(&h); return ESP_FAIL; }
+        if (n <= 0) { hint->retryable = true; http_close(&h); return ESP_ERR_HTTP_CONNECTION_CLOSED; }
         used += (size_t)n;
     }
     bool complete = used == expected && esp_http_client_is_complete_data_received(h.client);
     http_close(&h);
-    if (!complete) { return ESP_FAIL; }
+    if (!complete) { hint->retryable = true; return ESP_ERR_HTTP_CONNECTION_CLOSED; }
     *length = used;
     return ESP_OK;
 }
@@ -574,28 +735,34 @@ static bool range_matches(const http_t *h, uint32_t q, uint32_t total)
     return !strcmp(h->content_range, expected);
 }
 
-static esp_err_t download(const manifest_t *m, const esp_partition_t *target, int64_t started)
+static esp_err_t download(const manifest_t *m, const esp_partition_t *target, int64_t started, retry_hint_t *hint)
 {
+    memset(hint, 0, sizeof(*hint));
     const esp_partition_t *running = esp_ota_get_running_partition();
     if (!running || running->address == target->address) { return ESP_ERR_INVALID_STATE; }
     checkpoint_t cp; uint32_t q = 0;
     if (cp_load(&cp)) {
-        bool match = cp.target_addr == target->address && cp.target_size == target->size &&
-            cp.running_addr == running->address && cp.image_size == m->size && !strcmp(cp.target_label, target->label) &&
-            same_bytes(cp.release_id, m->release_id, 32) && same_bytes(cp.file_digest, m->digest, 32) &&
-            same_bytes(cp.origin_digest, m->origin_digest, 32);
-        if (match) { q = cp.q; }
-        else { ESP_LOGW(TAG, "checkpoint_identity_mismatch; fresh candidate only"); if (cp_clear() != ESP_OK) { return ESP_FAIL; } }
+        if (cp.target_addr == running->address) {
+            ESP_LOGW(TAG, "checkpoint_rejected target_is_running=true before_erase=true");
+            if (cp_clear() != ESP_OK) { return ESP_FAIL; }
+        } else {
+            bool match = cp.target_addr == target->address && cp.target_size == target->size &&
+                cp.running_addr == running->address && cp.image_size == m->size && !strcmp(cp.target_label, target->label) &&
+                same_bytes(cp.release_id, m->release_id, 32) && same_bytes(cp.file_digest, m->digest, 32) &&
+                same_bytes(cp.origin_digest, m->origin_digest, 32);
+            if (match) { q = cp.q; }
+            else { ESP_LOGW(TAG, "checkpoint_identity_mismatch; fresh candidate only"); if (cp_clear() != ESP_OK) { return ESP_FAIL; } }
+        }
     }
     atomic_store(&s_written, q); atomic_store(&s_durable_q, q); atomic_store(&s_total, m->size);
     http_t h;
-    esp_err_t err = http_open(&h, m->url, q);
+    esp_err_t err = http_open(&h, m->url, q, started, hint);
     if (err != ESP_OK) { return err; }
     if (q && h.status == 200) {
         ESP_LOGW(TAG, "range_ignored; discard body and restart from zero");
         http_close(&h); if (cp_clear() != ESP_OK) { return ESP_FAIL; }
         q = 0; atomic_store(&s_written, 0);
-        err = http_open(&h, m->url, 0); if (err != ESP_OK) { return err; }
+        err = http_open(&h, m->url, 0, started, hint); if (err != ESP_OK) { return err; }
     }
     if (!range_matches(&h, q, m->size) ||
         (h.type_count && !strncasecmp(h.content_type, "text/html", 9))) {
@@ -626,12 +793,24 @@ static esp_err_t download(const manifest_t *m, const esp_partition_t *target, in
         uint32_t boundary = CHECKPOINT_STEP - (written % CHECKPOINT_STEP);
         if (need > sizeof(buffer)) { need = sizeof(buffer); }
         if (need > boundary) { need = boundary; }
+        int timeout_ms = request_timeout_ms(started);
+        if (!timeout_ms) { err = ESP_ERR_TIMEOUT; goto cleanup; }
+        (void)esp_http_client_set_timeout_ms(h.client, timeout_ms);
         int n = esp_http_client_read(h.client, (char *)buffer, need);
-        if (n <= 0) { err = ESP_FAIL; goto cleanup; }
+        if (n <= 0) { hint->retryable = true; err = ESP_ERR_HTTP_CONNECTION_CLOSED; goto cleanup; }
         err = esp_ota_write(handle, buffer, n);
         if (err != ESP_OK) { goto cleanup; }
         written += n; atomic_store(&s_written, written);
         if (!(written % CHECKPOINT_STEP) && written < m->size) {
+#if LAB_FAULT_PROFILE
+            uint32_t reset_before = atomic_load(&s_lab_reset_before_checkpoint);
+            if (reset_before && written >= reset_before) {
+                atomic_store(&s_lab_reset_before_checkpoint, 0);
+                ESP_LOGW(TAG, "fault_method=software_reset_before_checkpoint written=%" PRIu32
+                    " old_durable_q=%u nvs_commit_for_new_q=false", written, atomic_load(&s_durable_q));
+                vTaskDelay(pdMS_TO_TICKS(50)); esp_restart();
+            }
+#endif
             err = cp_save(m, target, running->address, written);
             if (err != ESP_OK) { goto cleanup; }
         }
@@ -663,18 +842,28 @@ static esp_err_t download(const manifest_t *m, const esp_partition_t *target, in
             for (unsigned tick = 0; tick < 20 && !cancelled_or_expired(started); ++tick) {
                 vTaskDelay(pdMS_TO_TICKS(100));
             }
+            hint->retryable = true;
             err = ESP_ERR_HTTP_CONNECTION_CLOSED;
             goto cleanup;
         }
         taskYIELD();
     }
-    if (!esp_http_client_is_complete_data_received(h.client)) { err = ESP_FAIL; goto cleanup; }
+    if (!esp_http_client_is_complete_data_received(h.client)) { hint->retryable = true; err = ESP_ERR_HTTP_CONNECTION_CLOSED; goto cleanup; }
     status_set("VERIFY_IMAGE", "SDK native signature validation");
     err = esp_ota_end(handle); live = false;
-cleanup:
-    if (live) { (void)esp_ota_abort(handle); }
+cleanup: ;
+    bool aborted = live;
+    esp_err_t abort_result = live ? esp_ota_abort(handle) : ESP_OK;
     http_close(&h);
+    ESP_LOGI(TAG, "payload_cleanup target=%s writer_abort=%u http_closed=true result=%s transfer_error=%s",
+        target->label, aborted, esp_err_to_name(abort_result), esp_err_to_name(err));
     if (reconnect_after_cleanup) {
+#if LAB_FAULT_PROFILE
+        if (atomic_load(&s_lab_radio_off)) {
+            ESP_LOGI(TAG, "fault_wifi_restore deferred_by_lab_radio_off=true durable_q=%u", atomic_load(&s_durable_q));
+            return err;
+        }
+#endif
         atomic_store(&s_wifi_retries, 0);
         atomic_store(&s_wifi_reconnect_suppressed, false);
         esp_err_t reconnected = esp_wifi_connect();
@@ -703,12 +892,22 @@ static void wifi_event(void *arg, esp_event_base_t base, int32_t id, void *data)
 {
     (void)arg;
     if (base == IP_EVENT && id == IP_EVENT_STA_GOT_IP) {
+#if LAB_FAULT_PROFILE
+        if (atomic_load(&s_lab_radio_off)) {
+            xEventGroupClearBits(s_network, NET_UP);
+            ESP_LOGW(TAG, "lab_radio_off ignoring_late_IP_event=true"); return;
+        }
+#endif
         atomic_store(&s_wifi_retries, 0); xEventGroupSetBits(s_network, NET_UP); ESP_LOGI(TAG, "wifi=connected");
     } else if (base == WIFI_EVENT && id == WIFI_EVENT_STA_DISCONNECTED) {
         xEventGroupClearBits(s_network, NET_UP);
         const wifi_event_sta_disconnected_t *event = data;
         ESP_LOGW(TAG, "wifi=disconnected reason=%u", event ? event->reason : 0U);
-        if (atomic_load(&s_wifi_reconnect_suppressed)) {
+        bool suppress = atomic_load(&s_wifi_reconnect_suppressed);
+#if LAB_FAULT_PROFILE
+        suppress = suppress || atomic_load(&s_lab_radio_off);
+#endif
+        if (suppress) {
             ESP_LOGI(TAG, "wifi_auto_reconnect=suppressed_by_lab_fault");
         } else if (atomic_fetch_add(&s_wifi_retries, 1) < 5) { (void)esp_wifi_connect(); }
         else { ESP_LOGW(TAG, "wifi_retry_budget_exhausted; provision/reconnect explicitly"); }
@@ -717,6 +916,9 @@ static void wifi_event(void *arg, esp_event_base_t base, int32_t id, void *data)
 
 static esp_err_t set_wifi(const char *ssid, const char *password, bool persist)
 {
+#if LAB_FAULT_PROFILE
+    if (atomic_load(&s_lab_radio_off)) { return ESP_ERR_INVALID_STATE; }
+#endif
     size_t sl = strlen(ssid), pl = strlen(password);
     if (sl == 0 || sl > 32 || pl > 64 || (pl > 0 && pl < 8)) { return ESP_ERR_INVALID_ARG; }
     wifi_config_t config = {0};
@@ -745,11 +947,33 @@ static esp_err_t set_wifi(const char *ssid, const char *password, bool persist)
     return esp_wifi_connect();
 }
 
-static esp_err_t network_ready(void)
+static esp_err_t connect_saved_wifi(void)
 {
+    nvs_handle_t net;
+    esp_err_t err = nvs_open_from_partition("nvs_cfg", "net", NVS_READONLY, &net);
+    if (err != ESP_OK) { return err; }
+    struct { char ssid[33]; char password[65]; } credentials = {0};
+    size_t length = sizeof(credentials);
+    err = nvs_get_blob(net, "credentials", &credentials, &length);
+    nvs_close(net);
+    if (err == ESP_OK && (length != sizeof(credentials) || credentials.ssid[32] || credentials.password[64])) {
+        err = ESP_ERR_INVALID_SIZE;
+    }
+    if (err == ESP_OK) { err = set_wifi(credentials.ssid, credentials.password, false); }
+    memset(&credentials, 0, sizeof(credentials)); return err;
+}
+
+static esp_err_t network_ready(int64_t started)
+{
+#if LAB_FAULT_PROFILE
+    if (atomic_load(&s_lab_clock_not_ready)) {
+        ESP_LOGW(TAG, "fault_profile_clock_policy=NOT_READY before_TLS=true skip_time_verification=false");
+        return ESP_ERR_INVALID_STATE;
+    }
+#endif
     EventBits_t bits = 0;
     for (unsigned i = 0; i < 30; ++i) {
-        if (atomic_load(&s_cancel) || atomic_load(&s_activation_gate) < 0) { return ESP_ERR_TIMEOUT; }
+        if (cancelled_or_expired(started)) { return ESP_ERR_TIMEOUT; }
         bits = xEventGroupWaitBits(s_network, NET_UP, pdFALSE, pdTRUE, pdMS_TO_TICKS(1000));
         if (bits & NET_UP) { break; }
     }
@@ -764,10 +988,38 @@ static esp_err_t network_ready(void)
     for (unsigned i = 0; i < 30; ++i) {
         time_t now = time(NULL);
         if (now >= 1704067200) { return ESP_OK; }
-        if (atomic_load(&s_cancel)) { return ESP_FAIL; }
+        if (cancelled_or_expired(started)) { return ESP_ERR_TIMEOUT; }
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
     return ESP_ERR_TIMEOUT;
+}
+
+/* One retry budget for the metadata PAIR. A failed signature fetch refetches
+ * the manifest as well, so a publisher rotation never mixes attempts. Neither
+ * fetch_small nor http_open has an internal retry loop.
+ */
+static esp_err_t fetch_metadata(const request_t *request, uint8_t *raw, size_t *raw_len,
+                                uint8_t *signature, size_t *signature_len, int64_t started)
+{
+    esp_err_t err = ESP_FAIL;
+    for (unsigned attempt = 1; attempt <= HTTP_ATTEMPTS; ++attempt) {
+        if (cancelled_or_expired(started)) { return ESP_ERR_TIMEOUT; }
+        if (attempt > 1) {
+            err = network_ready(started); if (err != ESP_OK) { return err; }
+        }
+        *raw_len = 0; *signature_len = 0;
+        retry_hint_t hint = {0};
+        const char *phase = "metadata_manifest";
+        status_set("FETCH_MANIFEST", "exact bytes; bounded metadata pair budget");
+        err = fetch_small(request->manifest_url, raw, MANIFEST_CAP, raw_len, started, &hint);
+        if (err == ESP_OK) {
+            phase = "metadata_signature";
+            err = fetch_small(request->signature_url, signature, SIGNATURE_LEN, signature_len, started, &hint);
+        }
+        if (err == ESP_OK) { return ESP_OK; }
+        if (!retry_wait(phase, attempt, err, &hint, started)) { return err; }
+    }
+    return err;
 }
 
 static void ota_worker(void *argument)
@@ -785,12 +1037,9 @@ static void ota_worker(void *argument)
     err = ESP_ERR_NOT_SUPPORTED; goto finish;
 #endif
     status_set("WAIT_NETWORK_TIME", "bounded prerequisites");
-    err = network_ready(); if (err != ESP_OK) { goto finish; }
+    err = network_ready(started); if (err != ESP_OK) { goto finish; }
     size_t raw_len = 0, signature_len = 0;
-    status_set("FETCH_MANIFEST", "exact bytes");
-    err = fetch_small(request->manifest_url, raw, MANIFEST_CAP, &raw_len);
-    if (err != ESP_OK) { goto finish; }
-    err = fetch_small(request->signature_url, signature, SIGNATURE_LEN, &signature_len);
+    err = fetch_metadata(request, raw, &raw_len, signature, &signature_len, started);
     if (err != ESP_OK) { goto finish; }
     if (signature_len != SIGNATURE_LEN) { err = ESP_ERR_INVALID_SIZE; goto finish; }
     status_set("AUTH_MANIFEST", "RSA-PSS3072 SHA256 salt32");
@@ -805,22 +1054,21 @@ static void ota_worker(void *argument)
     hex_digest(manifest->release_id, release_id); hex_digest(manifest->digest, file_digest);
     ESP_LOGI(TAG, "accepted_release_id=%s file_sha256=%s", release_id, file_digest);
     status_set("DOWNLOAD", "inactive slot only");
-    for (unsigned attempt = 1; attempt <= 3; ++attempt) {
+    for (unsigned attempt = 1; attempt <= HTTP_ATTEMPTS; ++attempt) {
         if (attempt > 1) {
             status_set("WAIT_RETRY_NETWORK", "bounded reconnect before checkpoint resume");
-            err = network_ready();
+            err = network_ready(started);
             if (err != ESP_OK || cancelled_or_expired(started)) { break; }
             status_set("DOWNLOAD", "retry from durable checkpoint");
         }
-        err = download(manifest, target, started);
+        retry_hint_t hint = {0};
+        err = download(manifest, target, started, &hint);
         if (err == ESP_OK || cancelled_or_expired(started)) { break; }
-        /* Retry only transport/time failures. Permanent parser/auth/image,
-         * storage and HTTP contract errors fail without repetitive Flash wear.
+        /* Only explicitly classified network/HTTP transient failures retry.
+         * Storage, native image, parser/auth and contract failures never inherit
+         * a generic ESP_FAIL retry merely because they share an error number.
          */
-        if (err != ESP_FAIL && err != ESP_ERR_TIMEOUT && err != ESP_ERR_HTTP_CONNECT &&
-            err != ESP_ERR_HTTP_FETCH_HEADER && err != ESP_ERR_HTTP_CONNECTION_CLOSED) { break; }
-        ESP_LOGW(TAG, "download_attempt=%u failed=%s budget=3", attempt, esp_err_to_name(err));
-        if (attempt < 3) { vTaskDelay(pdMS_TO_TICKS(1000U << attempt)); }
+        if (!retry_wait("payload", attempt, err, &hint, started)) { break; }
     }
     if (err != ESP_OK) { goto finish; }
     status_set("VERIFY_FILE", "readback final signed bytes and descriptor");
@@ -839,10 +1087,16 @@ static void ota_worker(void *argument)
     if (err != ESP_OK) { goto finish; }
     status_set("BOOT_SELECTED", "NEW; success requires health and VALID after restart");
     atomic_store(&s_reset_at, 0); atomic_store(&s_wifi_drop_at, 0);
+#if LAB_FAULT_PROFILE
+    atomic_store(&s_lab_reset_before_checkpoint, 0);
+#endif
     free(request); free(raw); free(signature); free(manifest);
     vTaskDelay(pdMS_TO_TICKS(1000)); esp_restart();
 finish:
     atomic_store(&s_reset_at, 0); atomic_store(&s_wifi_drop_at, 0);
+#if LAB_FAULT_PROFILE
+    atomic_store(&s_lab_reset_before_checkpoint, 0);
+#endif
     if (boot_selected) {
         /* Boot selection and custom NVS cannot be one atomic transaction.
          * The pre-selection identity still reconciles a successful trial.
@@ -917,17 +1171,27 @@ void ota_lab_init(void)
     if (err == ESP_OK) { err = esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, wifi_event, NULL); }
     if (err != ESP_OK) { status_set("DISABLED", "Wi-Fi initialization failed"); return; }
     s_ready = true; status_set("IDLE", "local OTA controller ready");
-    nvs_handle_t net;
-    if (nvs_open_from_partition("nvs_cfg", "net", NVS_READONLY, &net) == ESP_OK) {
-        struct { char ssid[33]; char password[65]; } credentials = {0};
-        size_t n = sizeof(credentials);
-        if (nvs_get_blob(net, "credentials", &credentials, &n) == ESP_OK && n == sizeof(credentials) &&
-            !credentials.ssid[32] && !credentials.password[64]) {
-            err = set_wifi(credentials.ssid, credentials.password, false);
-            if (err != ESP_OK) { ESP_LOGW(TAG, "saved_wifi_connect_failed=%s", esp_err_to_name(err)); }
-        }
-        memset(&credentials, 0, sizeof(credentials)); nvs_close(net);
+#if LAB_FAULT_PROFILE
+    ESP_LOGW(TAG, "LAB_FAULT_PROFILE=ON test_CA_and_local_origins_enabled production=false TLS_checks=enabled");
+    uint8_t offline_once = 0;
+    if (nvs_get_u8(s_meta, "offline_once", &offline_once) == ESP_OK && offline_once == 1) {
+        atomic_store(&s_lab_radio_off, true);
+        atomic_store(&s_wifi_reconnect_suppressed, true);
+        xEventGroupClearBits(s_network, NET_UP);
+        esp_err_t cleared = nvs_erase_key(s_meta, "offline_once");
+        if (cleared == ESP_OK) { cleared = nvs_commit(s_meta); }
+        uint8_t readback = 0;
+        bool consumed = cleared == ESP_OK && nvs_get_u8(s_meta, "offline_once", &readback) == ESP_ERR_NVS_NOT_FOUND;
+        ESP_LOGW(TAG, "lab_offline_boot one_shot_consumed=%u wifi_autostart=false credentials_unchanged=true clear_result=%s",
+            consumed, esp_err_to_name(cleared));
+        /* Even if consuming the one-shot flag failed, keep this boot offline
+         * and report the error. Never erase the OTA/config partitions.
+         */
+        return;
     }
+#endif
+    err = connect_saved_wifi();
+    if (err != ESP_OK && err != ESP_ERR_NVS_NOT_FOUND) { ESP_LOGW(TAG, "saved_wifi_connect_failed=%s", esp_err_to_name(err)); }
 }
 
 static void print_status(void)
@@ -942,12 +1206,157 @@ static void print_status(void)
         atomic_load(&s_written), atomic_load(&s_total), atomic_load(&s_durable_q));
 }
 
+#if LAB_FAULT_PROFILE
+/* These commands exist only in the optional laboratory build. They mutate the
+ * checkpoint test records, never otadata, credentials, config or trust keys.
+ */
+static bool lab_fault_command(const char *line)
+{
+    if (strncmp(line, "lab-", 4)) { return false; }
+    if (!strcmp(line, "lab-radio-off") || !strcmp(line, "lab-radio-on")) {
+        if (!s_ready) { ESP_LOGW(TAG, "lab_radio_rejected controller_not_ready"); return true; }
+        if (!strcmp(line, "lab-radio-off")) {
+            atomic_store(&s_lab_radio_off, true);
+            atomic_store(&s_wifi_reconnect_suppressed, true);
+            xEventGroupClearBits(s_network, NET_UP);
+            esp_err_t disconnected = esp_wifi_disconnect();
+            esp_err_t stopped = esp_wifi_stop();
+            if (stopped == ESP_OK || stopped == ESP_ERR_WIFI_NOT_STARTED) { s_wifi_started = false; }
+            const esp_partition_t *running = esp_ota_get_running_partition();
+            esp_ota_img_states_t state = ESP_OTA_IMG_UNDEFINED;
+            bool valid = running && esp_ota_get_state_partition(running, &state) == ESP_OK && state == ESP_OTA_IMG_VALID;
+            ESP_LOGW(TAG, "lab_radio_off disconnect_result=%s stop_result=%s auto_reconnect_suppressed=true sdk_state=%s credentials_unchanged=true",
+                esp_err_to_name(disconnected), esp_err_to_name(stopped), valid ? "VALID" : "OTHER");
+        } else {
+            atomic_store(&s_lab_radio_off, false);
+            atomic_store(&s_wifi_reconnect_suppressed, false);
+            atomic_store(&s_wifi_retries, 0);
+            esp_err_t restored = connect_saved_wifi();
+            ESP_LOGI(TAG, "lab_radio_on stored_credentials_restore_result=%s credentials_unchanged=true",
+                esp_err_to_name(restored));
+        }
+        return true;
+    }
+    if (!strcmp(line, "lab-retry-policy-tests")) {
+        static const struct { int status; bool retry; } statuses[] = {
+            {429, true}, {500, true}, {502, true}, {503, true}, {504, true},
+            {200, false}, {206, false}, {301, false}, {401, false}, {403, false},
+            {404, false}, {416, false}, {501, false}
+        };
+        static const struct { const char *text; bool valid; uint32_t ms; } delays[] = {
+            {"0", true, 0}, {"1", true, 1000}, {"60", true, 60000}, {" 2\t", true, 2000},
+            {"61", false, 0}, {"42949672960", false, 0}, {"-1", false, 0}, {"+1", false, 0},
+            {"1.5", false, 0}, {"", false, 0}, {"1,2", false, 0},
+            {"Wed, 21 Oct 2026 07:28:00 GMT", false, 0}
+        };
+        unsigned passed = 0;
+        for (unsigned i = 0; i < sizeof(statuses)/sizeof(statuses[0]); ++i) {
+            passed += http_status_retryable(statuses[i].status) == statuses[i].retry;
+        }
+        for (unsigned i = 0; i < sizeof(delays)/sizeof(delays[0]); ++i) {
+            uint32_t ms = UINT32_MAX;
+            bool valid = parse_retry_after(delays[i].text, &ms);
+            passed += valid == delays[i].valid && (!valid || ms == delays[i].ms);
+        }
+        unsigned total = sizeof(statuses)/sizeof(statuses[0]) + sizeof(delays)/sizeof(delays[0]);
+        ESP_LOGI(TAG, "lab_retry_policy_tests passed=%u total=%u result=%s runtime_network_test=false",
+            passed, total, passed == total ? "PASS" : "FAIL");
+        return true;
+    }
+    if (!strcmp(line, "lab-checkpoint-status")) {
+        if (!s_ready) { ESP_LOGW(TAG, "lab_checkpoint_status controller_not_ready"); return true; }
+        const char *keys[] = { "cp0", "cp1" };
+        for (unsigned i = 0; i < 2; ++i) {
+            checkpoint_t cp = {0}; size_t size = sizeof(cp);
+            esp_err_t err = nvs_get_blob(s_meta, keys[i], &cp, &size);
+            bool found = err == ESP_OK && size == sizeof(cp);
+            ESP_LOGI(TAG, "lab_checkpoint key=%s found=%u valid_crc_format=%u q=%" PRIu32
+                " generation=%" PRIu32 " target=0x%" PRIx32 " read=%s",
+                keys[i], found, found && cp_valid(&cp), cp.q, cp.generation, cp.target_addr, esp_err_to_name(err));
+        }
+        return true;
+    }
+    if (!s_ready || atomic_load(&s_busy)) {
+        ESP_LOGW(TAG, "lab_fault_command_rejected controller_not_ready_or_busy"); return true;
+    }
+    if (!strcmp(line, "lab-offline-next-boot")) {
+        esp_err_t err = nvs_set_u8(s_meta, "offline_once", 1);
+        if (err == ESP_OK) { err = nvs_commit(s_meta); }
+        uint8_t readback = 0;
+        bool armed = err == ESP_OK && nvs_get_u8(s_meta, "offline_once", &readback) == ESP_OK && readback == 1;
+        ESP_LOGW(TAG, "lab_offline_next_boot armed=%u result=%s credentials_unchanged=true current_radio_unchanged=true",
+            armed, esp_err_to_name(err)); return true;
+    }
+    if (!strcmp(line, "lab-clock-not-ready on") || !strcmp(line, "lab-clock-not-ready off")) {
+        bool enabled = !strcmp(line, "lab-clock-not-ready on");
+        atomic_store(&s_lab_clock_not_ready, enabled);
+        ESP_LOGW(TAG, "lab_clock_not_ready=%u actual_clock_unchanged=true TLS_time_checks_enabled=true", enabled);
+        return true;
+    }
+    static const char reset_prefix[] = "lab-reset-before-checkpoint ";
+    if (!strncmp(line, reset_prefix, sizeof(reset_prefix)-1)) {
+        const char *value = line + sizeof(reset_prefix)-1;
+        char *end; unsigned long q = strtoul(value, &end, 10);
+        if (!*value || *end || q >= SLOT_CAP || q % CHECKPOINT_STEP) {
+            ESP_LOGW(TAG, "lab_reset_before_checkpoint_invalid use_64KiB_boundary_or_zero");
+        } else {
+            atomic_store(&s_lab_reset_before_checkpoint, q);
+            ESP_LOGW(TAG, "lab_reset_before_checkpoint_q=%lu next_session_only=true", q);
+        }
+        return true;
+    }
+    if (!strcmp(line, "lab-corrupt-checkpoints")) {
+        const char *keys[] = { "cp0", "cp1" };
+        unsigned changed = 0; esp_err_t result = ESP_OK;
+        for (unsigned i = 0; i < 2; ++i) {
+            checkpoint_t cp = {0}; size_t size = sizeof(cp);
+            esp_err_t err = nvs_get_blob(s_meta, keys[i], &cp, &size);
+            if (err == ESP_ERR_NVS_NOT_FOUND) { continue; }
+            if (err != ESP_OK || size != sizeof(cp)) { result = err == ESP_OK ? ESP_ERR_INVALID_SIZE : err; break; }
+            /* Derive a wrong CRC from the payload, rather than toggling the
+             * current value: repeated diagnostics must remain corrupt.
+             */
+            cp.crc = blob_crc(&cp, offsetof(checkpoint_t, crc)) ^ UINT32_C(0x01010101);
+            err = nvs_set_blob(s_meta, keys[i], &cp, sizeof(cp));
+            if (err != ESP_OK) { result = err; break; }
+            ++changed;
+        }
+        if (changed) {
+            esp_err_t committed = nvs_commit(s_meta);
+            if (committed != ESP_OK) { result = committed; }
+        }
+        atomic_store(&s_durable_q, 0);
+        ESP_LOGW(TAG, "fault_method=checkpoint_crc_xor records_changed=%u result=%s credentials_and_cfg_unchanged=true",
+            changed, esp_err_to_name(result));
+        return true;
+    }
+    if (!strcmp(line, "lab-seed-stale-running")) {
+        const esp_partition_t *running = esp_ota_get_running_partition();
+        esp_err_t err = running ? cp_clear() : ESP_ERR_INVALID_STATE;
+        manifest_t fixture = {0}; fixture.size = 2 * CHECKPOINT_STEP;
+        (void)hash_bytes("lab-stale-running", strlen("lab-stale-running"), fixture.release_id);
+        if (err == ESP_OK) { err = cp_save(&fixture, running, running->address, CHECKPOINT_STEP); }
+        ESP_LOGW(TAG, "fault_method=stale_checkpoint_target_running target=0x%" PRIx32 " q=%u result=%s flash_image_unchanged=true",
+            running ? running->address : 0U, CHECKPOINT_STEP, esp_err_to_name(err));
+        return true;
+    }
+    ESP_LOGW(TAG, "lab_fault_command_unknown"); return true;
+}
+#endif
+
 bool ota_lab_command(const char *line)
 {
+#if LAB_FAULT_PROFILE
+    if (lab_fault_command(line)) { return true; }
+#endif
     if (!strcmp(line, "otahelp")) {
-        ESP_LOGI(TAG, "otastatus | clock UNIX_UTC_SECONDS (trusted serial, idle only) | wifi SSID|PASSWORD (no echo) | ota MANIFEST_URL SIGNATURE_URL | cancel | clearresume");
+        ESP_LOGI(TAG, "otastatus | wifi SSID|PASSWORD (no echo) | ota MANIFEST_URL SIGNATURE_URL | cancel | clearresume");
         ESP_LOGI(TAG, "Lab faults: ota-reset-at OFFSET | ota-wifi-drop-at OFFSET (0 disarms; idle only)");
         ESP_LOGI(TAG, "Use public GitHub /releases/download/ HTTPS origins; no PAT in firmware. Reset injection is a software reset, not a power cut.");
+#if LAB_FAULT_PROFILE
+        ESP_LOGW(TAG, "Optional test mode: lab-clock-not-ready on/off | lab-reset-before-checkpoint Q | lab-checkpoint-status | lab-corrupt-checkpoints | lab-seed-stale-running | lab-retry-policy-tests");
+        ESP_LOGW(TAG, "Offline lab controls: lab-radio-off | lab-radio-on | lab-offline-next-boot");
+#endif
         return true;
     }
     if (!strcmp(line, "otastatus")) { print_status(); return true; }

@@ -2,6 +2,19 @@
 
 Profile test nằm trong clone riêng `D:\ota_update\.build\fault-profile`, branch `lab-fault-profile`. Production mặc định `LAB_FAULT_PROFILE=OFF` và chỉ nhận GitHub origin; chỉ binary test bật flag mới nhúng lab CA và nhận hotspot IP/port. Không tắt TLS CA/hostname/time verification. Các ca host bên dưới không tự chứng minh board PASS.
 
+Source cuối5.0.4/6.0.4 pin commit `f2c72dd570b0306b87539e64b35700ecfc4b104e`.
+Khi source profile đã được tích hợp vào main, build bằng công cụ chung:
+
+```powershell
+& tools/build.ps1 -Variant v5 -ProjectVersion 5.0.4 -VersionCode 6 -BuildName v5.0.4-test -FaultProfile -SigningKey '.secrets/app-signing.pem'
+& tools/build.ps1 -Variant v6 -ProjectVersion 6.0.4 -VersionCode 7 -BuildName v6.0.4-final -SigningKey '.secrets/app-signing.pem'
+```
+
+Version label và version_code độc lập; code phải tăng so với firmware đang chạy.
+`-FaultProfile` chỉ cho variantv5. Các build bình thường ép tất cả reset/profile
+flags OFF, tránh tái dùng cache test cho production. Không thay bytes trong release
+đã publish; một rebuild ký PSS có thể khác digest và phải có identity/release mới.
+
 Public CA: clone `main/lab_test_ca.pem`. Private CA/leaf keys chỉ ở `D:\ota_update\.secrets\fault-tls`, không đưa vào source/Notion. Chứng thư valid 2026-01-01..2036-01-01: port8443 có SANIP192.168.137.1 và CA tin cậy;8444 self-signed không tin cậy;8445 được CA tin cậy ký nhưng SANwrong.lab.invalid. Không thêm CA này vào Windows trust store.
 
 Khi native v6 signed image đã build:

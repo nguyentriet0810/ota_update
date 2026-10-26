@@ -1,0 +1,23 @@
+[HOST] sent: cfg arm-valid-reset
+[HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/v2.0.1/manifest.json https://github.com/nguyentriet0810/ota_update/releases/download/v2.0.1/manifest.sig
+I (87253) cfg: ARM_VALID_RESET result=ESP_OK next_trial_resets_after_SDK_VALID_before_pointer_commit=true
+I (87463) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+I (91573) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=90572 health_fail=0 selftest=PASS service_mode=0
+I (91573) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=234683 internal_largest=159744 minimum_free=8581312
+I (91583) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (101593) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=100592 health_fail=0 selftest=PASS service_mode=0
+I (101593) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=234683 internal_largest=159744 minimum_free=8581312
+I (101603) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (111613) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=110612 health_fail=0 selftest=PASS service_mode=0
+I (111613) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=234683 internal_largest=159744 minimum_free=8581312
+I (111623) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (117463) OTA: phase=FAILED reason=ESP_ERR_TIMEOUT
+I (121633) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=120632 health_fail=0 selftest=PASS service_mode=0
+I (121633) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257699 internal_largest=159744 minimum_free=8581312
+I (121643) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (131653) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=130652 health_fail=0 selftest=PASS service_mode=0
+I (131653) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257699 internal_largest=159744 minimum_free=8581312
+I (131663) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID
+I (141673) lab: STATUS version=1.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:22:28 reset=1 uptime_ms=140672 health_fail=0 selftest=PASS service_mode=0
+I (141673) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257711 internal_largest=159744 minimum_free=8581312
+I (141683) lab: OTA running=ota_0@0x00020000 boot=ota_0 next=ota_1 state=VALID

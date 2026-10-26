@@ -1,0 +1,47 @@
+{
+  "purpose": "isolated fault-profile only",
+  "activation_expected": "REJECT_DESCRIPTOR_VERSION",
+  "native_image_version": "6.0.0",
+  "manifest_version": "9.9.9",
+  "version_code": 7,
+  "config_schema": 2,
+  "size": 1118208,
+  "file_sha256": "f3d3abac88542ee0b7cd4549957cc08cd8f4836a0a20cf5730c49698b7bf8de6",
+  "release_id": "1205342ec6c235d0699a861c9f97ddfc99b1953cfa3b72904a837c8ef3cd4cd7",
+  "manifest_url": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.json",
+  "signature_url": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig",
+  "source_commit": "68dbc4fc0ceba65eaa68c4fb325be14978c78cff",
+  "native_host_verification": "PASS",
+  "raw_manifest_signature_host": "PASS",
+  "production_local_url_policy": "REJECT_AS_EXPECTED",
+  "safety_guard": "manifest version differs from native app descriptor",
+  "endpoint_pairs": {
+    "trusted_ip": {
+      "manifest_url": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.json",
+      "signature_url": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig"
+    },
+    "untrusted_ca": {
+      "manifest_url": "https://[LAN_IP_REDACTED]:8444/releases/download/lab-fault-v6/manifest.json",
+      "signature_url": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig"
+    },
+    "trusted_wrong_hostname": {
+      "manifest_url": "https://[LAN_IP_REDACTED]:8445/releases/download/lab-fault-v6/manifest.json",
+      "signature_url": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig"
+    }
+  },
+  "asset_hashes": {
+    "app.bin": {
+      "size": 1118208,
+      "sha256": "f3d3abac88542ee0b7cd4549957cc08cd8f4836a0a20cf5730c49698b7bf8de6"
+    },
+    "manifest.json": {
+      "size": 439,
+      "sha256": "1205342ec6c235d0699a861c9f97ddfc99b1953cfa3b72904a837c8ef3cd4cd7"
+    },
+    "manifest.sig": {
+      "size": 384,
+      "sha256": "63279fa80ca5f1daf08de04c78e9574d2980bf75583d202a5dd82a117f2d5507"
+    }
+  },
+  "board_result": "NOT RUN"
+}

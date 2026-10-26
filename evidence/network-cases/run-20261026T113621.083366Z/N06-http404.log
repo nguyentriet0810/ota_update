@@ -1,0 +1,41 @@
+2026-10-26T11:36:38.715+00:00 [HOST] case=N06-http404 no host reset commands
+2026-10-26T11:36:39.035+00:00 [HOST] sent: status
+2026-10-26T11:36:39.035+00:00 [HOST] sent: otastatus
+2026-10-26T11:36:39.056+00:00 I (170375) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=169359 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:36:39.073+00:00 I (170385) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256879 internal_largest=120832 minimum_free=8539816
+2026-10-26T11:36:39.078+00:00 I (170395) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:36:39.084+00:00 I (170405) lab: BUILD elf_sha256=fe7778499 secure_version=0
+2026-10-26T11:36:39.090+00:00 I (170405) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T11:36:39.101+00:00 I (170415) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T11:36:39.112+00:00 I (170425) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T11:36:39.117+00:00 I (170435) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T11:36:39.128+00:00 I (170445) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T11:36:39.139+00:00 I (170455) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T11:36:39.145+00:00 I (170465) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T11:36:39.162+00:00 I (170475) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T11:36:39.171+00:00 I (170485) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_RESPONSE wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T11:36:39.302+00:00 [HOST] server_settings={"chunk_bytes": 4096, "chunk_delay_ms": 0, "cut_after": 147456, "delay_ms": 18000, "fault_requests": -1, "image_mode": "good", "range_mode": "correct"}
+2026-10-26T11:36:39.311+00:00 [HOST] sent: ota https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/404.json https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig
+2026-10-26T11:36:39.328+00:00 I (170655) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T11:36:39.331+00:00 I (170655) OTA: phase=FETCH_MANIFEST reason=exact bytes; bounded metadata pair budget
+2026-10-26T11:36:40.289+00:00 W (171615) OTA: http_attempt phase=metadata_manifest attempt=1 budget=3 status=404 error=ESP_ERR_INVALID_RESPONSE retryable=0
+2026-10-26T11:36:40.296+00:00 I (171615) OTA: phase=FAILED reason=ESP_ERR_INVALID_RESPONSE
+2026-10-26T11:36:40.296+00:00 [HOST] sent: status
+2026-10-26T11:36:40.296+00:00 [HOST] sent: otastatus
+2026-10-26T11:36:40.317+00:00 I (171635) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=170620 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:36:40.334+00:00 I (171645) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256823 internal_largest=120832 minimum_free=8539816
+2026-10-26T11:36:40.339+00:00 I (171655) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:36:40.345+00:00 I (171665) lab: BUILD elf_sha256=fe7778499 secure_version=0
+2026-10-26T11:36:40.351+00:00 I (171665) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T11:36:40.362+00:00 I (171675) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T11:36:40.373+00:00 I (171685) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T11:36:40.378+00:00 I (171695) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T11:36:40.389+00:00 I (171705) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T11:36:40.401+00:00 I (171715) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T11:36:40.406+00:00 I (171725) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T11:36:40.423+00:00 I (171735) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T11:36:40.439+00:00 I (171755) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=170732 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:36:40.456+00:00 I (171765) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256879 internal_largest=120832 minimum_free=8539816
+2026-10-26T11:36:40.461+00:00 I (171775) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:36:40.469+00:00 I (171785) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_RESPONSE wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T11:36:40.597+00:00 [HOST] case_result=PASS reason=Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed

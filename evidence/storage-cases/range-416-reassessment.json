@@ -1,0 +1,43 @@
+{
+  "name": "N08-range-416",
+  "test_id": "N08",
+  "result": "PASS",
+  "checks": {
+    "actual_range_request": true,
+    "bad_header_rejected": true,
+    "rejected_before_writer": true,
+    "contract_failure": true,
+    "same_valid_running_image": true,
+    "no_boot_selection": true,
+    "no_service_mode": true
+  },
+  "before": {
+    "version": "5.0.2",
+    "selftest": "PASS",
+    "service_mode": 0,
+    "slot": "ota_1",
+    "address": 3276800,
+    "boot": "ota_1",
+    "state": "VALID",
+    "ready": 1,
+    "busy": 0,
+    "controller_phase": "FAILED",
+    "wifi": "up"
+  },
+  "after": {
+    "version": "5.0.2",
+    "selftest": "PASS",
+    "service_mode": 0,
+    "slot": "ota_1",
+    "address": 3276800,
+    "boot": "ota_1",
+    "state": "VALID",
+    "ready": 1,
+    "busy": 0,
+    "controller_phase": "FAILED",
+    "wifi": "up"
+  },
+  "log": "run-20261026T113857Z\\N08-range-416.log",
+  "original_result": "FAIL",
+  "assessment_method": "Same device trace: HTTP416 was rejected by http_open header validation before stream_header_reject. Original assertion required a later marker; all safety and baseline gates already passed."
+}

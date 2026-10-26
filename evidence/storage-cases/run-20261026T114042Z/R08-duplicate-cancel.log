@@ -1,0 +1,44 @@
+2026-10-26T11:42:18.129+00:00 [HOST] sent: status
+2026-10-26T11:42:18.129+00:00 [HOST] sent: otastatus
+2026-10-26T11:42:18.150+00:00 I (8326) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=7332 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:42:18.167+00:00 I (8326) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256867 internal_largest=124928 minimum_free=8539472
+2026-10-26T11:42:18.172+00:00 I (8336) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:42:18.178+00:00 I (8346) lab: BUILD elf_sha256=fe7778499 secure_version=0
+2026-10-26T11:42:18.183+00:00 I (8356) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T11:42:18.195+00:00 I (8356) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T11:42:18.205+00:00 I (8366) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T11:42:18.211+00:00 I (8376) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T11:42:18.222+00:00 I (8386) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T11:42:18.228+00:00 I (8396) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T11:42:18.238+00:00 I (8406) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T11:42:18.255+00:00 I (8416) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T11:42:18.264+00:00 I (8436) OTA: status ready=1 busy=0 phase=CANCELLED reason=app unchanged wifi=up bytes=12288 total=1118208 durable_q=0
+2026-10-26T11:42:18.378+00:00 [HOST] sent: clearresume
+2026-10-26T11:42:18.385+00:00 I (8566) OTA: clearresume_result=ESP_OK
+2026-10-26T11:42:18.420+00:00 [HOST] sent: ota https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.json https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig
+2026-10-26T11:42:18.437+00:00 I (8616) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T11:42:18.440+00:00 I (8616) OTA: phase=FETCH_MANIFEST reason=exact bytes; bounded metadata pair budget
+2026-10-26T11:42:20.148+00:00 I (10326) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+2026-10-26T11:42:20.222+00:00 I (10396) OTA: accepted_metadata version=9.9.9 version_code=6 size=1118208 slot=ota_0
+2026-10-26T11:42:20.239+00:00 I (10396) OTA: accepted_release_id=eb601d8c5e071b77b42513efa6b48f8a62f95a3869915bdd0ba540135fdd6627 file_sha256=f3d3abac88542ee0b7cd4549957cc08cd8f4836a0a20cf5730c49698b7bf8de6
+2026-10-26T11:42:20.239+00:00 I (10416) OTA: phase=DOWNLOAD reason=inactive slot only
+2026-10-26T11:42:21.174+00:00 I (11356) OTA: writer_started target=ota_0 offset=0 mode=fresh
+2026-10-26T11:42:21.183+00:00 [HOST] sent: ota https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.json https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig
+2026-10-26T11:42:21.196+00:00 I (11376) OTA: download=0% written=4096 durable_q=0
+2026-10-26T11:42:21.200+00:00 W (11376) lab: COMMAND_REJECT unknown command; use help
+2026-10-26T11:42:21.521+00:00 I (11696) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=10703 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:42:21.538+00:00 I (11696) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=200139 internal_largest=124928 minimum_free=8539472
+2026-10-26T11:42:21.540+00:00 I (11706) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:42:21.598+00:00 I (11786) OTA: checkpoint_committed q=65536 generation=82
+2026-10-26T11:42:21.910+00:00 I (12096) OTA: download=10% written=114688 durable_q=65536
+2026-10-26T11:42:22.011+00:00 I (12196) OTA: checkpoint_committed q=131072 generation=83
+2026-10-26T11:42:22.426+00:00 I (12606) OTA: checkpoint_committed q=196608 generation=84
+2026-10-26T11:42:22.606+00:00 I (12786) OTA: download=20% written=225280 durable_q=196608
+2026-10-26T11:42:22.835+00:00 I (13016) OTA: checkpoint_committed q=262144 generation=85
+2026-10-26T11:42:23.308+00:00 I (13496) OTA: checkpoint_committed q=327680 generation=86
+2026-10-26T11:42:23.342+00:00 I (13526) OTA: download=30% written=335872 durable_q=327680
+2026-10-26T11:42:24.093+00:00 I (14276) OTA: checkpoint_committed q=393216 generation=87
+2026-10-26T11:42:24.452+00:00 I (14636) OTA: download=40% written=450560 durable_q=393216
+2026-10-26T11:42:24.495+00:00 I (14676) OTA: checkpoint_committed q=458752 generation=88
+2026-10-26T11:42:24.903+00:00 I (15086) OTA: checkpoint_committed q=524288 generation=89
+2026-10-26T11:42:25.144+00:00 I (15326) OTA: download=50% written=561152 durable_q=524288

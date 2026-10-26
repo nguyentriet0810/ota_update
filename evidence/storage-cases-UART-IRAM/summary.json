@@ -1,0 +1,47 @@
+{
+  "results": [
+    {
+      "name": "R08-duplicate-cancel",
+      "test_id": "R08",
+      "result": "PASS",
+      "checks": {
+        "single_writer": true,
+        "duplicate_rejected": true,
+        "clock_cannot_change_during_update": true,
+        "writer_and_http_cleaned": true,
+        "cancelled": true,
+        "checkpoints_removed": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.4",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_0",
+        "address": 131072,
+        "boot": "ota_0",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "IDLE",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.4",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_0",
+        "address": 131072,
+        "boot": "ota_0",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "CANCELLED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T115410Z\\R08-duplicate-cancel.log"
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 import argparse
 import json
 from pathlib import Path
+import re
 import sys
 import time
 
@@ -15,12 +16,14 @@ def main():
     parser.add_argument('--port', default='COM13')
     parser.add_argument('--duration', type=float, default=180)
     parser.add_argument('--log', type=Path, required=True)
+    parser.add_argument('--require-marker', help='Also require this response regex after physical reconnection')
     args = parser.parse_args()
     private = Path(__file__).resolve().parents[1] / '.secrets' / 'wifi.json'
     secrets = list(json.loads(private.read_text()).values()) if private.is_file() else []
     args.log.parent.mkdir(parents=True, exist_ok=True)
     port = None
     removed = reconnected = healthy = valid = False
+    marker = args.require_marker is None
     deadline = time.monotonic() + args.duration
     buffer = bytearray()
     with args.log.open('w', encoding='utf-8', newline='\n') as log:
@@ -53,8 +56,10 @@ def main():
                     if reconnected:
                         healthy |= 'SELFTEST result=PASS' in line
                         valid |= 'OTA running=' in line and 'state=VALID' in line
-                if reconnected and healthy and valid:
+                        marker |= bool(args.require_marker and re.search(args.require_marker, line))
+                if reconnected and healthy and valid and marker:
                     record('[HOST] Reconnected boot observed: self-test PASS and SDK VALID')
+                    port.close()
                     return 0
             except (serial.SerialException, OSError):
                 if port is not None:

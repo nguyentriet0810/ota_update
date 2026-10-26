@@ -27,6 +27,19 @@ Provision serial chỉ thực hiện sau backup Flash và kiểm recovery. Lần
 
 ## Provision Wi-Fi và baseline VALID
 
+Nếu SNTP chưa cấp được giờ trên mạng lab, từ baseline1.0.2/test5.0.2/production6.0.2
+có thể cấp UTC hiện tại qua serial lúc controller idle:
+
+```powershell
+$otaUTC = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+& $otaPython tools/serial_lab.py --port COM13 --send "clock $otaUTC" --log evidence/clock-provision.log --duration 3
+```
+
+Chỉ dùng giờ đúng từ máy tin cậy. Lệnh nhận10digit trong2024..2035, từ chối khi
+worker bận; không bỏ CA/hostname/certificate-time verification. Clock giữ qua
+software reset với cấu hình RTC+HRT; power-on cần đồng bộ lại trước OTA. Local
+health/boot của app VALID không phụ thuộc Internet hoặc clock đã sync.
+
 `serial_lab.py` không in lệnh Wi-Fi vào log; `--provision` hỏi password bằng getpass. Hoặc dùng `--wifi-file` trỏ JSON riêng ngoài project có `ssid` và `password`. Không đặt password trong `--send`, README hoặc shell history.
 
 ```powershell

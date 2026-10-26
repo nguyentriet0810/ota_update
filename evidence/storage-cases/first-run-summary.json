@@ -1,0 +1,85 @@
+{
+  "results": [
+    {
+      "name": "R02-before-checkpoint-commit",
+      "test_id": "R02",
+      "result": "PASS",
+      "checks": {
+        "resume_from_previous_snapshot": true,
+        "native_verify_reached": true,
+        "dummy_descriptor_rejected": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T113857Z\\R02-before-checkpoint-commit.log"
+    },
+    {
+      "name": "N08-range-416",
+      "test_id": "N08",
+      "result": "FAIL",
+      "checks": {
+        "actual_range_request": true,
+        "bad_header_rejected": false,
+        "rejected_before_writer": true,
+        "contract_failure": true,
+        "same_valid_running_image": true,
+        "no_boot_selection": true,
+        "no_service_mode": true
+      },
+      "before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "log": "run-20261026T113857Z\\N08-range-416.log"
+    }
+  ]
+}

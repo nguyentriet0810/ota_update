@@ -1,0 +1,31 @@
+{
+  "host_listener_probe": "PASS",
+  "board_reachability": "NOT TESTED",
+  "checks": [
+    {
+      "port": 8443,
+      "expected": "ACCEPT",
+      "observed": "TLS_ACCEPT_HTTP200",
+      "result": "PASS"
+    },
+    {
+      "port": 8444,
+      "expected": "REJECT_UNTRUSTED_CA",
+      "observed": "TLS_CERTIFICATE_REJECT",
+      "detail": "self signed certificate",
+      "result": "PASS"
+    },
+    {
+      "port": 8445,
+      "expected": "REJECT_HOSTNAME",
+      "observed": "TLS_CERTIFICATE_REJECT",
+      "detail": "IP address mismatch, certificate is not valid for '[LAN_IP_REDACTED]'.",
+      "result": "PASS"
+    },
+    {
+      "port": 8765,
+      "observed": "LOOPBACK_CONTROL_STATUS",
+      "result": "PASS"
+    }
+  ]
+}

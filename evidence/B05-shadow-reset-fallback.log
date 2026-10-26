@@ -63,12 +63,12 @@ I (1146974) OTA: checkpoint_committed q=1114112 generation=84
 I (1146984) OTA: download=100% written=1118208 durable_q=1114112
 I (1146984) OTA: phase=VERIFY_IMAGE reason=SDK native signature validation
 I (1146984) esp_image: segment 0: paddr=00320020 vaddr=3c0b0020 size=35f88h (221064) map
-I (1147034) esp_image: segment 1: paddr=00355fb0 vaddr=3fc9a500 size=0573ch ( 22332) 
-I (1147044) esp_image: segment 2: paddr=0035b6f4 vaddr=40374000 size=04924h ( 18724) 
+I (1147034) esp_image: segment 1: paddr=00355fb0 vaddr=3fc9a500 size=0573ch ( 22332)
+I (1147044) esp_image: segment 2: paddr=0035b6f4 vaddr=40374000 size=04924h ( 18724)
 I (1147044) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af04ch (716876) map
-I (1147184) esp_image: segment 4: paddr=0040f074 vaddr=40378924 size=11ba4h ( 72612) 
-I (1147204) esp_image: segment 5: paddr=00420c20 vaddr=50000000 size=00024h (    36) 
-I (1147204) esp_image: segment 6: paddr=00420c4c vaddr=00000000 size=0f384h ( 62340) 
+I (1147184) esp_image: segment 4: paddr=0040f074 vaddr=40378924 size=11ba4h ( 72612)
+I (1147204) esp_image: segment 5: paddr=00420c20 vaddr=50000000 size=00024h (    36)
+I (1147204) esp_image: segment 6: paddr=00420c4c vaddr=00000000 size=0f384h ( 62340)
 I (1147214) esp_image: Verifying image signature...
 I (1147224) secure_boot_v2: Take trusted digest key(s) from running app
 I (1147224) secure_boot_v2: #0 app key digest == #0 trusted key digest
@@ -77,12 +77,12 @@ I (1147294) secure_boot_v2_rsa: Signature verified successfully!
 I (1147294) OTA: phase=VERIFY_FILE reason=readback final signed bytes and descriptor
 I (1147554) OTA: phase=READY_TO_BOOT reason=persisting per-slot identity
 I (1147564) esp_image: segment 0: paddr=00320020 vaddr=3c0b0020 size=35f88h (221064) map
-I (1147604) esp_image: segment 1: paddr=00355fb0 vaddr=3fc9a500 size=0573ch ( 22332) 
-I (1147614) esp_image: segment 2: paddr=0035b6f4 vaddr=40374000 size=04924h ( 18724) 
+I (1147604) esp_image: segment 1: paddr=00355fb0 vaddr=3fc9a500 size=0573ch ( 22332)
+I (1147614) esp_image: segment 2: paddr=0035b6f4 vaddr=40374000 size=04924h ( 18724)
 I (1147614) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af04ch (716876) map
-I (1147754) esp_image: segment 4: paddr=0040f074 vaddr=40378924 size=11ba4h ( 72612) 
-I (1147774) esp_image: segment 5: paddr=00420c20 vaddr=50000000 size=00024h (    36) 
-I (1147774) esp_image: segment 6: paddr=00420c4c vaddr=00000000 size=0f384h ( 62340) 
+I (1147754) esp_image: segment 4: paddr=0040f074 vaddr=40378924 size=11ba4h ( 72612)
+I (1147774) esp_image: segment 5: paddr=00420c20 vaddr=50000000 size=00024h (    36)
+I (1147774) esp_image: segment 6: paddr=00420c4c vaddr=00000000 size=0f384h ( 62340)
 I (1147784) esp_image: Verifying image signature...
 I (1147794) secure_boot_v2: Take trusted digest key(s) from running app
 I (1147794) secure_boot_v2: #0 app key digest == #0 trusted key digest
@@ -133,7 +133,7 @@ I (207) esp_image: segment 2: paddr=0035b6f4 vaddr=40374000 size=04924h ( 18724)
 I (213) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af04ch (716876) map
 I (394) esp_image: segment 4: paddr=0040f074 vaddr=40378924 size=11ba4h ( 72612) load
 I (416) esp_image: segment 5: paddr=00420c20 vaddr=50000000 size=00024h (    36) load
-I (416) esp_image: segment 6: paddr=00420c4c vaddr=00000000 size=0f384h ( 62340) 
+I (416) esp_image: segment 6: paddr=00420c4c vaddr=00000000 size=0f384h ( 62340)
 I (444) boot: Loaded app from partition at offset 0x320000
 I (444) boot: Disabling RNG early entropy source...
 I (455) octal_psram: vendor id    : 0x0d (AP)
@@ -162,7 +162,7 @@ I (963) app_init: Compile time:     Oct 26 2026 08:52:48
 I (968) app_init: ELF file SHA256:  33ecca06a...
 I (972) app_init: ESP-IDF:          v6.1
 I (976) efuse_init: Min chip rev:     v0.0
-I (980) efuse_init: Max chip rev:     v0.99 
+I (980) efuse_init: Max chip rev:     v0.99
 I (984) efuse_init: Chip rev:         v0.2
 I (988) heap_init: Initializing. RAM available for dynamic allocation:
 I (994) heap_init: At 3FCA4530 len 000451E0 (276 KiB): RAM
@@ -216,7 +216,7 @@ I (208) esp_image: segment 2: paddr=0005b4c4 vaddr=40374000 size=04b54h ( 19284)
 I (214) esp_image: segment 3: paddr=00060020 vaddr=42000020 size=aedb4h (716212) map
 I (395) esp_image: segment 4: paddr=0010eddc vaddr=40378b54 size=11974h ( 72052) load
 I (416) esp_image: segment 5: paddr=00120758 vaddr=50000000 size=00024h (    36) load
-I (417) esp_image: segment 6: paddr=00120784 vaddr=00000000 size=0f84ch ( 63564) 
+I (417) esp_image: segment 6: paddr=00120784 vaddr=00000000 size=0f84ch ( 63564)
 I (445) boot: Loaded app from partition at offset 0x20000
 I (445) boot: Disabling RNG early entropy source...
 I (456) octal_psram: vendor id    : 0x0d (AP)
@@ -245,7 +245,7 @@ I (964) app_init: Compile time:     Oct 26 2026 13:22:28
 I (969) app_init: ELF file SHA256:  da6b7babe...
 I (973) app_init: ESP-IDF:          v6.1
 I (977) efuse_init: Min chip rev:     v0.0
-I (981) efuse_init: Max chip rev:     v0.99 
+I (981) efuse_init: Max chip rev:     v0.99
 I (985) efuse_init: Chip rev:         v0.2
 I (989) heap_init: Initializing. RAM available for dynamic allocation:
 I (995) heap_init: At 3FCA4530 len 000451E0 (276 KiB): RAM

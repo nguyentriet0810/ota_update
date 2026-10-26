@@ -1,0 +1,18 @@
+{
+  "studybook_ota_lab.bin": {
+    "bytes": 1118208,
+    "sha256": "723f87adb2ee467cfecbb5035f0fa399ba95b29be4208243775de5575037f755"
+  },
+  "studybook_ota_lab.elf": {
+    "bytes": 10724760,
+    "sha256": "c45f5d40aab14f6fb91c36b651ca2ebf517c0df74942a2631134ac98e1d75fa0"
+  },
+  "bootloader/bootloader.bin": {
+    "bytes": 21232,
+    "sha256": "84e323bbe49fa1fec82b44aa2e6207957d2612aa3e44fb3c7b2458fb827c5df7"
+  },
+  "partition_table/partition-table.bin": {
+    "bytes": 3072,
+    "sha256": "00bdbfb28577b450fa0867638575d4de8c00236a2b64fe4db950a8e53ff9fdf6"
+  }
+}

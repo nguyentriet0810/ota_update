@@ -1,0 +1,8 @@
+{
+  "tag": "v1.0.2",
+  "source_commit": "cec07b9b70f8fabc849c5f2c8578975270245405",
+  "host_download_all_assets_identical": true,
+  "native_and_manifest_signatures": "VERIFIED_HOST",
+  "file_sha256": "49c0d0ba972c0d470c1b8860fc93be38d6bd53cd7bee1ddfb7d9c1303bf8e3c7",
+  "release_url": "https://github.com/nguyentriet0810/ota_update/releases/tag/v1.0.2"
+}

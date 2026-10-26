@@ -1,0 +1,62 @@
+2026-10-26T11:36:21.090+00:00 [HOST] case=N01-dns no host reset commands
+2026-10-26T11:36:21.421+00:00 [HOST] sent: status
+2026-10-26T11:36:21.421+00:00 [HOST] sent: otastatus
+2026-10-26T11:36:21.443+00:00 I (152765) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=151745 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:36:21.459+00:00 I (152765) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256879 internal_largest=120832 minimum_free=8539816
+2026-10-26T11:36:21.465+00:00 I (152785) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:36:21.470+00:00 I (152785) lab: BUILD elf_sha256=fe7778499 secure_version=0
+2026-10-26T11:36:21.476+00:00 I (152795) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T11:36:21.487+00:00 I (152805) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T11:36:21.497+00:00 I (152815) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T11:36:21.504+00:00 I (152825) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T11:36:21.515+00:00 I (152825) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T11:36:21.526+00:00 I (152835) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T11:36:21.531+00:00 I (152845) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T11:36:21.548+00:00 I (152855) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T11:36:21.559+00:00 I (152875) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_INVALID_VERSION wifi=up bytes=1118208 total=1118208 durable_q=0
+2026-10-26T11:36:21.689+00:00 [HOST] server_settings={"chunk_bytes": 4096, "chunk_delay_ms": 0, "cut_after": 147456, "delay_ms": 18000, "fault_requests": -1, "image_mode": "good", "range_mode": "correct"}
+2026-10-26T11:36:21.697+00:00 [HOST] sent: ota https://unresolvable.invalid:8443/releases/download/lab-fault-v6/manifest.json https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.sig
+2026-10-26T11:36:21.715+00:00 I (153045) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+2026-10-26T11:36:21.718+00:00 I (153045) OTA: phase=FETCH_MANIFEST reason=exact bytes; bounded metadata pair budget
+2026-10-26T11:36:22.125+00:00 E (153455) esp-tls: couldn't get hostname for :unresolvable.invalid: getaddrinfo() returns 202, addrinfo=0
+2026-10-26T11:36:22.130+00:00 E (153455) esp-tls: Failed to open new connection
+2026-10-26T11:36:22.135+00:00 E (153455) transport_base: Failed to open a new connection
+2026-10-26T11:36:22.141+00:00 E (153455) HTTP_CLIENT: Connection failed, sock < 0
+2026-10-26T11:36:22.153+00:00 W (153465) OTA: https_open_failed error=ESP_ERR_HTTP_CONNECT tls=0x8001 tls_error=0 verify_flags=0x0 retryable=1
+2026-10-26T11:36:22.158+00:00 W (153475) OTA: http_attempt phase=metadata_manifest attempt=1 budget=3 status=0 error=ESP_ERR_HTTP_CONNECT retryable=1
+2026-10-26T11:36:22.169+00:00 W (153485) OTA: retry_backoff phase=metadata_manifest failed_attempt=1 next_attempt=2 delay_ms=1812 status=0 retry_after_ms=0
+2026-10-26T11:36:23.983+00:00 I (155315) OTA: retry_backoff_complete phase=metadata_manifest waited_ms=1814 requested_ms=1812
+2026-10-26T11:36:23.990+00:00 I (155315) OTA: phase=FETCH_MANIFEST reason=exact bytes; bounded metadata pair budget
+2026-10-26T11:36:24.001+00:00 E (155325) esp-tls: couldn't get hostname for :unresolvable.invalid: getaddrinfo() returns 202, addrinfo=0
+2026-10-26T11:36:24.006+00:00 E (155325) esp-tls: Failed to open new connection
+2026-10-26T11:36:24.011+00:00 E (155325) transport_base: Failed to open a new connection
+2026-10-26T11:36:24.017+00:00 E (155335) HTTP_CLIENT: Connection failed, sock < 0
+2026-10-26T11:36:24.023+00:00 W (155335) OTA: https_open_failed error=ESP_ERR_HTTP_CONNECT tls=0x8001 tls_error=0 verify_flags=0x0 retryable=1
+2026-10-26T11:36:24.034+00:00 W (155345) OTA: http_attempt phase=metadata_manifest attempt=2 budget=3 status=0 error=ESP_ERR_HTTP_CONNECT retryable=1
+2026-10-26T11:36:24.044+00:00 W (155355) OTA: retry_backoff phase=metadata_manifest failed_attempt=2 next_attempt=3 delay_ms=2366 status=0 retry_after_ms=0
+2026-10-26T11:36:26.414+00:00 I (157745) OTA: retry_backoff_complete phase=metadata_manifest waited_ms=2369 requested_ms=2366
+2026-10-26T11:36:26.419+00:00 I (157745) OTA: phase=FETCH_MANIFEST reason=exact bytes; bounded metadata pair budget
+2026-10-26T11:36:26.737+00:00 E (158065) esp-tls: couldn't get hostname for :unresolvable.invalid: getaddrinfo() returns 202, addrinfo=0
+2026-10-26T11:36:26.743+00:00 E (158065) esp-tls: Failed to open new connection
+2026-10-26T11:36:26.748+00:00 E (158065) transport_base: Failed to open a new connection
+2026-10-26T11:36:26.754+00:00 E (158075) HTTP_CLIENT: Connection failed, sock < 0
+2026-10-26T11:36:26.765+00:00 W (158075) OTA: https_open_failed error=ESP_ERR_HTTP_CONNECT tls=0x8001 tls_error=0 verify_flags=0x0 retryable=1
+2026-10-26T11:36:26.771+00:00 W (158085) OTA: http_attempt phase=metadata_manifest attempt=3 budget=3 status=0 error=ESP_ERR_HTTP_CONNECT retryable=1
+2026-10-26T11:36:26.782+00:00 W (158095) OTA: retry_budget_exhausted phase=metadata_manifest attempts=3
+2026-10-26T11:36:26.782+00:00 I (158105) OTA: phase=FAILED reason=ESP_ERR_HTTP_CONNECT
+2026-10-26T11:36:26.782+00:00 [HOST] sent: status
+2026-10-26T11:36:26.782+00:00 [HOST] sent: otastatus
+2026-10-26T11:36:26.804+00:00 I (158125) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=3 uptime_ms=157106 health_fail=0 selftest=PASS service_mode=0
+2026-10-26T11:36:26.821+00:00 I (158125) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=256695 internal_largest=120832 minimum_free=8539816
+2026-10-26T11:36:26.826+00:00 I (158145) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+2026-10-26T11:36:26.831+00:00 I (158155) lab: BUILD elf_sha256=fe7778499 secure_version=0
+2026-10-26T11:36:26.837+00:00 I (158155) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+2026-10-26T11:36:26.848+00:00 I (158165) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+2026-10-26T11:36:26.859+00:00 I (158175) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+2026-10-26T11:36:26.864+00:00 I (158185) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+2026-10-26T11:36:26.876+00:00 I (158195) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+2026-10-26T11:36:26.886+00:00 I (158205) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+2026-10-26T11:36:26.893+00:00 I (158205) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+2026-10-26T11:36:26.909+00:00 I (158215) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+2026-10-26T11:36:26.919+00:00 I (158235) OTA: status ready=1 busy=0 phase=FAILED reason=ESP_ERR_HTTP_CONNECT wifi=up bytes=0 total=0 durable_q=0
+2026-10-26T11:36:27.049+00:00 [HOST] case_result=PASS reason=Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed

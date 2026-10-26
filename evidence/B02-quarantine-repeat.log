@@ -1,0 +1,13 @@
+[HOST] sent: ota https://github.com/nguyentriet0810/ota_update/releases/download/v3.0.0-explicit-fail/manifest.json https://github.com/nguyentriet0810/ota_update/releases/download/v3.0.0-explicit-fail/manifest.sig
+I (55906) OTA: phase=WAIT_NETWORK_TIME reason=bounded prerequisites
+I (55916) OTA: phase=FETCH_MANIFEST reason=exact bytes
+I (57386) wifi:<ba-add>idx:0 (ifx:0, [MAC_REDACTED]), tid:0, ssn:10, winSize:64
+I (59426) esp-x509-crt-bundle: Certificate validated
+I (61826) esp-x509-crt-bundle: Certificate validated
+I (61896) lab: STATUS version=2.0.1 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_13:26:58 reset=3 uptime_ms=60903 health_fail=0 selftest=PASS service_mode=0
+I (61896) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=197047 internal_largest=116736 minimum_free=8532480
+I (61906) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (65536) esp-x509-crt-bundle: Certificate validated
+I (68276) esp-x509-crt-bundle: Certificate validated
+I (69276) OTA: phase=AUTH_MANIFEST reason=RSA-PSS3072 SHA256 salt32
+I (69346) OTA: phase=FAILED reason=ESP_ERR_NOT_ALLOWED

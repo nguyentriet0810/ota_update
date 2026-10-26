@@ -83,12 +83,12 @@
 2026-10-26T06:42:19.195+00:00 I (872674) OTA: download=100% written=1118208 durable_q=1114112
 2026-10-26T06:42:19.200+00:00 I (872674) OTA: phase=VERIFY_IMAGE reason=SDK native signature validation
 2026-10-26T06:42:19.204+00:00 I (872674) esp_image: segment 0: paddr=00320020 vaddr=3c0b0020 size=35f08h (220936) map
-2026-10-26T06:42:19.249+00:00 I (872724) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332) 
-2026-10-26T06:42:19.254+00:00 I (872734) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852) 
+2026-10-26T06:42:19.249+00:00 I (872724) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332)
+2026-10-26T06:42:19.254+00:00 I (872734) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852)
 2026-10-26T06:42:19.260+00:00 I (872734) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af020h (716832) map
-2026-10-26T06:42:19.398+00:00 I (872874) esp_image: segment 4: paddr=0040f048 vaddr=403789a4 size=11b24h ( 72484) 
-2026-10-26T06:42:19.416+00:00 I (872894) esp_image: segment 5: paddr=00420b74 vaddr=50000000 size=00024h (    36) 
-2026-10-26T06:42:19.420+00:00 I (872894) esp_image: segment 6: paddr=00420ba0 vaddr=00000000 size=0f430h ( 62512) 
+2026-10-26T06:42:19.398+00:00 I (872874) esp_image: segment 4: paddr=0040f048 vaddr=403789a4 size=11b24h ( 72484)
+2026-10-26T06:42:19.416+00:00 I (872894) esp_image: segment 5: paddr=00420b74 vaddr=50000000 size=00024h (    36)
+2026-10-26T06:42:19.420+00:00 I (872894) esp_image: segment 6: paddr=00420ba0 vaddr=00000000 size=0f430h ( 62512)
 2026-10-26T06:42:19.427+00:00 I (872904) esp_image: Verifying image signature...
 2026-10-26T06:42:19.433+00:00 I (872904) secure_boot_v2: Take trusted digest key(s) from running app
 2026-10-26T06:42:19.444+00:00 I (872914) secure_boot_v2: #0 app key digest == #0 trusted key digest

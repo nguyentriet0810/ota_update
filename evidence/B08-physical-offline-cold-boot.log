@@ -1,0 +1,94 @@
+[HOST] Waiting for physical USB removal/reconnection; no host reset commands
+I (31824) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=1 uptime_ms=30832 health_fail=0 selftest=PASS service_mode=0
+I (31824) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257367 internal_largest=180224 minimum_free=8605004
+I (31834) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (41844) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=1 uptime_ms=40852 health_fail=0 selftest=PASS service_mode=0
+I (41844) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257367 internal_largest=180224 minimum_free=8605004
+I (41854) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (51864) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=1 uptime_ms=50872 health_fail=0 selftest=PASS service_mode=0
+I (51864) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257367 internal_largest=180224 minimum_free=8605004
+I (51874) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (61884) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=1 uptime_ms=60892 health_fail=0 selftest=PASS service_mode=0
+I (61884) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257367 internal_largest=180224 minimum_free=8605004
+I (61894) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (71904) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=1 uptime_ms=70912 health_fail=0 selftest=PASS service_mode=0
+I (71904) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=257367 internal_largest=180224 minimum_free=8605004
+I (71914) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+[HOST] Serial device removal observed
+[HOST] Serial device reconnected after observed removal
+I (913) esp_psram: SPI SRAM memory test OK
+I (921) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (922) cpu_start: Pro cpu start user code
+I (922) cpu_start: cpu freq: 160000000 Hz
+I (923) app_init: Application information:
+I (927) app_init: Project name:     studybook_ota_lab
+I (932) app_init: App version:      5.0.2
+I (936) app_init: Compile time:     Oct 26 2026 18:23:17
+I (941) app_init: ELF file SHA256:  fe7778499...
+I (945) app_init: ESP-IDF:          v6.1
+I (949) efuse_init: Min chip rev:     v0.0
+I (953) efuse_init: Max chip rev:     v0.99
+I (957) efuse_init: Chip rev:         v0.2
+I (961) heap_init: Initializing. RAM available for dynamic allocation:
+I (967) heap_init: At 3FCA4540 len 000451D0 (276 KiB): RAM
+I (972) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (977) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (982) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (988) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+I (995) spi_flash: detected chip: boya
+I (997) spi_flash: flash io: dio
+I (1004) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (1007) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (1014) main_task: Started on CPU0
+I (1034) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations
+I (1034) main_task: Calling app_main()
+I (1044) lab: NVS_INIT partition=nvs result=ESP_OK erase_performed=false
+I (1064) lab: NVS_INIT partition=nvs_cfg result=ESP_OK erase_performed=false
+I (1074) lab: NVS_INIT partition=ota_meta result=ESP_OK erase_performed=false
+I (1074) cfg: SHADOW_REUSE migration_id=00010002 source_generation=1 conversion_repeated=false
+I (1074) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+I (1094) lab: SELFTEST result=PASS flash_psram_heap_cfg_checked=true
+I (1104) lab: STATUS version=5.0.2 project=studybook_ota_lab sdk=v6.1 built=Oct 26 2026_18:23:17 reset=1 uptime_ms=112 health_fail=0 selftest=PASS service_mode=0
+I (1114) lab: BOARD model=ESP32-S3 revision=2 cores=2 flash_bytes=16777216 psram_bytes=8388608 internal_free=307427 internal_largest=217088 minimum_free=8660444
+I (1124) lab: OTA running=ota_1@0x00320000 boot=ota_1 next=ota_0 state=VALID
+I (1134) lab: BUILD elf_sha256=fe7778499 secure_version=0
+I (1134) lab: PART label=nvs type=0x01 subtype=0x02 offset=0x00009000 size=0x00006000 encrypted=0
+I (1144) lab: PART label=otadata type=0x01 subtype=0x00 offset=0x0000f000 size=0x00002000 encrypted=0
+I (1154) lab: PART label=phy_init type=0x01 subtype=0x01 offset=0x00011000 size=0x00001000 encrypted=0
+I (1164) lab: PART label=nvs_cfg type=0x01 subtype=0x02 offset=0x00012000 size=0x00008000 encrypted=0
+I (1174) lab: PART label=ota_meta type=0x01 subtype=0x02 offset=0x0001a000 size=0x00006000 encrypted=0
+I (1184) lab: PART label=ota_0 type=0x00 subtype=0x10 offset=0x00020000 size=0x00300000 encrypted=0
+I (1194) lab: PART label=ota_1 type=0x00 subtype=0x11 offset=0x00320000 size=0x00300000 encrypted=0
+I (1204) cfg: CONFIG ready=1 reader_schema=2 active_schema=2 used_schema=2 generation=2 sample_ms=1000 threshold=30000 units=milli_degree_C sensor_offset_mc=0 source_generation=1 source_crc=fbab8dc4
+I (1224) cfg: RECONCILE SDK_state=VALID active_schema=2 source_schema1_retained=true conversion_repeated=false
+I (1464) OTA: confirmed_identity slot=ota_1 version=5.0.2 version_code=5
+I (1464) OTA: running_release_id=ba7e255422bf15bce722d14826dc393ca8cdc6047f1d652c194e49a6b5baba25 file_sha256=b89d8c34847a3235f96eac311a275927f68bd52e0cae0f3d260a875e59a0c8bf size=1118208
+I (1484) pp: pp rom version: e7ae62f
+I (1484) net80211: net80211 rom version: e7ae62f
+I (1494) wifi:wifi driver task: 3fcedd20, prio:23, stack:6656, core=0
+I (1504) wifi:wifi firmware version: e12a754
+I (1504) wifi:wifi certification version: v7.0
+I (1504) wifi:config NVS flash: enabled
+I (1504) wifi:config nano formatting: disabled
+I (1514) wifi:Init data frame dynamic rx buffer num: 32
+I (1514) wifi:Init static rx mgmt buffer num: 5
+I (1514) wifi:Init management short buffer num: 32
+I (1524) wifi:Init dynamic tx buffer num: 32
+I (1524) wifi:Init static tx FG buffer num: 2
+I (1534) wifi:Init static rx buffer size: 1600
+I (1534) wifi:Init static rx buffer num: 10
+I (1544) wifi:Init dynamic rx buffer num: 32
+I (1544) wifi_init: rx ba win: 6
+I (1544) wifi_init: accept mbox: 6
+I (1554) wifi_init: tcpip mbox: 32
+I (1554) wifi_init: udp mbox: 6
+I (1554) wifi_init: tcp mbox: 6
+I (1554) wifi_init: tcp tx win: 5760
+I (1564) wifi_init: tcp rx win: 5760
+I (1564) wifi_init: tcp mss: 1440
+I (1564) wifi_init: WiFi IRAM OP enabled
+I (1574) wifi_init: WiFi RX IRAM OP enabled
+I (1574) OTA: phase=IDLE reason=local OTA controller ready
+W (1584) OTA: LAB_FAULT_PROFILE=ON test_CA_and_local_origins_enabled production=false TLS_checks=enabled
+W (1604) OTA: lab_offline_boot one_shot_consumed=1 wifi_autostart=false credentials_unchanged=true clear_result=ESP_OK
+[HOST] Reconnected boot observed: self-test PASS and SDK VALID

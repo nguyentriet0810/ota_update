@@ -1,0 +1,8 @@
+{
+  "tag": "v6.0.2-production",
+  "source_commit": "622c01b553a69e0703a9ab67ed64c29957b92083",
+  "host_download_all_assets_identical": true,
+  "native_and_manifest_signatures": "VERIFIED_HOST",
+  "file_sha256": "33690fafe49c993dc1b2b0583fcf767cfedf5abc48db30bd8d6f23b6a98c57a7",
+  "release_url": "https://github.com/nguyentriet0810/ota_update/releases/tag/v6.0.2-production"
+}

@@ -14,6 +14,9 @@ import release
 
 
 def create(args):
+    version_code = getattr(args, 'version_code', 6)
+    if not 1 <= version_code <= 2147483647:
+        raise release.ReleaseError('VERSION_CODE_BOUNDS')
     if not re.fullmatch(r"[0-9a-f]{40}", args.source_commit):
         raise release.ReleaseError("SOURCE_COMMIT_REQUIRED")
     output = args.output.resolve()
@@ -28,7 +31,7 @@ def create(args):
     if not isinstance(private, rsa.RSAPrivateKey) or private.key_size != 3072:
         raise release.ReleaseError("MANIFEST_KEY_NOT_RSA3072")
     manifest = {**release.PROFILE, "release": "lab-fault-v6", "version": "9.9.9",
-                "version_code": 6, "secure_version": 0, "config_schema": 2,
+                "version_code": version_code, "secure_version": 0, "config_schema": 2,
                 "min_updater_version": 1, "size": len(image),
                 "sha256": hashlib.sha256(image).hexdigest(),
                 "url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/app.bin"}
@@ -52,7 +55,7 @@ def create(args):
     (output / "manifest.sig").write_bytes(signature)
     report = {"purpose": "isolated fault-profile only", "activation_expected": "REJECT_DESCRIPTOR_VERSION",
               "native_image_version": descriptor["version"], "manifest_version": "9.9.9",
-              "version_code": 6, "config_schema": 2, "size": len(image),
+              "version_code": version_code, "config_schema": 2, "size": len(image),
               "file_sha256": manifest["sha256"], "release_id": hashlib.sha256(raw).hexdigest(),
               "manifest_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.json",
               "signature_url": "https://192.168.137.1:8443/releases/download/lab-fault-v6/manifest.sig",
@@ -80,6 +83,8 @@ def main():
     for option in ("image", "manifest-key", "app-public-key", "output"):
         parser.add_argument("--" + option, type=Path, required=True)
     parser.add_argument("--source-commit", required=True)
+    parser.add_argument("--version-code", type=int, default=6,
+                        help="Must exceed the compiled policy code of the test profile")
     args = parser.parse_args()
     try:
         print(json.dumps(create(args), indent=2))

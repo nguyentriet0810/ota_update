@@ -92,12 +92,12 @@ I (211036) OTA: checkpoint_committed q=1114112 generation=17
 I (211046) OTA: download=100% written=1118208 durable_q=1114112
 I (211046) OTA: phase=VERIFY_IMAGE reason=SDK native signature validation
 I (211046) esp_image: segment 0: paddr=00320020 vaddr=3c0b0020 size=35f08h (220936) map
-I (211096) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332) 
-I (211096) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852) 
+I (211096) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332)
+I (211096) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852)
 I (211106) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af024h (716836) map
-I (211246) esp_image: segment 4: paddr=0040f04c vaddr=403789a4 size=11b24h ( 72484) 
-I (211256) esp_image: segment 5: paddr=00420b78 vaddr=50000000 size=00024h (    36) 
-I (211266) esp_image: segment 6: paddr=00420ba4 vaddr=00000000 size=0f42ch ( 62508) 
+I (211246) esp_image: segment 4: paddr=0040f04c vaddr=403789a4 size=11b24h ( 72484)
+I (211256) esp_image: segment 5: paddr=00420b78 vaddr=50000000 size=00024h (    36)
+I (211266) esp_image: segment 6: paddr=00420ba4 vaddr=00000000 size=0f42ch ( 62508)
 I (211276) esp_image: Verifying image signature...
 I (211276) secure_boot_v2: Take trusted digest key(s) from running app
 I (211286) secure_boot_v2: #0 app key digest == #0 trusted key digest
@@ -106,12 +106,12 @@ I (211356) secure_boot_v2_rsa: Signature verified successfully!
 I (211366) OTA: phase=VERIFY_FILE reason=readback final signed bytes and descriptor
 I (211616) OTA: phase=READY_TO_BOOT reason=persisting per-slot identity
 I (211626) esp_image: segment 0: paddr=00320020 vaddr=3c0b0020 size=35f08h (220936) map
-I (211676) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332) 
-I (211676) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852) 
+I (211676) esp_image: segment 1: paddr=00355f30 vaddr=3fc9a500 size=0573ch ( 22332)
+I (211676) esp_image: segment 2: paddr=0035b674 vaddr=40374000 size=049a4h ( 18852)
 I (211686) esp_image: segment 3: paddr=00360020 vaddr=42000020 size=af024h (716836) map
-I (211826) esp_image: segment 4: paddr=0040f04c vaddr=403789a4 size=11b24h ( 72484) 
-I (211836) esp_image: segment 5: paddr=00420b78 vaddr=50000000 size=00024h (    36) 
-I (211836) esp_image: segment 6: paddr=00420ba4 vaddr=00000000 size=0f42ch ( 62508) 
+I (211826) esp_image: segment 4: paddr=0040f04c vaddr=403789a4 size=11b24h ( 72484)
+I (211836) esp_image: segment 5: paddr=00420b78 vaddr=50000000 size=00024h (    36)
+I (211836) esp_image: segment 6: paddr=00420ba4 vaddr=00000000 size=0f42ch ( 62508)
 I (211856) esp_image: Verifying image signature...
 I (211856) secure_boot_v2: Take trusted digest key(s) from running app
 I (211856) secure_boot_v2: #0 app key digest == #0 trusted key digest

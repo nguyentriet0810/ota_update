@@ -1,0 +1,1857 @@
+{
+  "run_id": "20261026T113621.083366Z",
+  "started_utc": "2026-10-26T11:36:21.083+00:00",
+  "evidence_kind": "ACTUAL_DEVICE_SERIAL_AND_LOCAL_SERVER",
+  "expected_version": "5.0.2",
+  "port": "COM13",
+  "selected_count": 12,
+  "reset_method": "NONE; RTS/DTR false before serial open",
+  "results": [
+    {
+      "name": "N01-dns",
+      "test_id": "N01",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "actual_DNS_error": true,
+        "failing_hostname_logged": true,
+        "transport_failure": true,
+        "no_asset_requests": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "FETCH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_HTTP_CONNECT",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "FETCH_MANIFEST",
+        "FETCH_MANIFEST",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 0
+      },
+      "server_events": [
+        {
+          "monotonic": 90806.39,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90806.39,
+          "response_status": 200,
+          "response_bytes": 2575,
+          "path": "/control",
+          "handler": "Controller"
+        }
+      ],
+      "elapsed_seconds": 5.344,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 4,
+      "log": "run-20261026T113621.083366Z/N01-dns.log"
+    },
+    {
+      "name": "N03-untrusted-ca",
+      "test_id": "N03",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "actual_certificate_verification_error": true,
+        "transport_failure": true,
+        "no_HTTP_after_TLS_reject": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "FETCH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_HTTP_CONNECT",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 0
+      },
+      "server_events": [
+        {
+          "monotonic": 90812.343,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90812.343,
+          "response_status": 200,
+          "response_bytes": 3307,
+          "path": "/control",
+          "handler": "Controller"
+        }
+      ],
+      "elapsed_seconds": 0.344,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 4,
+      "log": "run-20261026T113621.083366Z/N03-untrusted-ca.log"
+    },
+    {
+      "name": "N03-hostname-mismatch",
+      "test_id": "N03",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "actual_certificate_verification_error": true,
+        "transport_failure": true,
+        "no_HTTP_after_TLS_reject": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "FETCH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_HTTP_CONNECT",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 0
+      },
+      "server_events": [
+        {
+          "monotonic": 90813.312,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90813.312,
+          "response_status": 200,
+          "response_bytes": 4043,
+          "path": "/control",
+          "handler": "Controller"
+        }
+      ],
+      "elapsed_seconds": 0.406,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 4,
+      "log": "run-20261026T113621.083366Z/N03-hostname-mismatch.log"
+    },
+    {
+      "name": "N04-clock-not-ready",
+      "test_id": "N04",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "policy_failure": true,
+        "diagnostic_enabled_ack": true,
+        "diagnostic_disabled_ack": true,
+        "actual_NOT_READY_before_TLS": true,
+        "TLS_checks_not_disabled": true,
+        "fetch_not_started": true,
+        "no_asset_requests": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "WAIT_NETWORK_TIME",
+      "observed_failure_reason": "ESP_ERR_INVALID_STATE",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 0
+      },
+      "server_events": [
+        {
+          "monotonic": 90814.328,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90814.328,
+          "response_status": 200,
+          "response_bytes": 4777,
+          "path": "/control",
+          "handler": "Controller"
+        }
+      ],
+      "elapsed_seconds": 0.297,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 4,
+      "log": "run-20261026T113621.083366Z/N04-clock-not-ready.log"
+    },
+    {
+      "name": "N05-redirect-loop",
+      "test_id": "N05",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "header_policy_failure": true,
+        "actual_redirect_responses": true,
+        "bounded_redirect_requests": true,
+        "no_other_asset_path": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "FETCH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_RESPONSE",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 6,
+        "redirect_requests": 6
+      },
+      "server_events": [
+        {
+          "monotonic": 90815.265,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90815.265,
+          "response_status": 200,
+          "response_bytes": 5512,
+          "path": "/control",
+          "handler": "Controller"
+        },
+        {
+          "monotonic": 90816.046,
+          "request_id": 5,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90816.046,
+          "request_id": 5,
+          "status": 302,
+          "location": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/redirect-loop.json"
+        },
+        {
+          "monotonic": 90816.046,
+          "response_status": 302,
+          "response_bytes": 0,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90816.984,
+          "request_id": 6,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90816.984,
+          "request_id": 6,
+          "status": 302,
+          "location": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/redirect-loop.json"
+        },
+        {
+          "monotonic": 90816.984,
+          "response_status": 302,
+          "response_bytes": 0,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90817.671,
+          "request_id": 7,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90817.671,
+          "request_id": 7,
+          "status": 302,
+          "location": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/redirect-loop.json"
+        },
+        {
+          "monotonic": 90817.671,
+          "response_status": 302,
+          "response_bytes": 0,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90818.296,
+          "request_id": 8,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90818.296,
+          "request_id": 8,
+          "status": 302,
+          "location": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/redirect-loop.json"
+        },
+        {
+          "monotonic": 90818.296,
+          "response_status": 302,
+          "response_bytes": 0,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90819.015,
+          "request_id": 9,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90819.015,
+          "request_id": 9,
+          "status": 302,
+          "location": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/redirect-loop.json"
+        },
+        {
+          "monotonic": 90819.015,
+          "response_status": 302,
+          "response_bytes": 0,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90819.718,
+          "request_id": 10,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90819.718,
+          "request_id": 10,
+          "status": 302,
+          "location": "https://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/redirect-loop.json"
+        },
+        {
+          "monotonic": 90819.718,
+          "response_status": 302,
+          "response_bytes": 0,
+          "path": "/releases/download/lab-fault-v6/redirect-loop.json",
+          "handler": "Assets"
+        }
+      ],
+      "elapsed_seconds": 4.75,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 10,
+      "log": "run-20261026T113621.083366Z/N05-redirect-loop.log"
+    },
+    {
+      "name": "N05-redirect-http",
+      "test_id": "N05",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "header_policy_failure": true,
+        "actual_redirect_responses": true,
+        "bounded_redirect_requests": true,
+        "no_other_asset_path": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "FETCH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_RESPONSE",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 1,
+        "redirect_requests": 1
+      },
+      "server_events": [
+        {
+          "monotonic": 90820.625,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90820.625,
+          "response_status": 200,
+          "response_bytes": 9251,
+          "path": "/control",
+          "handler": "Controller"
+        },
+        {
+          "monotonic": 90821.578,
+          "request_id": 11,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/redirect-http.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90821.578,
+          "request_id": 11,
+          "status": 302,
+          "location": "http://[LAN_IP_REDACTED]:8443/releases/download/lab-fault-v6/manifest.json"
+        },
+        {
+          "monotonic": 90821.578,
+          "response_status": 302,
+          "response_bytes": 0,
+          "path": "/releases/download/lab-fault-v6/redirect-http.json",
+          "handler": "Assets"
+        }
+      ],
+      "elapsed_seconds": 1.265,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 11,
+      "log": "run-20261026T113621.083366Z/N05-redirect-http.log"
+    },
+    {
+      "name": "N05-redirect-host",
+      "test_id": "N05",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "header_policy_failure": true,
+        "actual_redirect_responses": true,
+        "bounded_redirect_requests": true,
+        "no_other_asset_path": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "FETCH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_RESPONSE",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 1,
+        "redirect_requests": 1
+      },
+      "server_events": [
+        {
+          "monotonic": 90822.484,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90822.484,
+          "response_status": 200,
+          "response_bytes": 10482,
+          "path": "/control",
+          "handler": "Controller"
+        },
+        {
+          "monotonic": 90823.109,
+          "request_id": 12,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/redirect-host.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90823.109,
+          "request_id": 12,
+          "status": 302,
+          "location": "https://not-allowed.invalid/releases/download/lab-fault-v6/manifest.json"
+        },
+        {
+          "monotonic": 90823.109,
+          "response_status": 302,
+          "response_bytes": 0,
+          "path": "/releases/download/lab-fault-v6/redirect-host.json",
+          "handler": "Assets"
+        }
+      ],
+      "elapsed_seconds": 0.921,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 12,
+      "log": "run-20261026T113621.083366Z/N05-redirect-host.log"
+    },
+    {
+      "name": "N06-http404",
+      "test_id": "N06",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "metadata_contract_failure": true,
+        "actual_endpoint_requested": true,
+        "actual_HTTP_status": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "FETCH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_RESPONSE",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 1
+      },
+      "server_events": [
+        {
+          "monotonic": 90824.0,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90824.0,
+          "response_status": 200,
+          "response_bytes": 11717,
+          "path": "/control",
+          "handler": "Controller"
+        },
+        {
+          "monotonic": 90824.968,
+          "request_id": 13,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/404.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90824.968,
+          "response_status": 404,
+          "response_bytes": 18,
+          "path": "/releases/download/lab-fault-v6/404.json",
+          "handler": "Assets"
+        }
+      ],
+      "elapsed_seconds": 1.266,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 13,
+      "log": "run-20261026T113621.083366Z/N06-http404.log"
+    },
+    {
+      "name": "N06-html200",
+      "test_id": "N06",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "metadata_contract_failure": true,
+        "actual_endpoint_requested": true,
+        "actual_HTTP_status": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "FETCH_MANIFEST",
+      "observed_failure_reason": "ESP_ERR_INVALID_RESPONSE",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 1
+      },
+      "server_events": [
+        {
+          "monotonic": 90825.89,
+          "control": {
+            "image_mode": "good",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90825.89,
+          "response_status": 200,
+          "response_bytes": 12785,
+          "path": "/control",
+          "handler": "Controller"
+        },
+        {
+          "monotonic": 90826.593,
+          "request_id": 14,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/html.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "good",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90826.593,
+          "response_status": 200,
+          "response_bytes": 42,
+          "path": "/releases/download/lab-fault-v6/html.json",
+          "handler": "Assets"
+        }
+      ],
+      "elapsed_seconds": 0.984,
+      "server_settings": {
+        "image_mode": "good",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 14,
+      "log": "run-20261026T113621.083366Z/N06-html200.log"
+    },
+    {
+      "name": "N07-http500",
+      "test_id": "N07",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "intended_image_fault_requested": true,
+        "injected_mode_observed": true,
+        "authenticated_metadata": true,
+        "bounded_retry_count": true,
+        "retry_budget_logged": true,
+        "bounded_backoff_logged": true,
+        "actual_backoff_observed": true,
+        "budget_exhaustion_logged": true,
+        "intended_failure_reason": true,
+        "injected_HTTP_status_observed": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "DOWNLOAD",
+      "observed_failure_reason": "ESP_ERR_HTTP_EAGAIN",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "AUTH_MANIFEST",
+        "DOWNLOAD",
+        "WAIT_RETRY_NETWORK",
+        "DOWNLOAD",
+        "WAIT_RETRY_NETWORK",
+        "DOWNLOAD",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 5,
+        "image_requests": 3,
+        "retry_logs": [
+          {
+            "attempt": 1,
+            "budget": 3,
+            "status": 500,
+            "reason": "ESP_ERR_HTTP_EAGAIN",
+            "retryable": 1
+          },
+          {
+            "attempt": 2,
+            "budget": 3,
+            "status": 500,
+            "reason": "ESP_ERR_HTTP_EAGAIN",
+            "retryable": 1
+          },
+          {
+            "attempt": 3,
+            "budget": 3,
+            "status": 500,
+            "reason": "ESP_ERR_HTTP_EAGAIN",
+            "retryable": 1
+          }
+        ],
+        "backoff_ms": [
+          1290,
+          2040
+        ],
+        "backoff_rules": [
+          {
+            "failed_attempt": 1,
+            "next_attempt": 2,
+            "delay_ms": 1276,
+            "status": 500,
+            "retry_after_ms": 1000
+          },
+          {
+            "failed_attempt": 2,
+            "next_attempt": 3,
+            "delay_ms": 2024,
+            "status": 500,
+            "retry_after_ms": 1000
+          }
+        ],
+        "completed_wait_ms": [
+          1276,
+          2026
+        ],
+        "server_request_intervals_ms": [
+          1938.0,
+          2781.0
+        ],
+        "writer_abort_and_HTTP_cleanup_observed": false
+      },
+      "server_events": [
+        {
+          "monotonic": 90827.484,
+          "control": {
+            "image_mode": "status500",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90827.484,
+          "response_status": 200,
+          "response_bytes": 13864,
+          "path": "/control",
+          "handler": "Controller"
+        },
+        {
+          "monotonic": 90828.343,
+          "request_id": 15,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/manifest.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status500",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90828.343,
+          "request_id": 15,
+          "status": 200,
+          "content_length": 439,
+          "content_range": null,
+          "range_start": 0,
+          "file_total": 439
+        },
+        {
+          "monotonic": 90828.343,
+          "request_id": 15,
+          "sent_bytes": 439,
+          "complete": true,
+          "mode": "good"
+        },
+        {
+          "monotonic": 90829.031,
+          "request_id": 16,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/manifest.sig",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status500",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90829.031,
+          "request_id": 16,
+          "status": 200,
+          "content_length": 384,
+          "content_range": null,
+          "range_start": 0,
+          "file_total": 384
+        },
+        {
+          "monotonic": 90829.031,
+          "request_id": 16,
+          "sent_bytes": 384,
+          "complete": true,
+          "mode": "good"
+        },
+        {
+          "monotonic": 90829.765,
+          "request_id": 17,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status500",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90829.781,
+          "request_id": 17,
+          "status": 500
+        },
+        {
+          "monotonic": 90829.781,
+          "response_status": 500,
+          "response_bytes": 22,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90831.703,
+          "request_id": 18,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status500",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90831.703,
+          "request_id": 18,
+          "status": 500
+        },
+        {
+          "monotonic": 90831.703,
+          "response_status": 500,
+          "response_bytes": 22,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90834.484,
+          "request_id": 19,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status500",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90834.484,
+          "request_id": 19,
+          "status": 500
+        },
+        {
+          "monotonic": 90834.484,
+          "response_status": 500,
+          "response_bytes": 22,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "handler": "Assets"
+        }
+      ],
+      "elapsed_seconds": 7.297,
+      "server_settings": {
+        "image_mode": "status500",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 19,
+      "log": "run-20261026T113621.083366Z/N07-http500.log"
+    },
+    {
+      "name": "N07-http429",
+      "test_id": "N07",
+      "result": "PASS",
+      "reason": "Expected failure gate, actual diagnostic evidence and unchanged VALID baseline observed",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "intended_image_fault_requested": true,
+        "injected_mode_observed": true,
+        "authenticated_metadata": true,
+        "bounded_retry_count": true,
+        "retry_budget_logged": true,
+        "bounded_backoff_logged": true,
+        "actual_backoff_observed": true,
+        "budget_exhaustion_logged": true,
+        "intended_failure_reason": true,
+        "injected_HTTP_status_observed": true
+      },
+      "coverage_gap": null,
+      "observed_failure_phase": "DOWNLOAD",
+      "observed_failure_reason": "ESP_ERR_HTTP_EAGAIN",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "AUTH_MANIFEST",
+        "DOWNLOAD",
+        "WAIT_RETRY_NETWORK",
+        "DOWNLOAD",
+        "WAIT_RETRY_NETWORK",
+        "DOWNLOAD",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 5,
+        "image_requests": 3,
+        "retry_logs": [
+          {
+            "attempt": 1,
+            "budget": 3,
+            "status": 429,
+            "reason": "ESP_ERR_HTTP_EAGAIN",
+            "retryable": 1
+          },
+          {
+            "attempt": 2,
+            "budget": 3,
+            "status": 429,
+            "reason": "ESP_ERR_HTTP_EAGAIN",
+            "retryable": 1
+          },
+          {
+            "attempt": 3,
+            "budget": 3,
+            "status": 429,
+            "reason": "ESP_ERR_HTTP_EAGAIN",
+            "retryable": 1
+          }
+        ],
+        "backoff_ms": [
+          1430,
+          2580
+        ],
+        "backoff_rules": [
+          {
+            "failed_attempt": 1,
+            "next_attempt": 2,
+            "delay_ms": 1411,
+            "status": 429,
+            "retry_after_ms": 1000
+          },
+          {
+            "failed_attempt": 2,
+            "next_attempt": 3,
+            "delay_ms": 2555,
+            "status": 429,
+            "retry_after_ms": 1000
+          }
+        ],
+        "completed_wait_ms": [
+          1415,
+          2563
+        ],
+        "server_request_intervals_ms": [
+          2125.0,
+          3515.0
+        ],
+        "writer_abort_and_HTTP_cleanup_observed": false
+      },
+      "server_events": [
+        {
+          "monotonic": 90835.406,
+          "control": {
+            "image_mode": "status429",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90835.406,
+          "response_status": 200,
+          "response_bytes": 15285,
+          "path": "/control",
+          "handler": "Controller"
+        },
+        {
+          "monotonic": 90836.093,
+          "request_id": 20,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/manifest.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status429",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90836.093,
+          "request_id": 20,
+          "status": 200,
+          "content_length": 439,
+          "content_range": null,
+          "range_start": 0,
+          "file_total": 439
+        },
+        {
+          "monotonic": 90836.093,
+          "request_id": 20,
+          "sent_bytes": 439,
+          "complete": true,
+          "mode": "good"
+        },
+        {
+          "monotonic": 90836.734,
+          "request_id": 21,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/manifest.sig",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status429",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90836.734,
+          "request_id": 21,
+          "status": 200,
+          "content_length": 384,
+          "content_range": null,
+          "range_start": 0,
+          "file_total": 384
+        },
+        {
+          "monotonic": 90836.734,
+          "request_id": 21,
+          "sent_bytes": 384,
+          "complete": true,
+          "mode": "good"
+        },
+        {
+          "monotonic": 90837.453,
+          "request_id": 22,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status429",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90837.453,
+          "request_id": 22,
+          "status": 429
+        },
+        {
+          "monotonic": 90837.453,
+          "response_status": 429,
+          "response_bytes": 22,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90839.578,
+          "request_id": 23,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status429",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90839.578,
+          "request_id": 23,
+          "status": 429
+        },
+        {
+          "monotonic": 90839.578,
+          "response_status": 429,
+          "response_bytes": 22,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "handler": "Assets"
+        },
+        {
+          "monotonic": 90843.093,
+          "request_id": 24,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "status429",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90843.093,
+          "request_id": 24,
+          "status": 429
+        },
+        {
+          "monotonic": 90843.093,
+          "response_status": 429,
+          "response_bytes": 22,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "handler": "Assets"
+        }
+      ],
+      "elapsed_seconds": 7.969,
+      "server_settings": {
+        "image_mode": "status429",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 24,
+      "log": "run-20261026T113621.083366Z/N07-http429.log"
+    },
+    {
+      "name": "N07-timeout",
+      "test_id": "N07",
+      "result": "FAIL",
+      "reason": "N07_RETRY_POLICY_GAP: intended HTTP/timeout failure lacks observed bounded retry and backoff",
+      "checks": {
+        "new_session_started": true,
+        "FAILED_observed": true,
+        "writer_contract": true,
+        "no_boot_selection_or_reset": true,
+        "unchanged_healthy_idle_baseline": true,
+        "expected_phase": true,
+        "intended_image_fault_requested": true,
+        "injected_mode_observed": true,
+        "authenticated_metadata": true,
+        "bounded_retry_count": true,
+        "retry_budget_logged": false,
+        "bounded_backoff_logged": false,
+        "actual_backoff_observed": false,
+        "budget_exhaustion_logged": true,
+        "intended_failure_reason": true
+      },
+      "coverage_gap": "N07_RETRY_POLICY_GAP: intended HTTP/timeout failure lacks observed bounded retry and backoff",
+      "observed_failure_phase": "DOWNLOAD",
+      "observed_failure_reason": "ESP_ERR_HTTP_FETCH_HEADER",
+      "phases": [
+        "WAIT_NETWORK_TIME",
+        "FETCH_MANIFEST",
+        "AUTH_MANIFEST",
+        "DOWNLOAD",
+        "WAIT_RETRY_NETWORK",
+        "DOWNLOAD",
+        "WAIT_RETRY_NETWORK",
+        "DOWNLOAD",
+        "FAILED"
+      ],
+      "forbidden_lines": [],
+      "writer_seen": false,
+      "writer_violation": false,
+      "baseline_before": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "baseline_after": {
+        "version": "5.0.2",
+        "selftest": "PASS",
+        "service_mode": 0,
+        "slot": "ota_1",
+        "address": 3276800,
+        "boot": "ota_1",
+        "state": "VALID",
+        "ready": 1,
+        "busy": 0,
+        "controller_phase": "FAILED",
+        "wifi": "up"
+      },
+      "details": {
+        "server_asset_requests": 5,
+        "image_requests": 3,
+        "retry_logs": [],
+        "backoff_ms": [],
+        "backoff_rules": [],
+        "completed_wait_ms": [
+          1622,
+          2793
+        ],
+        "server_request_intervals_ms": [
+          14328.0,
+          15469.0
+        ],
+        "writer_abort_and_HTTP_cleanup_observed": false
+      },
+      "server_events": [
+        {
+          "monotonic": 90844.0,
+          "control": {
+            "image_mode": "timeout",
+            "range_mode": "correct",
+            "fault_requests": -1,
+            "delay_ms": 18000,
+            "cut_after": 147456,
+            "chunk_bytes": 4096,
+            "chunk_delay_ms": 0
+          }
+        },
+        {
+          "monotonic": 90844.0,
+          "response_status": 200,
+          "response_bytes": 15203,
+          "path": "/control",
+          "handler": "Controller"
+        },
+        {
+          "monotonic": 90844.937,
+          "request_id": 25,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/manifest.json",
+          "method": "GET",
+          "range": "",
+          "image_mode": "timeout",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90844.937,
+          "request_id": 25,
+          "status": 200,
+          "content_length": 439,
+          "content_range": null,
+          "range_start": 0,
+          "file_total": 439
+        },
+        {
+          "monotonic": 90844.937,
+          "request_id": 25,
+          "sent_bytes": 439,
+          "complete": true,
+          "mode": "good"
+        },
+        {
+          "monotonic": 90845.64,
+          "request_id": 26,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/manifest.sig",
+          "method": "GET",
+          "range": "",
+          "image_mode": "timeout",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90845.64,
+          "request_id": 26,
+          "status": 200,
+          "content_length": 384,
+          "content_range": null,
+          "range_start": 0,
+          "file_total": 384
+        },
+        {
+          "monotonic": 90845.64,
+          "request_id": 26,
+          "sent_bytes": 384,
+          "complete": true,
+          "mode": "good"
+        },
+        {
+          "monotonic": 90846.359,
+          "request_id": 27,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "timeout",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90860.687,
+          "request_id": 28,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "timeout",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90864.359,
+          "request_id": 27,
+          "status": 200,
+          "content_length": 1118208,
+          "content_range": null,
+          "range_start": 0,
+          "file_total": 1118208
+        },
+        {
+          "monotonic": 90864.578,
+          "request_id": 27,
+          "peer_closed": "SSLEOFError"
+        },
+        {
+          "monotonic": 90864.578,
+          "request_id": 27,
+          "sent_bytes": 65536,
+          "complete": false,
+          "mode": "timeout"
+        },
+        {
+          "monotonic": 90876.156,
+          "request_id": 29,
+          "port": 8443,
+          "path": "/releases/download/lab-fault-v6/app.bin",
+          "method": "GET",
+          "range": "",
+          "image_mode": "timeout",
+          "range_mode": "correct"
+        },
+        {
+          "monotonic": 90878.687,
+          "request_id": 28,
+          "status": 200,
+          "content_length": 1118208,
+          "content_range": null,
+          "range_start": 0,
+          "file_total": 1118208
+        },
+        {
+          "monotonic": 90879.015,
+          "request_id": 28,
+          "peer_closed": "SSLEOFError"
+        },
+        {
+          "monotonic": 90879.015,
+          "request_id": 28,
+          "sent_bytes": 65536,
+          "complete": false,
+          "mode": "timeout"
+        }
+      ],
+      "elapsed_seconds": 44.453,
+      "server_settings": {
+        "image_mode": "timeout",
+        "range_mode": "correct",
+        "fault_requests": -1,
+        "delay_ms": 18000,
+        "cut_after": 147456,
+        "chunk_bytes": 4096,
+        "chunk_delay_ms": 0
+      },
+      "server_request_count_after": 29,
+      "log": "run-20261026T113621.083366Z/N07-timeout.log"
+    }
+  ],
+  "observed_reference": {
+    "version": "5.0.2",
+    "selftest": "PASS",
+    "service_mode": 0,
+    "slot": "ota_1",
+    "address": 3276800,
+    "boot": "ota_1",
+    "state": "VALID",
+    "ready": 1,
+    "busy": 0,
+    "controller_phase": "FAILED",
+    "wifi": "up"
+  },
+  "counts": {
+    "PASS": 11,
+    "FAIL": 1
+  },
+  "all_selected_passed": false,
+  "finished_utc": "2026-10-26T11:37:43.805+00:00"
+}

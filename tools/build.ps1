@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('v1','v2','v3','v4')][string]$Variant = 'v1',
+    [ValidateSet('v1','v2','v3','v4','v5','v6')][string]$Variant = 'v1',
     [Parameter(Mandatory=$true)][string]$SigningKey,
     [string]$IdfPath,
     [string]$ToolsPath,
@@ -11,10 +11,15 @@ param(
             throw 'BuildName must be one safe path segment, without .., separators, trailing dots or Windows device names'
         }
         $true
-    })][string]$BuildName
+    })][string]$BuildName,
+    [switch]$FaultProfile,
+    [ValidateRange(1,2147483647)][int]$VersionCode
 )
 $ErrorActionPreference = 'Stop'
 $otaIndex = [int]$Variant.Substring(1)
+$otaPolicyCode = if ($PSBoundParameters.ContainsKey('VersionCode')) { $VersionCode } else { $otaIndex }
+if ($FaultProfile -and $Variant -ne 'v5') { throw 'FaultProfile is only allowed for the explicit v5 test variant' }
+$otaFaultMode = if ($FaultProfile) { 'ON' } else { 'OFF' }
 if (-not $ProjectVersion) { $ProjectVersion = "$otaIndex.0.0" }
 if (-not $BuildName) { $BuildName = $Variant }
 $otaProject = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
@@ -45,7 +50,9 @@ try {
     & $otaPython "$env:IDF_PATH/tools/idf.py" -B $otaBuild `
         "-DSDKCONFIG=$($otaBuild.Replace('\','/'))/sdkconfig" `
         "-DSDKCONFIG_DEFAULTS=$otaDefaults" `
-        "-DPROJECT_VER=$ProjectVersion" "-DLAB_VERSION_CODE=$otaIndex" `
-        "-DLAB_CFG_SCHEMA=$otaSchema" "-DLAB_HEALTH_FAIL=$otaHealthFail" build
+        "-DPROJECT_VER=$ProjectVersion" "-DLAB_VERSION_CODE=$otaPolicyCode" `
+        "-DLAB_CFG_SCHEMA=$otaSchema" "-DLAB_HEALTH_FAIL=$otaHealthFail" `
+        "-DLAB_FAULT_PROFILE=$otaFaultMode" '-DLAB_CFG_FAULT_SHADOW_RESET=OFF' `
+        '-DLAB_PREVALID_RESET=OFF' build
     exit $LASTEXITCODE
 } finally { Pop-Location }
