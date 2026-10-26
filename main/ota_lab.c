@@ -1062,7 +1062,10 @@ static bool lab_fault_command(const char *line)
             esp_err_t err = nvs_get_blob(s_meta, keys[i], &cp, &size);
             if (err == ESP_ERR_NVS_NOT_FOUND) { continue; }
             if (err != ESP_OK || size != sizeof(cp)) { result = err == ESP_OK ? ESP_ERR_INVALID_SIZE : err; break; }
-            cp.crc ^= UINT32_C(0x01010101);
+            /* Derive a wrong CRC from the payload, rather than toggling the
+             * current value: repeated diagnostics must remain corrupt.
+             */
+            cp.crc = blob_crc(&cp, offsetof(checkpoint_t, crc)) ^ UINT32_C(0x01010101);
             err = nvs_set_blob(s_meta, keys[i], &cp, sizeof(cp));
             if (err != ESP_OK) { result = err; break; }
             ++changed;
