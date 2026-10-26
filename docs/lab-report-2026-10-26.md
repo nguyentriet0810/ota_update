@@ -1,5 +1,9 @@
 # Kết quả thực nghiệm Subject #3 — 26/10/2026
 
+**Báo cáo của firmware tham khảo do trợ lý chạy thử.** Người học chưa bắt đầu;
+12 bài Notion đang Not started, checklist để trống. Những PASS dưới đây giúp
+đối chiếu khi tự thực hành, không xác nhận người học đã hoàn thành bài nào.
+
 Board đã về **production8.0.1, version_code10, ota_0 VALID**, self-test PASS,
 controller IDLE/busy0, Wi-Fi hoạt động. Config schema2/active2/generation2,
 sample1000ms, threshold30000 milli-degreeC; schema1 nguồn generation1/CRCfbab8dc4

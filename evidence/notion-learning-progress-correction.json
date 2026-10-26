@@ -1,0 +1,165 @@
+{
+  "date_local": "2026-10-26",
+  "timezone": "Asia/Bangkok",
+  "reason": "User has not studied yet; firmware was prepared/tested by the assistant as reference for the user's future independent practice",
+  "learning_progress_owner": "User",
+  "reference_firmware_preparation": "Prepared and tested; does not count as learner completion",
+  "counts": {
+    "Not started": 12,
+    "In progress": 0,
+    "Done": 0
+  },
+  "topics": [
+    {
+      "code": "E01",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E02",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E03",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E04",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E05",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E06",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E07",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E08",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E09",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E10",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E11",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 5,
+      "reference_label": true,
+      "learner_not_started_note": true
+    },
+    {
+      "code": "E12",
+      "status": "Not started",
+      "checked": 0,
+      "unchecked": 6,
+      "reference_label": true,
+      "learner_not_started_note": true
+    }
+  ],
+  "curriculum_sections_aligned": [
+    {
+      "code": "E01",
+      "sections": [
+        "# 7.",
+        "# 8."
+      ]
+    },
+    {
+      "code": "E04",
+      "sections": [
+        "# 10.",
+        "# 7."
+      ]
+    },
+    {
+      "code": "E05",
+      "sections": [
+        "# 10."
+      ]
+    },
+    {
+      "code": "E07",
+      "sections": [
+        "# 7.",
+        "# 9."
+      ]
+    },
+    {
+      "code": "E08",
+      "sections": [
+        "# 13."
+      ]
+    },
+    {
+      "code": "E10",
+      "sections": [
+        "# 12."
+      ]
+    },
+    {
+      "code": "E11",
+      "sections": [
+        "# 9.",
+        "# 11."
+      ]
+    },
+    {
+      "code": "E12",
+      "sections": [
+        "# 7."
+      ]
+    }
+  ],
+  "hardware_actions_this_correction": "NONE; no build, flash, erase or COM session"
+}

@@ -1,5 +1,10 @@
 # ESP32-S3 N16R8 — Study Book OTA lab
 
+Đây là **firmware mẫu và kết quả tham khảo do trợ lý chuẩn bị** để bạn tự học,
+tự thực hành sau. Tiến độ học Subject #3 là **12 bài Not started**, checklist
+chưa tích. Kết quả kiểm thử của bộ mẫu không phải bài làm của bạn.
+Xem [cách bắt đầu tự thực hành](docs/learner-start.md).
+
 Board hiện chạy **production8.0.1/code10 VALID** sau OTA qua GitHub.
 **32/32 nhóm ca capstone đạt** trong phạm vi injection đã ghi; xem
 [báo cáo thực nghiệm](docs/lab-report-2026-10-26.md) và

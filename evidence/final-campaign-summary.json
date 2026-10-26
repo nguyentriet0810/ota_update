@@ -24,8 +24,11 @@
     "student independent knowledge assessment not claimed"
   ],
   "E04_one_call": "PASS; see E04-onecall-result.json",
-  "subject_topics_technical": {
-    "Done": 12,
-    "In_progress": 0
+  "evidence_owner": "Assistant reference firmware runs; not the user's completed practice",
+  "reference_firmware_preparation": "Prepared and tested",
+  "learner_progress": {
+    "Not started": 12,
+    "In progress": 0,
+    "Done": 0
   }
 }
