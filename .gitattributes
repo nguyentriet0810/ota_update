@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.der binary
+*.bin binary
+*.sig binary
+manifest.json -text

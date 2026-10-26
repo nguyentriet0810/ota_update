@@ -1,0 +1,11 @@
+menu "Study Book OTA lab"
+
+config LAB_HEALTH_FAIL
+    bool "Intentionally fail trial-boot health check (negative test only)"
+    default n
+    help
+        On a PENDING_VERIFY boot, log an intentional health-check failure and
+        reset without marking the image valid. The bootloader should roll back
+        to the previous valid image. Do not enable this in a release image.
+
+endmenu

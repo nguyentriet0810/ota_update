@@ -1,0 +1,15 @@
+{
+  "port": "COM13",
+  "bridge": "CH343",
+  "chip": "ESP32-S3",
+  "revision": "0.2",
+  "flash_bytes": 16777216,
+  "psram_bytes": 8388608,
+  "crystal_mhz": 40,
+  "flash_quad_3v3": true,
+  "secure_boot": false,
+  "flash_encryption": false,
+  "original_flash_backup_sha256": "e570d1427b2a7c53f1fa0f09987aa19054edfeddd258a07b059b8bf21050a780",
+  "original_flash_backup_bytes": 16777216,
+  "backup_visibility": "local private work directory; never uploaded"
+}

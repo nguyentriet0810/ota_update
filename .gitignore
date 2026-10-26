@@ -1,0 +1,15 @@
+.tooling/
+.secrets/
+.recovery/
+.build/
+build/
+sdkconfig
+sdkconfig.old
+sdkconfig.private.defaults
+*.pem.private
+*-signing.pem
+wifi.json
+__pycache__/
+*.pyc
+managed_components/
+.DS_Store

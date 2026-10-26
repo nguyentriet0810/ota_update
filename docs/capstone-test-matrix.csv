@@ -1,0 +1,33 @@
+﻿test_id,injection,expected,result,observed,evidence_paths,fault_method,repeat_count,limitation
+N01,DNS hoặc route lỗi,Không ghi/chọn candidate; báo lỗi đúng phase.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+N02,Mất Wi-Fi giữa download,App hiện tại giữ; retry/resume theo policy.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+N03,CA hoặc hostname sai,"TLS reject, không skip verification.",NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+N04,Clock chưa đạt time policy,Không bỏ certificate time check; báo reason.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+N05,"Redirect loop, HTTP downgrade hoặc host ngoài policy",Dừng trước nhận bytes không được phép.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+N06,404 hoặc HTTP200 HTML,Không coi là app image.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+N07,"Timeout, 5xx hoặc rate-limit",Backoff/budget hữu hạn; app có tiến độ.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+N08,Resume200/416/Content-Range sai,Không append mù; restart/reconcile.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A01,Signed metadata sai board/chip/layout,Reject trước begin/erase.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A02,Size âm/thập phân/vượt3MiB,Bounds/type reject.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A03,Manifest/signature đổi1byte,Crypto reject.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A04,Unsigned app hoặc app key lạ,Native verify reject.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A05,File đổi nhưng metadata/hash cũ,Full-file digest reject; không set_boot.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A06,Descriptor version/secure_version khác manifest,Policy reject.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A07,File thiếu/thừa bytes,Length/image validation reject.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+A08,Unknown schema hoặc duplicate keys,Parser/policy reject xác định.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+R01,Mất mạng sau checkpoint,Resume đúng release/slot/Q.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+R02,Reset trước nvs_commit checkpoint,Dùng snapshot trước.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+R03,Reset sau commit/readback,Dùng Q mới đã validate.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+R04,Tail có bytes viết sau Q trước reset,Erase/replay sau Q; prefix giữ nguyên.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+R05,Checkpoint target đã thành running,Reject stale trước erase.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+R06,Cùng URL/tag nhưng bytes khác,Identity check chặn trộn.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+R07,Checkpoint CRC/NVS lỗi,Không đoán offset; không erase config/credentials.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+R08,Cancel/duplicate request/lỗi writer,"Một owner, cleanup đúng; không leak/chọn image dở.",NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+B01,Good candidate,NEW -> PENDING_VERIFY -> VALID; đúng running identity.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+B02,Explicit self-test fail,INVALID và fallback đúng.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+B03,Hang/reset trước confirm,ABORTED ở boot sau; fallback valid.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+B04,Reset ngay trước mark valid,Không false confirm; theo trial policy.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+B05,Reset khi tạo schema2 shadow,V1 vẫn đọc schema1.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+B06,Reset sau VALID trước active_schema commit,V2 reconcile idempotent.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+B07,Lỗi muộn/report mất sau confirm,Ghi giới hạn/retry report; không giả automatic rollback.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
+B08,Cold boot khi không có Internet,Local-health policy vẫn boot app valid; không update loop.,NOT RUN,Chưa chạy ca này trên board.,,,0,Cần ghi observed và evidence thật trước PASS.
