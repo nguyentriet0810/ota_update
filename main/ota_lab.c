@@ -14,6 +14,7 @@
 #include <string.h>
 #include <strings.h>
 #include <time.h>
+#include <sys/time.h>
 
 #include "cJSON.h"
 #include "esp_app_desc.h"
@@ -1359,6 +1360,20 @@ bool ota_lab_command(const char *line)
         return true;
     }
     if (!strcmp(line, "otastatus")) { print_status(); return true; }
+    if (!strncmp(line, "clock ", 6)) {
+        const char *digits = line + 6;
+        bool valid = strlen(digits) == 10;
+        for (size_t i = 0; valid && digits[i]; ++i) valid = isdigit((unsigned char)digits[i]);
+        unsigned long long seconds = valid ? strtoull(digits, NULL, 10) : 0;
+        if (!s_ready || atomic_load(&s_busy) || seconds < 1704067200ULL || seconds >= 2082758400ULL) {
+            ESP_LOGW(TAG, "CLOCK_REJECT require_idle_and_UTC_2024_to_2035=true");
+        } else {
+            struct timeval utc = { .tv_sec = (time_t)seconds, .tv_usec = 0 };
+            int result = settimeofday(&utc, NULL);
+            ESP_LOGI(TAG, "CLOCK_PROVISION source=trusted_serial UTC_seconds=%llu result=%d TLS_time_checks_unchanged=true", seconds, result);
+        }
+        return true;
+    }
     if (!strcmp(line, "cancel")) {
         if (!atomic_load(&s_busy)) { ESP_LOGI(TAG, "cancel_no_active_session"); return true; }
         int open_gate = 0;
