@@ -1078,6 +1078,8 @@ static void ota_worker(void *argument)
         esp_http_client_config_t http = {
             .url = manifest->url, .crt_bundle_attach = esp_crt_bundle_attach,
             .timeout_ms = request_timeout_ms(started), .keep_alive_enable = false,
+            .buffer_size = 4096, .buffer_size_tx = 2048,
+            .max_redirection_count = 5, .max_authorization_retries = -1,
         };
         esp_https_ota_config_t basic = { .http_config = &http, .bulk_flash_erase = true };
         status_set("BASIC_ONE_CALL", "E04 lab only; no checkpoint/cancel contract during SDK call");
