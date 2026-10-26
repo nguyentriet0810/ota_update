@@ -21,6 +21,7 @@
 #include "esp_crt_bundle.h"
 #include "esp_event.h"
 #include "esp_http_client.h"
+#include "esp_https_ota.h"
 #include "esp_log.h"
 #include "esp_netif.h"
 #include "esp_ota_ops.h"
@@ -120,7 +121,12 @@ typedef struct {
     int64_t content_length;
 } http_t;
 
-typedef struct { char manifest_url[URL_CAP], signature_url[URL_CAP]; } request_t;
+typedef struct {
+    char manifest_url[URL_CAP], signature_url[URL_CAP];
+#if LAB_FAULT_PROFILE
+    bool one_call;
+#endif
+} request_t;
 
 static nvs_handle_t s_meta;
 static EventGroupHandle_t s_network;
@@ -1053,6 +1059,41 @@ static void ota_worker(void *argument)
     char release_id[65], file_digest[65];
     hex_digest(manifest->release_id, release_id); hex_digest(manifest->digest, file_digest);
     ESP_LOGI(TAG, "accepted_release_id=%s file_sha256=%s", release_id, file_digest);
+#if LAB_FAULT_PROFILE
+    if (request->one_call) {
+        /* E04's introductory route is deliberately separate from the strict
+         * checkpointed route. The SDK one-call owns download and set_boot;
+         * file readback happens after that API and before our explicit reset.
+         * Persist identity first so trial health can independently recheck it.
+         */
+        int open_gate = 0;
+        if (!atomic_compare_exchange_strong(&s_activation_gate, &open_gate, 1)) {
+            err = ESP_ERR_TIMEOUT; goto finish;
+        }
+        err = save_candidate(manifest, target); if (err != ESP_OK) { goto finish; }
+        err = cp_clear(); if (err != ESP_OK) { goto finish; }
+        /* Prevent a stale signature tail even if the SDK erases sequentially. */
+        err = esp_partition_erase_range(target, 0, target->size);
+        if (err != ESP_OK) { goto finish; }
+        esp_http_client_config_t http = {
+            .url = manifest->url, .crt_bundle_attach = esp_crt_bundle_attach,
+            .timeout_ms = request_timeout_ms(started), .keep_alive_enable = false,
+        };
+        esp_https_ota_config_t basic = { .http_config = &http, .bulk_flash_erase = true };
+        status_set("BASIC_ONE_CALL", "E04 lab only; no checkpoint/cancel contract during SDK call");
+        ESP_LOGI(TAG, "E04_ONE_CALL begin target=%s task=ota_worker TLS_CA_hostname_time=true", target->label);
+        err = esp_https_ota(&basic);
+        ESP_LOGI(TAG, "E04_ONE_CALL result=%s", esp_err_to_name(err));
+        if (err != ESP_OK) { goto finish; }
+        boot_selected = true;
+        status_set("VERIFY_FILE", "E04 post-one-call readback; SDK already selected NEW");
+        err = verify_candidate(manifest, target); if (err != ESP_OK) { goto finish; }
+        err = record_boot_selected(manifest, target); if (err != ESP_OK) { goto finish; }
+        status_set("BOOT_SELECTED", "E04 one-call NEW; success still requires trial health and VALID");
+        free(request); free(raw); free(signature); free(manifest);
+        vTaskDelay(pdMS_TO_TICKS(1000)); esp_restart();
+    }
+#endif
     status_set("DOWNLOAD", "inactive slot only");
     for (unsigned attempt = 1; attempt <= HTTP_ATTEMPTS; ++attempt) {
         if (attempt > 1) {
@@ -1355,6 +1396,7 @@ bool ota_lab_command(const char *line)
         ESP_LOGI(TAG, "Use public GitHub /releases/download/ HTTPS origins; no PAT in firmware. Reset injection is a software reset, not a power cut.");
 #if LAB_FAULT_PROFILE
         ESP_LOGW(TAG, "Optional test mode: lab-clock-not-ready on/off | lab-reset-before-checkpoint Q | lab-checkpoint-status | lab-corrupt-checkpoints | lab-seed-stale-running | lab-retry-policy-tests");
+        ESP_LOGW(TAG, "E04 demo only: ota-basic MANIFEST_URL SIGNATURE_URL uses esp_https_ota one-call, without low-level resume/cancel guarantees");
         ESP_LOGW(TAG, "Offline lab controls: lab-radio-off | lab-radio-on | lab-offline-next-boot");
 #endif
         return true;
@@ -1411,13 +1453,22 @@ bool ota_lab_command(const char *line)
         else { atomic_store(&s_wifi_drop_at, n); ESP_LOGW(TAG, "wifi_disconnect_injection_offset=%lu next_session_only", n); }
         return true;
     }
-    if (strncmp(line, "ota ", 4)) { return false; }
+    const char *first = NULL;
+    if (!strncmp(line, "ota ", 4)) { first = line + 4; }
+#if LAB_FAULT_PROFILE
+    bool one_call = !strncmp(line, "ota-basic ", 10);
+    if (one_call) { first = line + 10; }
+#endif
+    if (!first) { return false; }
     if (!s_ready) { ESP_LOGW(TAG, "ota rejected: controller unavailable"); return true; }
     bool expected = false;
     if (!atomic_compare_exchange_strong(&s_busy, &expected, true)) { ESP_LOGW(TAG, "ota rejected: one worker already owns updater"); return true; }
     request_t *request = calloc(1, sizeof(*request));
     if (!request) { atomic_store(&s_busy, false); ESP_LOGE(TAG, "request allocation failed"); return true; }
-    const char *first = line+4, *space = strchr(first, ' ');
+#if LAB_FAULT_PROFILE
+    request->one_call = one_call;
+#endif
+    const char *space = strchr(first, ' ');
     if (!space || space-first == 0 || space-first > 512 || !space[1] || strlen(space+1) > 512 || strchr(space+1, ' ')) {
         free(request); atomic_store(&s_busy, false); ESP_LOGW(TAG, "ota_format_invalid"); return true;
     }
